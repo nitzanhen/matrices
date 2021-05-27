@@ -14,3 +14,24 @@ export const emptyMatrix = (rows: number, columns: number) => {
   }
   return matrix;
 }
+
+export const bisect = <T>(target: Iterable<T>, predicate: (item: T) => boolean): [T[], T[]] => {
+  const bisected = [[], []] as [T[], T[]];
+  for (const item of target) {
+    const index = predicate(item) ? 0 : 1
+    bisected[index].push(item);
+  }
+
+  return bisected;
+};
+
+export const union = <T>(...iterables: Iterable<T>[]): Set<T> => {
+  const set = new Set<T>();
+  iterables.forEach(iter => {
+    for (const item of iter) {
+      set.add(item);
+    }
+  });
+
+  return set;
+}

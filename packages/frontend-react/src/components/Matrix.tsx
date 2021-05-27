@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
@@ -40,51 +40,61 @@ const useStyles = createUseStyles(
   { name: "matrix" }
 );
 
-interface MatrixProps extends BaseComponentProps {
-  matrix: (number | undefined)[][];
+export interface MatrixProps extends BaseComponentProps {
+  cells: (number | undefined)[][];
   onChange: (row: number, column: number, value: number | undefined) => void;
   onAddRow: () => void;
   onAddColumn: () => void;
+  setFocus: (row: number, column: number) => void;
   readonly?: boolean;
 }
 
-const Matrix: React.VFC<MatrixProps> = ({
-  matrix,
-  readonly = false,
-  onChange,
-  onAddRow,
-  onAddColumn,
-  className,
-  style,
-}) => {
-  const [numRows, numColumns] = [matrix.length, matrix[0].length];
+const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
+  (
+    {
+      cells,
+      readonly = false,
+      onChange,
+      onAddRow,
+      onAddColumn,
+      setFocus,
+      className,
+      style,
+    },
+    ref
+  ) => {
+    const [numRows, numColumns] = [cells.length, cells[0].length];
 
-  const classes = useStyles({ numRows, numColumns });
+    const classes = useStyles({ numRows, numColumns });
 
-  return (
-    <div className={clsx(classes.root, className)}>
-      <div className={classes.matrix} style={style}>
-        {matrix.flatMap((row, i) =>
-          row.map((value, j) => (
-            <Cell
-              className={classes.cell}
-              key={`(${i},${j})`}
-              label={`(${i},${j})`}
-              value={value}
-              onChange={(value) => onChange(i, j, value)}
-              readonly={readonly}
-            />
-          ))
-        )}
+    return (
+      <div className={clsx(classes.root, className)}>
+        <div className={classes.matrix} style={style} ref={ref}>
+          {cells.flatMap((row, i) =>
+            row.map((value, j) => (
+              <Cell
+                className={classes.cell}
+                row={i}
+                column={j}
+                key={`(${i},${j})`}
+                label={`(${i},${j})`}
+                value={value}
+                onChange={(value) => onChange(i, j, value)}
+                readonly={readonly}
+                setFocus={setFocus}
+              />
+            ))
+          )}
+        </div>
+        <button style={{ gridArea: "add-col" }} onClick={onAddColumn}>
+          aaaaaaa
+        </button>
+        <button style={{ gridArea: "add-row" }} onClick={onAddRow}>
+          bbbbbbb
+        </button>
       </div>
-      <button style={{ gridArea: "add-col" }} onClick={onAddColumn}>
-        aaaaaaa
-      </button>
-      <button style={{ gridArea: "add-row" }} onClick={onAddRow}>
-        bbbbbbb
-      </button>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default Matrix;

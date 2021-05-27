@@ -1,7 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
+import { take } from "rhax";
+import { bisect, union } from "../utils";
 
 const useStyles = createUseStyles({
   cell: {
@@ -47,19 +49,33 @@ const useStyles = createUseStyles({
 });
 
 interface CellProps extends BaseComponentProps {
+  row: number;
+  column: number;
   value: number | undefined;
   onChange: (value: number | undefined) => void;
   readonly?: boolean;
   label?: string;
+  setFocus?: (row: number, column: number) => void;
 }
 
 /**
  * A simple cell; can be part of a vector or matrix or stand by itself.
  */
 const Cell: React.VFC<CellProps> = memo(
-  ({ className, style, value, onChange, label, readonly = false }) => {
+  ({
+    row,
+    column,
+    className,
+    style,
+    value,
+    onChange,
+    label,
+    readonly = false,
+    setFocus,
+  }) => {
     /** @todo fix logic. */
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target.value);
       if (e.target.value === "") {
         onChange(undefined);
         return;
@@ -70,10 +86,41 @@ const Cell: React.VFC<CellProps> = memo(
       }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const caretPosition = (e.target as HTMLInputElement).selectionStart;
+
+      switch (e.key) {
+        case "ArrowLeft": {
+          if (caretPosition === 0) {
+            setFocus?.(row, column - 1);
+          }
+          break;
+        }
+        case "ArrowRight": {
+          if (!value || caretPosition === String(value).length) {
+            return setFocus?.(row, column + 1);
+          }
+          break;
+        }
+        case "ArrowUp": {
+          setFocus?.(row - 1, column);
+          break;
+        }
+        case "ArrowDown": {
+          setFocus?.(row + 1, column);
+          break;
+        }
+      }
+    };
+
+    const ref = useRef<HTMLInputElement | null>(null);
+    console.log(ref.current?.selectionStart);
+
     const classes = useStyles();
 
     return (
       <div
+        ref={ref}
         className={clsx(
           classes.cell,
           readonly && classes.cellDisabled,
@@ -84,33 +131,41 @@ const Cell: React.VFC<CellProps> = memo(
         {label && <span className={classes.label}>{label}</span>}
         <input
           disabled={readonly}
-          type="number"
           value={value ?? ""}
-          onInput={onChangeHandler}
+          onInput={handleChange}
           className={classes.input}
-          onKeyDown={(e) => {
-            console.log((e.target as any));
-          }}
+          onKeyDown={handleKeyDown}
         />
       </div>
     );
   },
   (prevProps, nextProps) => {
-    const keys = new Set([
-      ...Object.keys(prevProps),
-      ...Object.keys(nextProps),
-    ]);
-    keys.delete("onChange");
-
     type Prop = keyof typeof prevProps;
 
-    for (const key of keys) {
+    const keys = union(Object.keys(prevProps), Object.keys(nextProps));
+    const [functionKeys, nonFunctionKeys] = bisect(
+      keys,
+      (key) => typeof key === "function"
+    );
+
+    for (const key of nonFunctionKeys) {
       if (prevProps[key as Prop] !== nextProps[key as Prop]) {
+        console.log(key);
         return false;
       }
     }
 
-    return prevProps.onChange.toString() === nextProps.onChange.toString();
+    for (const key of functionKeys) {
+      console.log(key, (prevProps as any)[key], (nextProps as any)[key]);
+      if (
+        prevProps[key as Prop]?.toString() !==
+        nextProps[key as Prop]?.toString()
+      ) {
+        return false;
+      }
+    }
+
+    return true;
   }
 );
 

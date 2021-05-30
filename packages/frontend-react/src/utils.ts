@@ -1,16 +1,22 @@
 
 /**
  * Creates a matrix (2d-array) with the given number of rows and columns.
- * Fills all cells in the matrix with `undefined`
+ * Populates each cell with the value retrieved from the callback.
  * @param rows the number of rows.
  * @param columns the number of columns.
+ * @param cb the callback to populate by
  */
-export const emptyMatrix = (rows: number, columns: number) => {
-  const matrix = [];
+export const generateMatrix = <T>(
+  rows: number,
+  columns: number,
+  cb: (i: number, j: number) => T
+): T[][] => {
+  const matrix: T[][] = [];
   for (let i = 0; i < rows; i++) {
-    matrix.push(
-      Array(columns).fill(undefined)
-    )
+    matrix[i] = [];
+    for (let j = 0; j < columns; j++) {
+      matrix[i][j] = cb(i, j);
+    }
   }
   return matrix;
 }

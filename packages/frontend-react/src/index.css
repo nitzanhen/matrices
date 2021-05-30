@@ -17,3 +17,8 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+h1, p {
+  margin: 0;
+  font-weight: normal;
+}

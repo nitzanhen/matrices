@@ -1,8 +1,9 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
-import Cell from "./Cell";
+import { generateMatrix } from "../utils";
+import { Cell } from './Cell';
 
 interface MatrixDimensions {
   numRows: number;
@@ -49,7 +50,7 @@ export interface MatrixProps extends BaseComponentProps {
   readonly?: boolean;
 }
 
-const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
+export const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
   (
     {
       cells,
@@ -65,6 +66,16 @@ const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
   ) => {
     const [numRows, numColumns] = [cells.length, cells[0].length];
 
+    const onChangeHandlers = useMemo(
+      () =>
+        generateMatrix(
+          numRows,
+          numColumns,
+          (i, j) => (value: number | undefined) => onChange(i, j, value)
+        ),
+      [numRows, numColumns, onChange]
+    );
+
     const classes = useStyles({ numRows, numColumns });
 
     return (
@@ -79,7 +90,7 @@ const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
                 key={`(${i},${j})`}
                 label={`(${i},${j})`}
                 value={value}
-                onChange={(value) => onChange(i, j, value)}
+                onChange={onChangeHandlers[i][j]}
                 readonly={readonly}
                 setFocus={setFocus}
               />
@@ -96,5 +107,3 @@ const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
     );
   }
 );
-
-export default Matrix;

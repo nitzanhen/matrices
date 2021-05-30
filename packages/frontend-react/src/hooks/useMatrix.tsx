@@ -1,9 +1,10 @@
 import { useCallback, useRef, useState } from "react";
-import { take } from "rhax";
 import { MatrixProps } from "../components/Matrix";
-import { emptyMatrix } from "../utils";
+import { generateMatrix } from "../utils";
 
-export const useMatrix = (defaultCells = emptyMatrix(3, 3)) => {
+export const useMatrix = (
+  defaultCells = generateMatrix(3, 3, () => undefined)
+) => {
   const [cells, setCells] = useState<(number | undefined)[][]>(defaultCells);
 
   const addColumn = useCallback(() => {
@@ -16,6 +17,7 @@ export const useMatrix = (defaultCells = emptyMatrix(3, 3)) => {
 
   const addRow = useCallback(() => {
     setCells((cells) => {
+      const numColumns = cells[0].length;
       return [...cells, Array(numColumns).fill(undefined)];
     });
   }, []);
@@ -40,6 +42,7 @@ export const useMatrix = (defaultCells = emptyMatrix(3, 3)) => {
         return;
       }
 
+
       const el = ref.current;
 
       const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
@@ -58,7 +61,7 @@ export const useMatrix = (defaultCells = emptyMatrix(3, 3)) => {
         input?.setSelectionRange(caretPosition, caretPosition);
       }
     },
-    [ref.current]
+    [ref.current, numRows, numColumns]
   );
 
   const toProps = useCallback(

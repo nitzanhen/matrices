@@ -1,9 +1,7 @@
-import React, { memo, useRef } from "react";
+import React, { memo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
-import { take } from "rhax";
-import { bisect, union } from "../utils";
 
 const useStyles = createUseStyles({
   cell: {
@@ -48,7 +46,7 @@ const useStyles = createUseStyles({
   },
 });
 
-interface CellProps extends BaseComponentProps {
+export interface CellProps extends BaseComponentProps {
   row: number;
   column: number;
   value: number | undefined;
@@ -61,7 +59,7 @@ interface CellProps extends BaseComponentProps {
 /**
  * A simple cell; can be part of a vector or matrix or stand by itself.
  */
-const Cell: React.VFC<CellProps> = memo(
+export const Cell: React.VFC<CellProps> = memo(
   ({
     row,
     column,
@@ -120,14 +118,10 @@ const Cell: React.VFC<CellProps> = memo(
       }
     };
 
-    const ref = useRef<HTMLInputElement | null>(null);
-    console.log(ref.current?.selectionStart);
-
     const classes = useStyles();
 
     return (
       <div
-        ref={ref}
         className={clsx(
           classes.cell,
           readonly && classes.cellDisabled,
@@ -145,35 +139,5 @@ const Cell: React.VFC<CellProps> = memo(
         />
       </div>
     );
-  },
-  (prevProps, nextProps) => {
-    type Prop = keyof typeof prevProps;
-
-    const keys = union(Object.keys(prevProps), Object.keys(nextProps));
-    const [functionKeys, nonFunctionKeys] = bisect(
-      keys,
-      (key) =>
-        typeof prevProps[key as Prop] === "function" ||
-        typeof nextProps[key as Prop] === "function"
-    );
-
-    for (const key of nonFunctionKeys) {
-      if (prevProps[key as Prop] !== nextProps[key as Prop]) {
-        return false;
-      }
-    }
-
-    for (const key of functionKeys) {
-      if (
-        prevProps[key as Prop]?.toString() !==
-        nextProps[key as Prop]?.toString()
-      ) {
-        return false;
-      }
-    }
-
-    return true;
   }
 );
-
-export default Cell;

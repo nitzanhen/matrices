@@ -41,13 +41,22 @@ export const useMatrix = (defaultCells = emptyMatrix(3, 3)) => {
       }
 
       const el = ref.current;
-      //const row = take(i).clamp()
+
       const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
       const input = el?.children.item(position)?.querySelector("input") as
         | HTMLInputElement
         | undefined;
 
-      if (el?.querySelector("*:focus")) input?.focus();
+      const focusedElement = el?.querySelector("*:focus") as
+        | HTMLInputElement
+        | undefined;
+      if (focusedElement) {
+        // Set the caret position in the element to be focused equal to the current caret position
+        // (this is expected behaviour), then focus it.
+        const caretPosition = focusedElement.selectionStart;
+        input?.focus();
+        input?.setSelectionRange(caretPosition, caretPosition);
+      }
     },
     [ref.current]
   );

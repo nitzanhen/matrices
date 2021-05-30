@@ -75,7 +75,6 @@ const Cell: React.VFC<CellProps> = memo(
   }) => {
     /** @todo fix logic. */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.value);
       if (e.target.value === "") {
         onChange(undefined);
         return;
@@ -87,26 +86,34 @@ const Cell: React.VFC<CellProps> = memo(
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const caretPosition = (e.target as HTMLInputElement).selectionStart;
+      const el = e.target as HTMLInputElement;
 
       switch (e.key) {
         case "ArrowLeft": {
-          if (caretPosition === 0) {
+          if (el.selectionStart === 0) {
+            e.preventDefault();
+            e.stopPropagation();
             setFocus?.(row, column - 1);
           }
           break;
         }
         case "ArrowRight": {
-          if (!value || caretPosition === String(value).length) {
+          if (!value || el.selectionStart === String(value).length) {
+            e.preventDefault();
+            e.stopPropagation();
             return setFocus?.(row, column + 1);
           }
           break;
         }
         case "ArrowUp": {
+          e.preventDefault();
+          e.stopPropagation();
           setFocus?.(row - 1, column);
           break;
         }
         case "ArrowDown": {
+          e.preventDefault();
+          e.stopPropagation();
           setFocus?.(row + 1, column);
           break;
         }
@@ -145,18 +152,18 @@ const Cell: React.VFC<CellProps> = memo(
     const keys = union(Object.keys(prevProps), Object.keys(nextProps));
     const [functionKeys, nonFunctionKeys] = bisect(
       keys,
-      (key) => typeof key === "function"
+      (key) =>
+        typeof prevProps[key as Prop] === "function" ||
+        typeof nextProps[key as Prop] === "function"
     );
 
     for (const key of nonFunctionKeys) {
       if (prevProps[key as Prop] !== nextProps[key as Prop]) {
-        console.log(key);
         return false;
       }
     }
 
     for (const key of functionKeys) {
-      console.log(key, (prevProps as any)[key], (nextProps as any)[key]);
       if (
         prevProps[key as Prop]?.toString() !==
         nextProps[key as Prop]?.toString()

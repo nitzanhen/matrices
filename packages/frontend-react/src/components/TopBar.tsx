@@ -1,5 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = createUseStyles(
   {
@@ -18,7 +19,9 @@ export const TopBar: React.VFC = () => {
 
   return (
     <div className={classes.root}>
-      <h1>Coolest Matrices</h1>
+      <h1>
+        <RouterLink to="/">Coolest Matrices</RouterLink>
+      </h1>
     </div>
   );
 };

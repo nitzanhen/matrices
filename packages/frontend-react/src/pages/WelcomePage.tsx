@@ -51,6 +51,10 @@ const useStyles = createUseStyles(
   { name: "welcome" }
 );
 
+/**
+ * A welcome page; this is rendered at the root path, and prompts
+ * the user to select the operation they'd like to calculate.
+ */
 export const WelcomePage: React.VFC = () => {
   const classes = useStyles();
 

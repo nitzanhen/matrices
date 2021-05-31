@@ -37,15 +37,13 @@ const useStyles = createUseStyles(
   { name: "button" }
 );
 
-type NativeAnchorProps = React.DetailedHTMLProps<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  HTMLAnchorElement
->;
-
 export interface LinkProps extends RouterLinkProps {
   variant?: "dark" | "light" | "outline";
 }
 
+/**
+ * A styled wrapper for `react-router-dom`'s `Link`.
+ */
 export const Link: React.VFC<LinkProps> = ({
   className,
   variant = "light",

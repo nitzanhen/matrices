@@ -2,6 +2,9 @@ import { useCallback, useRef, useState } from "react";
 import { MatrixProps } from "./Matrix";
 import { generateMatrix } from "../utils";
 
+/**
+ * Handles functionality for a single matrix.
+ */
 export const useMatrix = (
   defaultCells = generateMatrix(3, 3, () => undefined)
 ) => {

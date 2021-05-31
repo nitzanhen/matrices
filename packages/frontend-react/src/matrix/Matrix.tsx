@@ -50,6 +50,10 @@ export interface MatrixProps extends BaseComponentProps {
   readonly?: boolean;
 }
 
+/**
+ * A matrix - i.e. a grid of cells. 
+ * The intended use for this component is with the `useMatrix` hook.
+ */
 export const Matrix = forwardRef<HTMLDivElement, MatrixProps>(
   (
     {

@@ -3,6 +3,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Route, Switch } from "react-router";
 import { TopBar } from "./components/TopBar";
+import { MatrixAdditionPage } from "./pages/MatrixAdditionPage";
 import { WelcomePage } from "./pages/WelcomePage";
 
 const useStyles = createUseStyles(
@@ -22,7 +23,7 @@ const useStyles = createUseStyles(
       "& > main": {
         flex: "1 0 auto",
       },
-      color: 'var(--color-primary)'
+      color: "var(--color-primary)",
     },
   },
   { name: "app" }
@@ -38,6 +39,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <WelcomePage />
+          </Route>
+          <Route path="/matrix/add">
+            <MatrixAdditionPage />
           </Route>
         </Switch>
       </main>

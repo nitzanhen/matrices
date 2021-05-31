@@ -37,19 +37,18 @@ export const useMatrix = (
     []
   );
 
-  const ref = useRef<HTMLDivElement | null>(null);
+  const gridRef = useRef<HTMLDivElement | null>(null);
 
   const setFocus = useCallback(
     (i: number, j: number) => {
       if (i < 0 || j < 0 || i > numRows - 1 || j > numColumns - 1) {
         return;
       }
-
-
-      const el = ref.current;
+      const el = gridRef.current;
 
       const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
-      const input = el?.children.item(position)?.querySelector("input") as
+      const cells = el ? Array.from(el.children) : null;
+      const input = cells?.[position]?.querySelector("input") as
         | HTMLInputElement
         | undefined;
 
@@ -57,14 +56,20 @@ export const useMatrix = (
         | HTMLInputElement
         | undefined;
       if (focusedElement) {
-        // Set the caret position in the element to be focused equal to the current caret position
-        // (this is expected behaviour), then focus it.
-        const caretPosition = focusedElement.selectionStart;
+        const focusPosition = cells!.indexOf(focusedElement.parentElement!);
+        const focusColumn = focusPosition % numColumns;
+        if (focusColumn === j) {
+          // Iff the focus is not changed horizontally:
+          // Set the caret position in the element to be focused equal to the current caret position
+          // (this is expected behaviour), then focus it.
+          const caretPosition = focusedElement.selectionStart;
+          input?.setSelectionRange(caretPosition, caretPosition);
+        }
+
         input?.focus();
-        input?.setSelectionRange(caretPosition, caretPosition);
       }
     },
-    [ref.current, numRows, numColumns]
+    [gridRef.current, numRows, numColumns]
   );
 
   const toProps = useCallback(
@@ -74,6 +79,7 @@ export const useMatrix = (
       onAddRow: addRow,
       onChange: setCell,
       setFocus,
+      gridRef,
     }),
     [cells, addColumn, addRow, setCell]
   );
@@ -83,7 +89,7 @@ export const useMatrix = (
     addColumn,
     addRow,
     setCell,
-    ref,
+    gridRef,
     setFocus,
     toProps,
   };

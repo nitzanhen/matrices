@@ -4,7 +4,7 @@ import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles(
   {
     root: {
-      backgroundColor: "var(--background-primary)",
+      backgroundColor: "var(--background-dark)",
       color: "white",
       padding: 16,
       boxShadow: "0px 3px 9px 0px #00000050",

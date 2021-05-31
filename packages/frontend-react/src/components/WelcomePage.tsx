@@ -1,6 +1,7 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 import calculator from "../calculator.svg";
+import { Link } from "./Link";
 
 const useStyles = createUseStyles(
   {
@@ -22,19 +23,28 @@ const useStyles = createUseStyles(
       },
     },
     actions: {
-      marginTop: 32,
+      marginTop: 40,
+      width: '100%',
+      overflow: 'hidden',
       display: "flex",
 
       "& > span": {
         display: "block",
         width: 1,
         flex: "0 0 auto",
-        backgroundColor: "var(--background-primary)",
+        backgroundColor: "var(--background-dark)",
         opacity: 0.3,
+        margin: "0 24px",
       },
 
       "& > div": {
-        flex: "1 0 50%",
+        flex: "1 1 50%",
+        display: "grid",
+        padding: 8,
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "1fr 1fr",
+        columnGap: 16,
+        rowGap: 16,
       },
     },
   },
@@ -52,15 +62,15 @@ export const WelcomePage: React.VFC = () => {
         <p>select an operation to get started</p>
         <div className={classes.actions}>
           <div>
-            <button>Matrix addition</button>
-            <button>Matrix multiplication</button>
-            <button>Matrix transpose</button>
-            <button>Matrix determinant</button>
+            <Link to='/matrix/sum'>Matrix addition</Link>
+            <Link to='/matrix/product'>Matrix multiplication</Link>
+            <Link to='/matrix/transpose'>Matrix transpose</Link>
+            <Link to='/matrix/determinant'>Matrix determinant</Link>
           </div>
           <span />
           <div>
-            <button>Dot product</button>
-            <button>Cross product</button>
+            <Link to='/vector/dot'>Dot product</Link>
+            <Link to='/vector/cross'>Cross product</Link>
           </div>
         </div>
       </div>

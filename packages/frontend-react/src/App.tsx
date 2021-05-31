@@ -8,7 +8,8 @@ import { WelcomePage } from "./components/WelcomePage";
 const useStyles = createUseStyles(
   {
     colorDefs: {
-      "--background-primary": "#3A3768",
+      "--background-light": "#F0EFFF",
+      "--background-dark": "#3A3768",
       "--color-primary": "#3F3C72",
     },
 

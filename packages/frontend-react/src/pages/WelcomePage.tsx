@@ -62,7 +62,7 @@ export const WelcomePage: React.VFC = () => {
     <div className={classes.root}>
       <div className={classes.content}>
         <img src={calculator} />
-        <h1>Welcome</h1>
+        <h1>Welcome!</h1>
         <p>select an operation to get started</p>
         <div className={classes.actions}>
           <div>

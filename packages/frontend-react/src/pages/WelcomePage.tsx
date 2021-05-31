@@ -1,7 +1,7 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 import calculator from "../calculator.svg";
-import { Link } from "./Link";
+import { Link } from "../components/Link";
 
 const useStyles = createUseStyles(
   {

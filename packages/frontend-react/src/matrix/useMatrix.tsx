@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { MatrixProps } from "../components/Matrix";
+import { MatrixProps } from "./Matrix";
 import { generateMatrix } from "../utils";
 
 export const useMatrix = (

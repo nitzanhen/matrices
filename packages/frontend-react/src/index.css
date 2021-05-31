@@ -22,3 +22,8 @@ h1, p {
   margin: 0;
   font-weight: normal;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

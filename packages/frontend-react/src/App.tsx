@@ -3,7 +3,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Route, Switch } from "react-router";
 import { TopBar } from "./components/TopBar";
-import { WelcomePage } from "./components/WelcomePage";
+import { WelcomePage } from "./pages/WelcomePage";
 
 const useStyles = createUseStyles(
   {

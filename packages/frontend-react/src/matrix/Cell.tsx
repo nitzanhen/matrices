@@ -14,10 +14,9 @@ const useStyles = createUseStyles({
     height: 50,
     border: "1px solid black",
     borderRadius: 4,
-    transition: "border-color 200ms ease-in-out",
 
     "&:focus-within": {
-      border: "2px solid #3d7bcc",
+      border: "2px solid var(--color-light, #3d7bcc)",
     },
   },
   cellDisabled: {

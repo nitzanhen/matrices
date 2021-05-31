@@ -6,6 +6,7 @@ import { generateMatrix } from "../utils";
  * Handles functionality for a single matrix.
  */
 export const useMatrix = (
+  readonly = false,
   defaultCells = generateMatrix(3, 3, () => undefined)
 ) => {
   const [cells, setCells] = useState<(number | undefined)[][]>(defaultCells);
@@ -36,6 +37,10 @@ export const useMatrix = (
     },
     []
   );
+
+  const clear = useCallback(() => {
+    setCells(generateMatrix(numRows, numColumns, () => undefined));
+  }, [numRows, numColumns])
 
   const gridRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,8 +85,9 @@ export const useMatrix = (
       onChange: setCell,
       setFocus,
       gridRef,
+      readonly,
     }),
-    [cells, addColumn, addRow, setCell]
+    [cells, addColumn, addRow, setCell, readonly]
   );
 
   return {
@@ -89,8 +95,11 @@ export const useMatrix = (
     addColumn,
     addRow,
     setCell,
+    setCells,
+    clear,
     gridRef,
     setFocus,
+    readonly,
     toProps,
   };
 };

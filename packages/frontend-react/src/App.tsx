@@ -12,6 +12,7 @@ const useStyles = createUseStyles(
       "--background-light": "#F0EFFF",
       "--background-dark": "#3A3768",
       "--color-primary": "#3F3C72",
+      "--color-light": "#6C63FF",
     },
 
     root: {
@@ -40,7 +41,7 @@ function App() {
           <Route path="/" exact>
             <WelcomePage />
           </Route>
-          <Route path="/matrix/add">
+          <Route path="/matrix/sum">
             <MatrixAdditionPage />
           </Route>
         </Switch>

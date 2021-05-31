@@ -99,12 +99,16 @@ export const Matrix: React.VFC<MatrixProps> = ({
           ))
         )}
       </div>
-      <button style={{ gridArea: "add-col" }} onClick={onAddColumn}>
-        aaaaaaa
-      </button>
-      <button style={{ gridArea: "add-row" }} onClick={onAddRow}>
-        bbbbbbb
-      </button>
+      {!readonly && (
+        <>
+          <button style={{ gridArea: "add-col" }} onClick={onAddColumn}>
+            aaaaaaa
+          </button>
+          <button style={{ gridArea: "add-row" }} onClick={onAddRow}>
+            bbbbbbb
+          </button>
+        </>
+      )}
     </div>
   );
 };

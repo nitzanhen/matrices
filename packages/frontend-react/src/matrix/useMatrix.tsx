@@ -2,28 +2,43 @@ import { useCallback, useRef, useState } from "react";
 import { MatrixProps } from "./Matrix";
 import { generateMatrix } from "../utils";
 
+interface useMatrixProps {
+  label?: string;
+  readonly?: boolean;
+  defaultCells?: (number | undefined)[][];
+}
+
 /**
  * Handles functionality for a single matrix.
  */
-export const useMatrix = (
+export const useMatrix = ({
+  label,
   readonly = false,
-  defaultCells = generateMatrix(3, 3, () => undefined)
-) => {
+  defaultCells = generateMatrix(3, 3, () => undefined),
+}: useMatrixProps) => {
   const [cells, setCells] = useState<(number | undefined)[][]>(defaultCells);
+
+  // Assumption: all rows have the same amount of values.
+  const numRows = cells.length;
+  const numColumns = cells[0].length;
 
   const addColumn = useCallback(() => {
     setCells((cells) => cells.map((row) => [...row, undefined]));
   }, []);
 
-  // Assumption: all rows have the same amount of values.
-  const numRows = cells.length;
-  const numColumns = cells[0].length;
+  const removeColumn = useCallback(() => {
+    setCells((cells) => cells.map((row) => row.slice(0, -1)));
+  }, []);
 
   const addRow = useCallback(() => {
     setCells((cells) => {
       const numColumns = cells[0].length;
       return [...cells, Array(numColumns).fill(undefined)];
     });
+  }, []);
+
+  const removeRow = useCallback(() => {
+    setCells((cells) => cells.slice(0, -1));
   }, []);
 
   const setCell = useCallback(
@@ -40,7 +55,7 @@ export const useMatrix = (
 
   const clear = useCallback(() => {
     setCells(generateMatrix(numRows, numColumns, () => undefined));
-  }, [numRows, numColumns])
+  }, [numRows, numColumns]);
 
   const gridRef = useRef<HTMLDivElement | null>(null);
 
@@ -79,21 +94,27 @@ export const useMatrix = (
 
   const toProps = useCallback(
     (): MatrixProps => ({
+      label,
       cells,
       onAddColumn: addColumn,
+      onRemoveColumn: removeColumn,
       onAddRow: addRow,
+      onRemoveRow: removeRow,
       onChange: setCell,
       setFocus,
       gridRef,
       readonly,
     }),
-    [cells, addColumn, addRow, setCell, readonly]
+    [cells, addColumn, addRow, setCell, readonly, label]
   );
 
   return {
+    label,
     cells,
     addColumn,
+    removeColumn,
     addRow,
+    removeRow,
     setCell,
     setCells,
     clear,

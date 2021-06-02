@@ -1,9 +1,11 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, ReactNode, useMemo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
 import { generateMatrix } from "../utils";
 import { Cell } from "./Cell";
+import { Plus } from "../components/svg/Plus";
+import { Minus } from "../components/svg/Minus";
 
 interface MatrixDimensions {
   numRows: number;
@@ -15,16 +17,61 @@ const useStyles = createUseStyles(
     root: {
       width: "max-content",
       height: "max-content",
-      rowGap: 16,
-      columnGap: 16,
       display: "grid",
       gridTemplateAreas: `
+        "label label"
         "matrix add-col"
         "add-row ."
       `,
+      rowGap: 16,
+      columnGap: 16,
+      alignItems: "center",
+      justifyContent: "center",
       gridTemplateRows: "1fr auto",
       gridTemplateColumns: "1fr auto",
+
+      "& button": {
+        appearance: "none",
+        border: "none",
+        background: "none",
+        padding: 0,
+        margin: 0,
+        borderRadius: "50%",
+        boxShadow: "0 2px 3px 1px #00000029",
+      },
+
+      "& svg": {
+        margin: 0,
+        padding: 0,
+        width: 24,
+        height: 24,
+        fill: "var(--color-primary)",
+        verticalAlign: "top",
+      },
     },
+    addCol: {
+      gridArea: "add-col",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+
+      "& > :not(:last-child)": {
+        marginBottom: 16,
+      },
+    },
+
+    addRow: {
+      gridArea: "add-row",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+
+      "& > :not(:last-child)": {
+        marginRight: 16,
+      },
+    },
+
     matrix: ({ numRows, numColumns }: MatrixDimensions) => ({
       gridArea: "matrix",
       display: "grid",
@@ -45,10 +92,13 @@ export interface MatrixProps extends BaseComponentProps {
   cells: (number | undefined)[][];
   onChange: (row: number, column: number, value: number | undefined) => void;
   onAddRow: () => void;
+  onRemoveRow: () => void;
   onAddColumn: () => void;
+  onRemoveColumn: () => void;
   setFocus: (row: number, column: number) => void;
   readonly?: boolean;
   gridRef?: React.Ref<HTMLDivElement>;
+  label?: ReactNode;
 }
 
 /**
@@ -60,11 +110,14 @@ export const Matrix: React.VFC<MatrixProps> = ({
   readonly = false,
   onChange,
   onAddRow,
+  onRemoveRow,
   onAddColumn,
+  onRemoveColumn,
   setFocus,
   className,
   style,
   gridRef,
+  label,
 }) => {
   const [numRows, numColumns] = [cells.length, cells[0].length];
 
@@ -82,6 +135,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
 
   return (
     <div className={clsx(classes.root, className)}>
+      <div style={{ gridArea: "label" }}>{label}</div>
       <div className={classes.matrix} style={style} ref={gridRef}>
         {cells.flatMap((row, i) =>
           row.map((value, j) => (
@@ -101,12 +155,23 @@ export const Matrix: React.VFC<MatrixProps> = ({
       </div>
       {!readonly && (
         <>
-          <button style={{ gridArea: "add-col" }} onClick={onAddColumn}>
-            aaaaaaa
-          </button>
-          <button style={{ gridArea: "add-row" }} onClick={onAddRow}>
-            bbbbbbb
-          </button>
+          <div className={classes.addCol}>
+            <button onClick={onRemoveColumn}>
+              <Minus />
+            </button>
+            <button onClick={onAddColumn}>
+              <Plus />
+            </button>
+          </div>
+          <div className={classes.addRow}>
+            <button onClick={onRemoveRow}>
+              <Minus />
+            </button>
+            <span>{numRows} rows</span>
+            <button onClick={onAddRow}>
+              <Plus />
+            </button>
+          </div>
         </>
       )}
     </div>

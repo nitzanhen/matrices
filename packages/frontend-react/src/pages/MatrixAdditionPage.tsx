@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
+import { Equal } from "../components/svg/Equal";
+import { Plus } from "../components/svg/Plus";
 import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
 import { addMatrices } from "../operations";
@@ -15,8 +17,15 @@ const useStyles = createUseStyles(
     },
     content: {
       display: "flex",
+      alignItems: "center",
       "& > *:not(:last-child)": {
-        marginRight: 32,
+        marginRight: 40,
+      },
+
+      "& > svg": {
+        width: 48,
+        height: 48,
+        fill: "var(--color-light)",
       },
     },
   },
@@ -27,9 +36,9 @@ const useStyles = createUseStyles(
  * The page in which matrices can be summed up, rendered in path /matrix/add.
  */
 export const MatrixAdditionPage: React.VFC = () => {
-  const matrix1 = useMatrix();
-  const matrix2 = useMatrix();
-  const sum = useMatrix(true);
+  const matrix1 = useMatrix({ label: "A" });
+  const matrix2 = useMatrix({ label: "B" });
+  const sum = useMatrix({ label: "A + B", readonly: true });
 
   useEffect(() => {
     const result = addMatrices(matrix1.cells, matrix2.cells);
@@ -45,9 +54,11 @@ export const MatrixAdditionPage: React.VFC = () => {
   return (
     <div className={classes.root}>
       <div className={classes.content}>
-        <Matrix {...matrix1.toProps()} />
-        <Matrix {...matrix2.toProps()} />
-        <Matrix {...sum.toProps()} />
+        <Matrix {...matrix1.toProps()} label="A" />
+        <Plus />
+        <Matrix {...matrix2.toProps()} label="B" />
+        <Equal />
+        <Matrix {...sum.toProps()} label="A + B" />
       </div>
     </div>
   );

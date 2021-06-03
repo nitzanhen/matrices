@@ -4,6 +4,7 @@ import { createUseStyles } from "react-jss";
 import { Route, Switch } from "react-router";
 import { TopBar } from "./components/TopBar";
 import { MatrixAdditionPage } from "./pages/MatrixAdditionPage";
+import { MatrixMultiplicationPage } from "./pages/MatrixMultiplicationPage";
 import { WelcomePage } from "./pages/WelcomePage";
 
 const useStyles = createUseStyles(
@@ -11,8 +12,10 @@ const useStyles = createUseStyles(
     colorDefs: {
       "--background-light": "#F0EFFF",
       "--background-dark": "#3A3768",
+      "--background-result": "#3A3768CD",
       "--color-primary": "#3F3C72",
       "--color-light": "#6C63FF",
+      "--color-result": "#F0EFFF"
     },
 
     root: {
@@ -43,6 +46,9 @@ function App() {
           </Route>
           <Route path="/matrix/sum">
             <MatrixAdditionPage />
+          </Route>
+          <Route path="/matrix/product">
+            <MatrixMultiplicationPage />
           </Route>
         </Switch>
       </main>

@@ -5,29 +5,35 @@ import { BaseComponentProps } from "../types";
 
 const useStyles = createUseStyles({
   cell: {
-    boxSizing: "border-box",
     position: "relative",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     width: 50,
     height: 50,
-    border: "1px solid black",
-    borderRadius: 4,
+    backgroundColor: "var(--background-light)",
+    borderRadius: 10,
 
     "&:focus-within": {
-      border: "2px solid var(--color-light, #3d7bcc)",
+      outline: "1px solid var(--color-light, #3d7bcc)",
     },
   },
-  cellDisabled: {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  cellResult: {
+    backgroundColor: "var(--background-result)",
+
+    "& $input, & $label": {
+      color: "var(--color-result)",
+    },
   },
   input: {
+    background: "none",
     textAlign: "center",
     flex: "1 1 auto",
     maxWidth: "calc(100% - 16px)",
     height: "calc(100% - 16px)",
     border: "none",
+    color: "var(--color-primary)",
+    fontSize: 18,
 
     "&:focus": {
       outline: "none",
@@ -40,7 +46,8 @@ const useStyles = createUseStyles({
     position: "absolute",
     top: 4,
     left: 4,
-    color: "rgba(0, 0, 0, 0.5)",
+    color: "var(--color-primary)",
+    opacity: 0.75,
     fontSize: 12,
   },
 });
@@ -123,7 +130,7 @@ export const Cell: React.VFC<CellProps> = memo(
       <div
         className={clsx(
           classes.cell,
-          readonly && classes.cellDisabled,
+          readonly && classes.cellResult,
           className
         )}
         style={style}

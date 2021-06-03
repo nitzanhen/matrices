@@ -27,18 +27,21 @@ export const useMatrix = ({
   }, []);
 
   const removeColumn = useCallback(() => {
-    setCells((cells) => cells.map((row) => row.slice(0, -1)));
-  }, []);
-
-  const addRow = useCallback(() => {
     setCells((cells) => {
       const numColumns = cells[0].length;
-      return [...cells, Array(numColumns).fill(undefined)];
+      return numColumns > 1 ? cells.map((row) => row.slice(0, -1)) : cells;
     });
   }, []);
 
+  const addRow = useCallback(() => {
+    setCells((cells) => [...cells, Array(cells[0].length).fill(undefined)]);
+  }, []);
+
   const removeRow = useCallback(() => {
-    setCells((cells) => cells.slice(0, -1));
+    setCells((cells) => {
+      const numRows = cells.length;
+      return numRows > 1 ? cells.slice(0, -1) : cells;
+    });
   }, []);
 
   const setCell = useCallback(

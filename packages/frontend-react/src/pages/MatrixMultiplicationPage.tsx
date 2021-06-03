@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { Equal } from "../components/svg/Equal";
-import { Plus } from "../components/svg/Plus";
+import { Multiply } from "../components/svg/Multiply";
 import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
-import { addMatrices } from "../operations";
+import { multiplyMatrices } from "../operations";
 
 const useStyles = createUseStyles(
   {
@@ -22,7 +22,7 @@ const useStyles = createUseStyles(
       },
 
       "& > svg": {
-        alignSelf: "center",
+        alignSelf: 'center',
         width: 48,
         height: 48,
         fill: "var(--color-light)",
@@ -33,21 +33,21 @@ const useStyles = createUseStyles(
 );
 
 /**
- * The page in which matrices can be summed up, rendered in path /matrix/sum.
+ * The page in which matrices can be multiplied, rendered in path /matrix/product.
  */
-export const MatrixAdditionPage: React.VFC = () => {
+export const MatrixMultiplicationPage: React.VFC = () => {
   const matrix1 = useMatrix({ label: "A" });
   const matrix2 = useMatrix({ label: "B" });
-  const sum = useMatrix({ label: "A+B", readonly: true });
+  const product = useMatrix({ label: "AB", readonly: true });
 
   useEffect(() => {
-    const result = addMatrices(matrix1.cells, matrix2.cells);
+    const result = multiplyMatrices(matrix1.cells, matrix2.cells);
     if (result) {
-      sum.setCells(result);
+      product.setCells(result);
     } else {
-      sum.clear();
+      product.clear();
     }
-  }, [matrix1.cells, matrix2.cells, sum.setCells, sum.clear]);
+  }, [matrix1.cells, matrix2.cells, product.setCells, product.clear]);
 
   const classes = useStyles();
 
@@ -55,10 +55,10 @@ export const MatrixAdditionPage: React.VFC = () => {
     <div className={classes.root}>
       <div className={classes.content}>
         <Matrix {...matrix1.toProps()} />
-        <Plus />
+        <Multiply />
         <Matrix {...matrix2.toProps()} />
         <Equal />
-        <Matrix {...sum.toProps()} />
+        <Matrix {...product.toProps()} />
       </div>
     </div>
   );

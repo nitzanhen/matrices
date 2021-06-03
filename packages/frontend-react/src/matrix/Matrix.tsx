@@ -19,7 +19,7 @@ const useStyles = createUseStyles(
       height: "max-content",
       display: "grid",
       gridTemplateAreas: `
-        "label label"
+        "label ."
         "matrix add-col"
         "add-row ."
       `,
@@ -77,6 +77,8 @@ const useStyles = createUseStyles(
       display: "grid",
       gridTemplateRows: `repeat(${numRows}, 100px)`,
       gridTemplateColumns: `repeat(${numColumns}, 100px)`,
+      rowGap: 8,
+      columnGap: 8,
 
       "& > $cell": {
         width: "100%",
@@ -84,6 +86,12 @@ const useStyles = createUseStyles(
       },
     }),
     cell: {},
+    label: {
+      gridArea: "label",
+      textAlign: 'center',
+      fontSize: 28,
+      color: 'var(--color-primary)'
+    }
   },
   { name: "matrix" }
 );
@@ -135,7 +143,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
 
   return (
     <div className={clsx(classes.root, className)}>
-      <div style={{ gridArea: "label" }}>{label}</div>
+      <div className={classes.label}>{label}</div>
       <div className={classes.matrix} style={style} ref={gridRef}>
         {cells.flatMap((row, i) =>
           row.map((value, j) => (

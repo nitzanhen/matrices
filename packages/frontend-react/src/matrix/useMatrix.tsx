@@ -14,7 +14,7 @@ interface useMatrixProps {
 export const useMatrix = ({
   label,
   readonly = false,
-  defaultCells = generateMatrix(3, 3, () => undefined),
+  defaultCells = generateMatrix(2, 2, () => undefined),
 }: useMatrixProps) => {
   const [cells, setCells] = useState<(number | undefined)[][]>(defaultCells);
 

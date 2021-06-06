@@ -75,6 +75,56 @@ export const multiplyMatrices = (m1: (number | undefined)[][], m2: (number | und
   return result;
 };
 
+function* permutationsOf<T>(...iterables: Iterable<T>[]): Generator<[T[], number[]]> {
+  if (iterables.length === 0) {
+    yield [[], []];
+    return;
+  }
+
+  let itemIndex = 0;
+  const [head, ...nextIters] = iterables;
+  for (const item of head) {
+    for (const [items, coords] of permutationsOf(...nextIters)) {
+      yield [[item, ...items], [itemIndex, ...coords]];
+    }
+    itemIndex++;
+  }
+}
+
+/**
+ * Calculates the parity of a given permutation.
+ * 
+ * It does so by breaking up the permutation into cycles,
+ * which gives roughly O(n) time (n is the length of the permutation as a vector).
+ * This method is faster, order of magnitude speaking, than counting the inversions of the permutation,
+ * which is more straight-forward.
+ * 
+ * @param {[...number[]]} permutation the permutation to operate on. 
+ * permutation should hold the numbers {0, ..., n-1}, and them exactly, each exactly once.
+ * @returns {-1 | 1} the parity of the permutation.
+ */
+const parityOf = (permutation: [...number[]]): -1 | 1 => {
+
+  let cycles = [];
+  let currentCycle = new Set();
+}
+
+/**
+ * Calculates the determinant of a matrix.
+ * `m` must be a square matrix.
+ */
+export const determinant = (m: (number | undefined)[][]) => {
+  //Laplace expansion along the first row
+
+  let det = 0;
+  //Iterate over all permutations over rows of m
+  for (const [permutation, coords] of permutationsOf(...m)) {
+    console.log(permutation, coords);
+  }
+}
+
+determinant([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+
 /**
  * Takes the transpose of a matrix.
  * All rows of the matrix must have the same number of columns.

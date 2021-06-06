@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { createUseStyles } from "react-jss";
 import { Equal } from "../components/svg/Equal";
 import { Plus } from "../components/svg/Plus";
 import { Matrix } from "../matrix/Matrix";

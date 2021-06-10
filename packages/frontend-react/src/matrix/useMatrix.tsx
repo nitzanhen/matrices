@@ -3,8 +3,8 @@ import { MatrixProps } from "./Matrix";
 import { generateMatrix } from "../utils";
 
 interface useMatrixProps {
-  label?: string;
-  readonly?: boolean;
+  label?: MatrixProps['label'];
+  readonly?: MatrixProps['readonly'];
   defaultCells?: (number | undefined)[][];
 }
 

@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
  */
 export const MatrixTransposePage: React.VFC = () => {
   const matrix = useMatrix({ label: "A" });
-  const tranposed = useMatrix({ label: "A+B", readonly: true });
+  const tranposed = useMatrix({ label: <span>A<sup>t</sup></span>, readonly: true });
 
   useEffect(() => {
     const result = transpose(matrix.cells);

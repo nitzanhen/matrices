@@ -1,0 +1,19 @@
+{
+  "name": "@matrices/common",
+  "version": "0.1.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "private": true,
+  "scripts": {
+    "prebuild": "yarn run clean:build",
+    "build": "tsc -p tsconfig.json --pretty",
+    "clean:build": "rimraf build && rimraf .cache",
+    "dev": "tsc -p tsconfig.json -w",
+    "lint": "eslint src --ext .ts --color",
+    "lint:fix": "eslint src --ext .ts --fix --color",
+    "typecheck": "tsc -p tsconfig.json --noEmit --pretty"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}

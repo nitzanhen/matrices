@@ -1,4 +1,3 @@
-//@ts-expect-error path is not known to browser, but script is being run in a Node.Js env.
 import path from 'path';
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
@@ -9,7 +8,6 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      //@ts-expect-error path is not known to browser, but script is being run in a Node.Js env.
       '@matrices/common': path.join(__dirname, '..', 'common', 'src', 'index.ts')
     }
   },

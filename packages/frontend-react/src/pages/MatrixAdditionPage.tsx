@@ -17,8 +17,8 @@ export const MatrixAdditionPage: React.VFC = () => {
 
   useEffect(() => {
     const result = addMatrices(matrix1.cells, matrix2.cells);
-    if (result) {
-      sum.setCells(result);
+    if (result.ok) {
+      sum.setCells(result.result);
     } else {
       sum.clear();
     }

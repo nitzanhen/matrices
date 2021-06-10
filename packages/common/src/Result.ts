@@ -1,6 +1,7 @@
 export class DimensionError extends Error {}; 
 export class EmptyCellError extends Error {};
 
+/** @todo maybe find a better field name than result (leads to `result.result`) */
 export type Result<T, E> = { ok: true, result: T } | { ok: false, err: E }
 
 /** Convenience factory for { ok: true, result: result } */

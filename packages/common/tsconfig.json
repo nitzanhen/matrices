@@ -4,7 +4,7 @@
     "declaration": true,
     "declarationMap": true,
     "composite": true,
-    "rootDir": "true",
+    "rootDir": "src",
     "outDir": "build",
     "tsBuildInfoFile": "./.cache/tsbuildinfo",
   },

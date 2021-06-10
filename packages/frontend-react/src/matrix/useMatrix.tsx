@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from "react";
+import { generateMatrix } from "@matrices/common";
+
 import { MatrixProps } from "./Matrix";
-import { generateMatrix } from "../utils";
 
 interface useMatrixProps {
   label?: MatrixProps['label'];

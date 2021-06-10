@@ -1,8 +1,9 @@
 import React, { forwardRef, ReactNode, useMemo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
+import { generateMatrix } from "@matrices/common";
+
 import { BaseComponentProps } from "../types";
-import { generateMatrix } from "../utils";
 import { Cell } from "./Cell";
 import { Plus } from "../components/svg/Plus";
 import { Minus } from "../components/svg/Minus";

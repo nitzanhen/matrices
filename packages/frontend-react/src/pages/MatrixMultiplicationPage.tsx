@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
+import { multiplyMatrices } from "@matrices/common";
+
 import { Equal } from "../components/svg/Equal";
 import { Multiply } from "../components/svg/Multiply";
 import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
-import { multiplyMatrices } from "../operations";
-import classes from './operation.module.css';
 import { OperationPage } from './OperationPage';
 
 /**

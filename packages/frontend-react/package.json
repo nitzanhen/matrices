@@ -16,6 +16,7 @@
     "rhax": "^1.0.0-beta.18"
   },
   "devDependencies": {
+    "@matrices/common": "^0.1.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",

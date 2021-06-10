@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
+import { transpose } from "@matrices/common";
+
+
 import { Equal } from "../components/svg/Equal";
 import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
-import { transpose } from "../operations";
-import classes from "./operation.module.css";
 import { OperationPage } from './OperationPage';
 
 const useStyles = createUseStyles({

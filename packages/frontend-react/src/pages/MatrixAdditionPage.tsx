@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import { addMatrices } from "@matrices/common";
+
 import { Equal } from "../components/svg/Equal";
 import { Plus } from "../components/svg/Plus";
 import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
-import { addMatrices } from "../operations";
 import { OperationPage } from './OperationPage';
 
 /**

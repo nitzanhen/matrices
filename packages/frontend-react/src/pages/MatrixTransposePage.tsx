@@ -5,6 +5,7 @@ import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
 import { transpose } from "../operations";
 import classes from "./operation.module.css";
+import { OperationPage } from './OperationPage';
 
 const useStyles = createUseStyles({
   inputMatrix: {
@@ -31,12 +32,11 @@ export const MatrixTransposePage: React.VFC = () => {
   const { inputMatrix } = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div className={classes.content}>
-        <Matrix {...matrix.toProps()} className={inputMatrix} />
-        <Equal />
-        <Matrix {...tranposed.toProps()} />
-      </div>
-    </div>
+    <OperationPage>
+      <Matrix {...matrix.toProps()} className={inputMatrix} />
+      <Equal />
+      <Matrix {...tranposed.toProps()} />
+    </OperationPage>
+
   );
 };

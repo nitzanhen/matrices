@@ -5,6 +5,7 @@ import { Matrix } from "../matrix/Matrix";
 import { useMatrix } from "../matrix/useMatrix";
 import { multiplyMatrices } from "../operations";
 import classes from './operation.module.css';
+import { OperationPage } from './OperationPage';
 
 /**
  * The page in which matrices can be multiplied, rendered in path /matrix/product.
@@ -24,14 +25,12 @@ export const MatrixMultiplicationPage: React.VFC = () => {
   }, [matrix1.cells, matrix2.cells, product.setCells, product.clear]);
 
   return (
-    <div className={classes.root}>
-      <div className={classes.content}>
-        <Matrix {...matrix1.toProps()} />
-        <Multiply />
-        <Matrix {...matrix2.toProps()} />
-        <Equal />
-        <Matrix {...product.toProps()} />
-      </div>
-    </div>
+    <OperationPage>
+      <Matrix {...matrix1.toProps()} />
+      <Multiply />
+      <Matrix {...matrix2.toProps()} />
+      <Equal />
+      <Matrix {...product.toProps()} />
+    </OperationPage>
   );
 };

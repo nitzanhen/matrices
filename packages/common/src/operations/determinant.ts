@@ -7,6 +7,9 @@
 //     return;
 //   }
 
+import { DimensionError, EmptyCellError, err, ok, Result } from '../Result';
+import { Matrix } from '../types';
+
 //   let itemIndex = 0;
 //   const [head, ...nextIters] = iterables;
 //   for (const item of head) {
@@ -75,9 +78,10 @@ console.log(signOf([2, 3, 4, 1, 0]), signOf([2, 3, 0, 1]))
  * Calculates the determinant of a matrix.
  * `m` must be a square matrix.
  */
-export const determinant = (matrix: (number | undefined)[][]) => {
-  //Laplace expansion along the first row
-
+export const determinant = (matrix: Matrix): Result<number, DimensionError | EmptyCellError> => {
+  if(matrix.length !== matrix[0].length) {
+    return err(new DimensionError('matrix must be a square matrix'))
+  }
   const n = matrix.length;
 
   let det = 0;
@@ -89,14 +93,14 @@ export const determinant = (matrix: (number | undefined)[][]) => {
       const j = permutation[i];
       const aij = matrix[i][j];
       if (aij === undefined) {
-        return null;
+        return err(new EmptyCellError());
       }
       product *= aij;
     }
     det += sign * product
   }
 
-  return det;
+  return ok(det);
 }
 
 //console.log(determinant([[1, 3, 5, 9], [1, 3, 1, 7], [4, 3, 9, 7], [5, 2, 0, 9]]))

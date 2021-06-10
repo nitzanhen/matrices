@@ -1,18 +1,25 @@
+import { EmptyCellError, err, ok, Result } from '../Result';
+import { Matrix } from '../types';
+
 /**
  * Takes the transpose of a matrix.
  * All rows of the matrix must have the same number of columns.
  */
- export const transpose = (m: (number | undefined)[][]) => {
+ export const transpose = (m: Matrix): Result<Matrix, EmptyCellError> => {
   const numRows = m.length;
   const numCols = m[0].length;
 
-  const result: (number | undefined)[][] = [];
+  const result: Matrix = [];
   for (let i = 0; i < numCols; i++) {
     result[i] = []
     for (let j = 0; j < numRows; j++) {
-      result[i][j] = m[j][i];
+      const mji = m[j][i] ?? null;
+      if(mji === null) {
+        return err(new EmptyCellError());
+      }
+      result[i][j] = mji;
     }
   }
 
-  return result;
+  return ok(result);
 }

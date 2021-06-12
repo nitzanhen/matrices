@@ -3,7 +3,7 @@ import { generateMatrix } from "@matrices/common";
 
 import { MatrixProps } from "./Matrix";
 
-interface useMatrixProps {
+export interface useMatrixProps {
   label?: MatrixProps['label'];
   readonly?: MatrixProps['readonly'];
   defaultCells?: (number | undefined)[][];

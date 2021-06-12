@@ -21,6 +21,15 @@ export const generateMatrix = <T>(
   return matrix;
 }
 
+/**
+ * Convenient wrapper over `generateMatrix` for the
+ * special case of a vector.
+ */
+export const generateVector = <T>(
+  columns: number,
+  cb: (i: number) => T
+): T[] => generateMatrix(1, columns, (i) => cb(i))[0];
+
 export const bisect = <T>(target: Iterable<T>, predicate: (item: T) => boolean): [T[], T[]] => {
   const bisected = [[], []] as [T[], T[]];
   for (const item of target) {

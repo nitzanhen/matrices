@@ -1,4 +1,5 @@
-
+import { DimensionError, EmptyCellError, err, ok, Result } from '../Result';
+import { Matrix } from '../types';
 
 // This actually gives the cartesian product, not permutations
 // function* permutationsOf<T>(...iterables: Iterable<T>[]): Generator<[T[], number[]]> {
@@ -6,10 +7,6 @@
 //     yield [[], []];
 //     return;
 //   }
-
-import { DimensionError, EmptyCellError, err, ok, Result } from '../Result';
-import { Matrix } from '../types';
-
 //   let itemIndex = 0;
 //   const [head, ...nextIters] = iterables;
 //   for (const item of head) {

@@ -31,11 +31,8 @@ export const multiplyMatrices = (m1: Matrix, m2: Matrix): Result<Matrix, Dimensi
         if (ail === null || blj === null) {
           return err(new EmptyCellError());
         }
-
-        console.log(ail, blj, ail + blj)
         cij += ail * blj;
       }
-      console.log('!')
       result[i][j] = cij;
     }
   }

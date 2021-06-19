@@ -1,12 +1,12 @@
 import { useCallback, useRef, useState } from "react";
-import { generateMatrix } from "@matrices/common";
+import { CellValue, generateMatrix, Matrix } from "@matrices/common";
 
 import { MatrixProps } from "./Matrix";
 
 export interface useMatrixProps {
   label?: MatrixProps['label'];
   readonly?: MatrixProps['readonly'];
-  defaultCells?: (number | undefined)[][];
+  defaultCells?: Matrix;
 }
 
 /**
@@ -17,7 +17,7 @@ export const useMatrix = ({
   readonly = false,
   defaultCells = generateMatrix(2, 2, () => undefined),
 }: useMatrixProps) => {
-  const [cells, setCells] = useState<(number | undefined)[][]>(defaultCells);
+  const [cells, setCells] = useState<Matrix>(defaultCells);
 
   // Assumption: all rows have the same amount of values.
   const numRows = cells.length;
@@ -46,7 +46,7 @@ export const useMatrix = ({
   }, []);
 
   const setCell = useCallback(
-    (row: number, column: number, value: number | undefined) => {
+    (row: number, column: number, value: CellValue) => {
       setCells((cells) => {
         const newCells = cells.map((row) => [...row]);
         newCells[row][column] = value;

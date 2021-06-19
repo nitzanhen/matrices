@@ -1,7 +1,7 @@
 import React, { forwardRef, ReactNode, useMemo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
-import { generateMatrix } from "@matrices/common";
+import { CellValue, generateMatrix, Matrix as MathMatrix } from "@matrices/common";
 
 import { BaseComponentProps } from "../types";
 import { Cell } from "./Cell";
@@ -98,8 +98,8 @@ const useStyles = createUseStyles(
 );
 
 export interface MatrixProps extends BaseComponentProps {
-  cells: (number | undefined)[][];
-  onChange: (row: number, column: number, value: number | undefined) => void;
+  cells: MathMatrix;
+  onChange: (row: number, column: number, value: CellValue) => void;
   onAddRow: () => void;
   onRemoveRow: () => void;
   onAddColumn: () => void;
@@ -135,7 +135,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
       generateMatrix(
         numRows,
         numColumns,
-        (i, j) => (value: number | undefined) => onChange(i, j, value)
+        (i, j) => (value: CellValue) => onChange(i, j, value)
       ),
     [numRows, numColumns, onChange]
   );

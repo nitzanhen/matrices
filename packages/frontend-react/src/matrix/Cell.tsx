@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
+import { CellValue } from '@matrices/common';
 
 const useStyles = createUseStyles({
   cell: {
@@ -55,8 +56,8 @@ const useStyles = createUseStyles({
 export interface CellProps extends BaseComponentProps {
   row: number;
   column: number;
-  value: number | undefined;
-  onChange: (value: number | undefined) => void;
+  value: CellValue;
+  onChange: (value: CellValue) => void;
   readonly?: boolean;
   label?: string;
   setFocus?: (row: number, column: number) => void;

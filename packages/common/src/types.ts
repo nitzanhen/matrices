@@ -1,5 +1,7 @@
 
-export type Matrix = (number | undefined)[][];
+export type CellValue = number | undefined;
 
-export type Vector = (number | undefined)[]
+export type Matrix = CellValue[][];
+
+export type Vector = CellValue[]
 

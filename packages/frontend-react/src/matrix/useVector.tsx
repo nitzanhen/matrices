@@ -1,4 +1,4 @@
-import { generateVector, Vector } from '@matrices/common'
+import { CellValue, generateVector, Vector } from '@matrices/common'
 import { useCallback, useMemo } from 'react'
 import { Rhax, take } from 'rhax';
 import { MatrixProps } from './Matrix';
@@ -38,7 +38,7 @@ export const useVector = ({
     , [setMatrixCells])
 
   const setCell = useCallback(
-    (i: number, value: number | undefined) =>
+    (i: number, value: CellValue) =>
       setMatrixCell(i, 1, value),
     [setMatrixCell]
   )

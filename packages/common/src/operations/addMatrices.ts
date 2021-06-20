@@ -6,11 +6,13 @@ import { Matrix } from '../types';
  * If undefined, the function returns `null`.
  * All rows must have the same amount of columns.
  */
- export const addMatrices = (m1: Matrix, m2: Matrix): Result<Matrix, DimensionError | EmptyCellError> => {
+export const addMatrices = (
+  m1: Matrix,
+  m2: Matrix
+): Result<Matrix, DimensionError | EmptyCellError> => {
   if (m1.length !== m2.length) {
     return err(new DimensionError('m1 and m2 must have the same number of rows'));
-  }
-  else if (m1[0].length !== m2[0].length) {
+  } else if (m1[0].length !== m2[0].length) {
     return err(new DimensionError('m1 and m2 must have the same number of columns'));
   }
 
@@ -32,4 +34,4 @@ import { Matrix } from '../types';
   }
 
   return ok(result);
-}
+};

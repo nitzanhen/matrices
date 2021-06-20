@@ -12,14 +12,14 @@ function* permutationsOf<T>(items: T[]): Generator<[...T[]]> {
   for (let index = 0; index < items.length; index++) {
     const item = items[index];
 
-    const others = items.slice()
+    const others = items.slice();
     others.splice(index, 1);
 
     for (const perm of permutationsOf(others)) {
       yield [item, ...perm];
     }
   }
-};
+}
 
 /**
  * Returns the sign of a permutation.
@@ -27,7 +27,7 @@ function* permutationsOf<T>(items: T[]): Generator<[...T[]]> {
  * that `permutation` contains the numbers 0, ..., n-1, where n is the length
  * of the array (and each integer appears exactly once).
  * `n` is also assumed to be positive.
- * 
+ *
  * This function breaks the permutation up into cycles, which is not as straighforward
  * as counting inversions, but provides roughly O(n) time instead of O(n^2).
  */
@@ -53,19 +53,20 @@ const signOf = (permutation: [...number[]]): -1 | 1 => {
 
   const sum = cycles.map(c => c.size - 1).reduce((sum, n) => sum + n, 0);
   return sum % 2 === 0 ? 1 : -1;
-}
+};
 
 /**
  * Calculates the determinant of a matrix.
  * `m` must be a square matrix.
- * 
+ *
  * This function has `O(n!)` performance, which is absolutely terrible.
  * A better implementation involves reducing the rows of the matrix to row-echelon form
- * and then easily calculating the determinant. 
+ * and then easily calculating the determinant.
  */
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 const determinant = (matrix: Matrix): Result<number, DimensionError | EmptyCellError> => {
-  if(matrix.length !== matrix[0].length) {
-    return err(new DimensionError('matrix must be a square matrix'))
+  if (matrix.length !== matrix[0].length) {
+    return err(new DimensionError('matrix must be a square matrix'));
   }
   const n = matrix.length;
 
@@ -82,8 +83,8 @@ const determinant = (matrix: Matrix): Result<number, DimensionError | EmptyCellE
       }
       product *= aij;
     }
-    det += sign * product
+    det += sign * product;
   }
 
   return ok(det);
-}
+};

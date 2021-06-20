@@ -10,4 +10,4 @@ export const dotProduct = (u: [...number[]], v: [...number[]]) => {
   }
 
   return sum;
-}
+};

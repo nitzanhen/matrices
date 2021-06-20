@@ -1,34 +1,35 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-const useStyles = createUseStyles({
-  root: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  content: {
-    display: 'flex',
-
-    '& > *:not(:last-child)': {
-      marginRight: 40
+const useStyles = createUseStyles(
+  {
+    root: {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
 
-    '& > svg': {
-      alignSelf: 'center',
-      width: 48,
-      height: 48,
-      fill: 'var(--color-light)'
+    content: {
+      display: 'flex',
+
+      '& > *:not(:last-child)': {
+        marginRight: 40
+      },
+
+      '& > svg': {
+        alignSelf: 'center',
+        width: 48,
+        height: 48,
+        fill: 'var(--color-light)'
+      }
     }
-  }
-}, { name: 'operation-page' })
+  },
+  { name: 'operation-page' }
+);
 
-export interface OperationPageProps {
-
-}
+export interface OperationPageProps {}
 
 /**
  * Common structure and styles for operation pages.
@@ -38,9 +39,7 @@ export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.content}>
-        {children}
-      </div>
+      <div className={classes.content}>{children}</div>
     </div>
-  )
+  );
 };

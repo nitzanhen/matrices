@@ -1,54 +1,54 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import calculator from "../calculator.svg";
-import { Link } from "../components/Link";
+import React from 'react';
+import { createUseStyles } from 'react-jss';
+import calculator from '../calculator.svg';
+import { Link } from '../components/Link';
 
 const useStyles = createUseStyles(
   {
     root: {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     content: {
-      textAlign: "center",
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      "& > img": {
-        maxHeight: "40vh",
-        maxWidth: "40vh",
-      },
+      textAlign: 'center',
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'column',
+      '& > img': {
+        maxHeight: '40vh',
+        maxWidth: '40vh'
+      }
     },
     actions: {
       marginTop: 40,
       width: '100%',
       overflow: 'hidden',
-      display: "flex",
+      display: 'flex',
 
-      "& > span": {
-        display: "block",
+      '& > span': {
+        display: 'block',
         width: 1,
-        flex: "0 0 auto",
-        backgroundColor: "var(--background-dark)",
+        flex: '0 0 auto',
+        backgroundColor: 'var(--background-dark)',
         opacity: 0.3,
-        margin: "0 24px",
+        margin: '0 24px'
       },
 
-      "& > div": {
-        flex: "1 1 50%",
-        display: "grid",
+      '& > div': {
+        flex: '1 1 50%',
+        display: 'grid',
         padding: 8,
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows: "1fr 1fr",
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: '1fr 1fr',
         columnGap: 16,
-        rowGap: 16,
-      },
-    },
+        rowGap: 16
+      }
+    }
   },
-  { name: "welcome" }
+  { name: 'welcome' }
 );
 
 /**

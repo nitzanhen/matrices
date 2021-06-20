@@ -1,13 +1,13 @@
-import { CellValue, generateVector, Vector } from '@matrices/common'
-import { useCallback, useMemo } from 'react'
+import { CellValue, generateVector, Vector } from '@matrices/common';
+import { useCallback, useMemo } from 'react';
 import { Rhax, take } from 'rhax';
 import { MatrixProps } from './Matrix';
-import { useMatrix, useMatrixProps } from './useMatrix'
+import { useMatrix, useMatrixProps } from './useMatrix';
 
 export interface useVectorProps {
-  label?: useMatrixProps['label'],
-  readonly?: useMatrixProps['readonly'],
-  defaultCells?: Vector
+  label?: useMatrixProps['label'];
+  readonly?: useMatrixProps['readonly'];
+  defaultCells?: Vector;
 }
 
 /**
@@ -33,20 +33,14 @@ export const useVector = ({
   } = useMatrix({ label, readonly, defaultCells: defaultMatrixCells });
 
   const cells = useMemo(() => matrixCells[0], [matrixCells]);
-  const setCells = useCallback(
-    (cells: Vector) => setMatrixCells([cells])
-    , [setMatrixCells])
+  const setCells = useCallback((cells: Vector) => setMatrixCells([cells]), [setMatrixCells]);
 
   const setCell = useCallback(
-    (i: number, value: CellValue) =>
-      setMatrixCell(i, 1, value),
+    (i: number, value: CellValue) => setMatrixCell(i, 1, value),
     [setMatrixCell]
-  )
+  );
 
-  const setFocus = useCallback(
-    (i: number) => setMatrixFocus(i, 1),
-    [setMatrixFocus]
-  )
+  const setFocus = useCallback((i: number) => setMatrixFocus(i, 1), [setMatrixFocus]);
 
   /** @todo `toProps` */
 
@@ -60,6 +54,6 @@ export const useVector = ({
     addRow,
     clear,
     setFocus,
-    gridRef,
-  }
-}
+    gridRef
+  };
+};

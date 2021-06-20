@@ -11,13 +11,19 @@ export interface EmbeddedCellProps extends CellProps {
  * A wrapper around {@link Cell} which adds the required logic for it to be used
  * in a matrix or vector.
  */
-export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({ setFocus, row, column, value, inputProps, ...otherProps }) => {
-
+export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({
+  setFocus,
+  row,
+  column,
+  value,
+  inputProps,
+  ...otherProps
+}) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const el = e.target as HTMLInputElement;
 
     switch (e.key) {
-      case "ArrowLeft": {
+      case 'ArrowLeft': {
         if (el.selectionStart === 0) {
           e.preventDefault();
           e.stopPropagation();
@@ -25,7 +31,7 @@ export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({ setFocus, row, colu
         }
         break;
       }
-      case "ArrowRight": {
+      case 'ArrowRight': {
         if (!value || el.selectionStart === String(value).length) {
           e.preventDefault();
           e.stopPropagation();
@@ -33,13 +39,13 @@ export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({ setFocus, row, colu
         }
         break;
       }
-      case "ArrowUp": {
+      case 'ArrowUp': {
         e.preventDefault();
         e.stopPropagation();
         setFocus?.(row - 1, column);
         break;
       }
-      case "ArrowDown": {
+      case 'ArrowDown': {
         e.preventDefault();
         e.stopPropagation();
         setFocus?.(row + 1, column);
@@ -49,6 +55,6 @@ export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({ setFocus, row, colu
   };
 
   return (
-    <Cell value={value} {...otherProps} inputProps={{...inputProps, onKeyDown: handleKeyDown }}/>
-  )
-}
+    <Cell value={value} {...otherProps} inputProps={{ ...inputProps, onKeyDown: handleKeyDown }} />
+  );
+};

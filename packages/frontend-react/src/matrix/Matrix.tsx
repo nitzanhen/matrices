@@ -1,12 +1,12 @@
-import React, { forwardRef, ReactNode, useMemo } from "react";
-import clsx from "clsx";
-import { createUseStyles } from "react-jss";
-import { CellValue, generateMatrix, Matrix as MathMatrix } from "@matrices/common";
+import React, { forwardRef, ReactNode, useMemo } from 'react';
+import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
+import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/common';
 
-import { BaseComponentProps } from "../types";
-import { Cell } from "./Cell";
-import { Plus } from "../components/svg/Plus";
-import { Minus } from "../components/svg/Minus";
+import { BaseComponentProps } from '../types';
+import { Cell } from './Cell';
+import { Plus } from '../components/svg/Plus';
+import { Minus } from '../components/svg/Minus';
 import { EmbeddedCell } from './EmbeddedCell';
 
 interface MatrixDimensions {
@@ -17,9 +17,9 @@ interface MatrixDimensions {
 const useStyles = createUseStyles(
   {
     root: {
-      width: "max-content",
-      height: "max-content",
-      display: "grid",
+      width: 'max-content',
+      height: 'max-content',
+      display: 'grid',
       gridTemplateAreas: `
         "label ."
         "matrix add-col"
@@ -27,75 +27,75 @@ const useStyles = createUseStyles(
       `,
       rowGap: 16,
       columnGap: 16,
-      alignItems: "center",
-      justifyContent: "center",
-      gridTemplateRows: "1fr auto",
-      gridTemplateColumns: "1fr auto",
+      alignItems: 'center',
+      justifyContent: 'center',
+      gridTemplateRows: '1fr auto',
+      gridTemplateColumns: '1fr auto',
 
-      "& button": {
-        appearance: "none",
-        border: "none",
-        background: "none",
+      '& button': {
+        appearance: 'none',
+        border: 'none',
+        background: 'none',
         padding: 0,
         margin: 0,
-        borderRadius: "50%",
-        boxShadow: "0 2px 3px 1px #00000029",
+        borderRadius: '50%',
+        boxShadow: '0 2px 3px 1px #00000029'
       },
 
-      "& svg": {
+      '& svg': {
         margin: 0,
         padding: 0,
         width: 24,
         height: 24,
-        fill: "var(--color-primary)",
-        verticalAlign: "top",
-      },
+        fill: 'var(--color-primary)',
+        verticalAlign: 'top'
+      }
     },
     addCol: {
-      gridArea: "add-col",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      flexDirection: "column",
+      gridArea: 'add-col',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
 
-      "& > :not(:last-child)": {
-        marginBottom: 16,
-      },
+      '& > :not(:last-child)': {
+        marginBottom: 16
+      }
     },
 
     addRow: {
-      gridArea: "add-row",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      gridArea: 'add-row',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
 
-      "& > :not(:last-child)": {
-        marginRight: 16,
-      },
+      '& > :not(:last-child)': {
+        marginRight: 16
+      }
     },
 
     matrix: ({ numRows, numColumns }: MatrixDimensions) => ({
-      gridArea: "matrix",
-      display: "grid",
+      gridArea: 'matrix',
+      display: 'grid',
       gridTemplateRows: `repeat(${numRows}, 100px)`,
       gridTemplateColumns: `repeat(${numColumns}, 100px)`,
       rowGap: 8,
       columnGap: 8,
 
-      "& > $cell": {
-        width: "100%",
-        height: "100%",
-      },
+      '& > $cell': {
+        width: '100%',
+        height: '100%'
+      }
     }),
     cell: {},
     label: {
-      gridArea: "label",
+      gridArea: 'label',
       textAlign: 'center',
       fontSize: 28,
       color: 'var(--color-primary)'
     }
   },
-  { name: "matrix" }
+  { name: 'matrix' }
 );
 
 export interface MatrixProps extends BaseComponentProps {
@@ -127,17 +127,13 @@ export const Matrix: React.VFC<MatrixProps> = ({
   className,
   style,
   gridRef,
-  label,
+  label
 }) => {
   const [numRows, numColumns] = [cells.length, cells[0].length];
 
   const onChangeHandlers = useMemo(
     () =>
-      generateMatrix(
-        numRows,
-        numColumns,
-        (i, j) => (value: CellValue) => onChange(i, j, value)
-      ),
+      generateMatrix(numRows, numColumns, (i, j) => (value: CellValue) => onChange(i, j, value)),
     [numRows, numColumns, onChange]
   );
 

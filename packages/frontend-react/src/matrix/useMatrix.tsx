@@ -1,7 +1,7 @@
-import { useCallback, useRef, useState } from "react";
-import { CellValue, generateMatrix, Matrix } from "@matrices/common";
+import { useCallback, useRef, useState } from 'react';
+import { CellValue, generateMatrix, Matrix } from '@matrices/common';
 
-import { MatrixProps } from "./Matrix";
+import { MatrixProps } from './Matrix';
 
 export interface useMatrixProps {
   label?: MatrixProps['label'];
@@ -15,7 +15,7 @@ export interface useMatrixProps {
 export const useMatrix = ({
   label,
   readonly = false,
-  defaultCells = generateMatrix(2, 2, () => undefined),
+  defaultCells = generateMatrix(2, 2, () => undefined)
 }: useMatrixProps) => {
   const [cells, setCells] = useState<Matrix>(defaultCells);
 
@@ -24,38 +24,35 @@ export const useMatrix = ({
   const numColumns = cells[0].length;
 
   const addColumn = useCallback(() => {
-    setCells((cells) => cells.map((row) => [...row, undefined]));
+    setCells(cells => cells.map(row => [...row, undefined]));
   }, []);
 
   const removeColumn = useCallback(() => {
-    setCells((cells) => {
+    setCells(cells => {
       const numColumns = cells[0].length;
-      return numColumns > 1 ? cells.map((row) => row.slice(0, -1)) : cells;
+      return numColumns > 1 ? cells.map(row => row.slice(0, -1)) : cells;
     });
   }, []);
 
   const addRow = useCallback(() => {
-    setCells((cells) => [...cells, Array(cells[0].length).fill(undefined)]);
+    setCells(cells => [...cells, Array(cells[0].length).fill(undefined)]);
   }, []);
 
   const removeRow = useCallback(() => {
-    setCells((cells) => {
+    setCells(cells => {
       const numRows = cells.length;
       return numRows > 1 ? cells.slice(0, -1) : cells;
     });
   }, []);
 
-  const setCell = useCallback(
-    (row: number, column: number, value: CellValue) => {
-      setCells((cells) => {
-        const newCells = cells.map((row) => [...row]);
-        newCells[row][column] = value;
+  const setCell = useCallback((row: number, column: number, value: CellValue) => {
+    setCells(cells => {
+      const newCells = cells.map(row => [...row]);
+      newCells[row][column] = value;
 
-        return newCells;
-      });
-    },
-    []
-  );
+      return newCells;
+    });
+  }, []);
 
   const clear = useCallback(() => {
     setCells(generateMatrix(numRows, numColumns, () => undefined));
@@ -72,13 +69,9 @@ export const useMatrix = ({
 
       const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
       const cells = el ? Array.from(el.children) : null;
-      const input = cells?.[position]?.querySelector("input") as
-        | HTMLInputElement
-        | undefined;
+      const input = cells?.[position]?.querySelector('input') as HTMLInputElement | undefined;
 
-      const focusedElement = el?.querySelector("*:focus") as
-        | HTMLInputElement
-        | undefined;
+      const focusedElement = el?.querySelector('*:focus') as HTMLInputElement | undefined;
       if (focusedElement) {
         const focusPosition = cells!.indexOf(focusedElement.parentElement!);
         const focusColumn = focusPosition % numColumns;
@@ -107,7 +100,7 @@ export const useMatrix = ({
       onChange: setCell,
       setFocus,
       gridRef,
-      readonly,
+      readonly
     }),
     [cells, addColumn, addRow, setCell, readonly, label]
   );
@@ -125,6 +118,6 @@ export const useMatrix = ({
     gridRef,
     setFocus,
     readonly,
-    toProps,
+    toProps
   };
 };

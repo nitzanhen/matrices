@@ -1,38 +1,38 @@
-import clsx from "clsx";
-import React from "react";
-import { createUseStyles } from "react-jss";
-import { Route, Switch } from "react-router";
-import { TopBar } from "./components/TopBar";
-import { MatrixAdditionPage } from "./pages/MatrixAdditionPage";
+import clsx from 'clsx';
+import React from 'react';
+import { createUseStyles } from 'react-jss';
+import { Route, Switch } from 'react-router';
+import { TopBar } from './components/TopBar';
+import { MatrixAdditionPage } from './pages/MatrixAdditionPage';
 import { MatrixDeterminantPage } from './pages/MatrixDeterminantPage';
-import { MatrixMultiplicationPage } from "./pages/MatrixMultiplicationPage";
+import { MatrixMultiplicationPage } from './pages/MatrixMultiplicationPage';
 import { MatrixTransposePage } from './pages/MatrixTransposePage';
-import { WelcomePage } from "./pages/WelcomePage";
+import { WelcomePage } from './pages/WelcomePage';
 
 const useStyles = createUseStyles(
   {
     colorDefs: {
-      "--background-light": "#F0EFFF",
-      "--background-dark": "#3A3768",
-      "--background-result": "#3A3768CD",
-      "--color-primary": "#3F3C72",
-      "--color-light": "#6C63FF",
-      "--color-result": "#F0EFFF"
+      '--background-light': '#F0EFFF',
+      '--background-dark': '#3A3768',
+      '--background-result': '#3A3768CD',
+      '--color-primary': '#3F3C72',
+      '--color-light': '#6C63FF',
+      '--color-result': '#F0EFFF'
     },
 
     root: {
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
 
-      "& > main": {
-        flex: "1 0 auto",
+      '& > main': {
+        flex: '1 0 auto'
       },
-      color: "var(--color-primary)",
-    },
+      color: 'var(--color-primary)'
+    }
   },
-  { name: "app" }
+  { name: 'app' }
 );
 
 function App() {
@@ -43,19 +43,19 @@ function App() {
       <TopBar />
       <main>
         <Switch>
-          <Route path="/" exact>
+          <Route path='/' exact>
             <WelcomePage />
           </Route>
-          <Route path="/matrix/sum">
+          <Route path='/matrix/sum'>
             <MatrixAdditionPage />
           </Route>
-          <Route path="/matrix/product">
+          <Route path='/matrix/product'>
             <MatrixMultiplicationPage />
           </Route>
-          <Route path="/matrix/transpose">
+          <Route path='/matrix/transpose'>
             <MatrixTransposePage />
           </Route>
-          <Route path="/matrix/determinant">
+          <Route path='/matrix/determinant'>
             <MatrixDeterminantPage />
           </Route>
         </Switch>

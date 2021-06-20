@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint src --ext .ts --ext .tsx --color",
+    "lint:fix": "eslint src --ext .ts --ext .tsx --fix --color"
   },
   "dependencies": {
     "clsx": "^1.1.1",

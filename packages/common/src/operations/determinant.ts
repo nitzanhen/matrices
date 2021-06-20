@@ -33,3 +33,4 @@ export const determinant = (m: Matrix): Result<number, DimensionError> => {
 // console.log(determinant(testMatrix));
 // const endTime = window.performance.now();
 // console.log(`operation took ${endTime - startTime} nanoseconds`)
+

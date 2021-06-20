@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { HTMLProps, memo } from "react";
 import clsx from "clsx";
 import { createUseStyles } from "react-jss";
 import { BaseComponentProps } from "../types";
@@ -54,13 +54,11 @@ const useStyles = createUseStyles({
 });
 
 export interface CellProps extends BaseComponentProps {
-  row: number;
-  column: number;
   value: CellValue;
-  onChange: (value: CellValue) => void;
+  onChange?: (value: CellValue) => void;
   readonly?: boolean;
   label?: string;
-  setFocus?: (row: number, column: number) => void;
+  inputProps?: HTMLProps<HTMLInputElement>;
 }
 
 /**
@@ -68,60 +66,23 @@ export interface CellProps extends BaseComponentProps {
  */
 export const Cell: React.VFC<CellProps> = memo(
   ({
-    row,
-    column,
     className,
     style,
     value,
     onChange,
     label,
     readonly = false,
-    setFocus,
+    inputProps
   }) => {
     /** @todo fix logic. */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.value === "") {
-        onChange(undefined);
+        onChange?.(undefined);
         return;
       }
       const value = parseFloat(e.target.value);
       if (!isNaN(value)) {
-        onChange(value);
-      }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      const el = e.target as HTMLInputElement;
-
-      switch (e.key) {
-        case "ArrowLeft": {
-          if (el.selectionStart === 0) {
-            e.preventDefault();
-            e.stopPropagation();
-            setFocus?.(row, column - 1);
-          }
-          break;
-        }
-        case "ArrowRight": {
-          if (!value || el.selectionStart === String(value).length) {
-            e.preventDefault();
-            e.stopPropagation();
-            return setFocus?.(row, column + 1);
-          }
-          break;
-        }
-        case "ArrowUp": {
-          e.preventDefault();
-          e.stopPropagation();
-          setFocus?.(row - 1, column);
-          break;
-        }
-        case "ArrowDown": {
-          e.preventDefault();
-          e.stopPropagation();
-          setFocus?.(row + 1, column);
-          break;
-        }
+        onChange?.(value);
       }
     };
 
@@ -142,7 +103,7 @@ export const Cell: React.VFC<CellProps> = memo(
           value={value ?? ""}
           onInput={handleChange}
           className={classes.input}
-          onKeyDown={handleKeyDown}
+          {...inputProps}
         />
       </div>
     );

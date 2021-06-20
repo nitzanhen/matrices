@@ -50,9 +50,6 @@ export const useVector = ({
 
   /** @todo `toProps` */
 
-  /** @todo file a bug on this */
-  type a = MatrixProps extends Record<string, unknown> ? true : false
-
   return {
     label,
     readonly,

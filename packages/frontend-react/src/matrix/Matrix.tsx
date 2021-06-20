@@ -7,6 +7,7 @@ import { BaseComponentProps } from "../types";
 import { Cell } from "./Cell";
 import { Plus } from "../components/svg/Plus";
 import { Minus } from "../components/svg/Minus";
+import { EmbeddedCell } from './EmbeddedCell';
 
 interface MatrixDimensions {
   numRows: number;
@@ -148,7 +149,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
       <div className={classes.matrix} style={style} ref={gridRef}>
         {cells.flatMap((row, i) =>
           row.map((value, j) => (
-            <Cell
+            <EmbeddedCell
               className={classes.cell}
               row={i}
               column={j}

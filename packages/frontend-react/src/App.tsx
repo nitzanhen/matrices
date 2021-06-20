@@ -4,6 +4,7 @@ import { createUseStyles } from "react-jss";
 import { Route, Switch } from "react-router";
 import { TopBar } from "./components/TopBar";
 import { MatrixAdditionPage } from "./pages/MatrixAdditionPage";
+import { MatrixDeterminantPage } from './pages/MatrixDeterminantPage';
 import { MatrixMultiplicationPage } from "./pages/MatrixMultiplicationPage";
 import { MatrixTransposePage } from './pages/MatrixTransposePage';
 import { WelcomePage } from "./pages/WelcomePage";
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/matrix/transpose">
             <MatrixTransposePage />
+          </Route>
+          <Route path="/matrix/determinant">
+            <MatrixDeterminantPage />
           </Route>
         </Switch>
       </main>

@@ -73,16 +73,18 @@ export const addRowMultiplied = (m: Matrix, i: number, j: number, scalar: number
 }
 
 /**
- * Returns the the maximal entry in the array, that is, an object with `index` and `value`
+ * Returns the the entry with the greatest value in the array.
  * fields, which point to the index of the maximum value in the array, and the value itself.
  * If there are multiple indices holding the same max value, returns the first occurence.
+ * 
+ * Entries are passed as [index, value] tuples, and the result is returned accordingly.
  */
-export const maxWithIndex = (values: number[]) =>
-  values.reduce(
-    (max, n, index) => n > max.value
-      ? { value: n, index }
-      : max
-    , { value: -Infinity, index: -1 }
+export const maxWithIndex = (entries: [index: number, value: number][]) =>
+  entries.reduce(
+    ([indexMax, max], [index, n]) => n > max
+      ? [index, n]
+      : [indexMax, max]
+    , [-Infinity, -1]
   )
 
 /**
@@ -101,10 +103,10 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
     return err(new DimensionError());
   }
 
-  if(m.some(row => row.includes(undefined))) {
+  if (m.some(row => row.includes(undefined))) {
     return err(new EmptyCellError());
   }
-  
+
   //Clone m, so as to not modify the original.
   const echelonForm = m.map(row => [...row]) as number[][];
 
@@ -112,20 +114,20 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
   let pivotColumnIndex = 0;
 
   while (pivotRowIndex < numRows && pivotColumnIndex < numColumns) {
-    const pivotColumn = echelonForm.map(row => row[pivotColumnIndex]);
-    const pivotColumnMax = maxWithIndex(pivotColumn);
+    const pivotColumn = echelonForm.map((row, i) => [i, row[pivotColumnIndex]] as [number, number]).slice(pivotColumnIndex);
+    const [pivotColumnMaxIndex, pivotColumnMax] = maxWithIndex(pivotColumn);
 
-    if(pivotColumnMax.value === 0) {
+    if (pivotColumnMax === 0) {
       //No pivots in this column, pass to the next column.
       pivotColumnIndex++;
       continue;
     }
-    
+
     //Swap rows such that the maximum pivot is on top.
-    swapRows(echelonForm, pivotRowIndex, pivotColumnMax.index);
-    for(let index = pivotRowIndex + 1; index < numRows; index++) {
+    swapRows(echelonForm, pivotRowIndex, pivotColumnMaxIndex);
+    for (let index = pivotRowIndex + 1; index < numRows; index++) {
       const ratio = echelonForm[index][pivotColumnIndex] / echelonForm[pivotRowIndex][pivotColumnIndex];
-      
+
       //Multiply the current row by pivotRow times -ratio, so as to cancel the leading (pivot) coefficient.
       addRowMultiplied(echelonForm, index, pivotRowIndex, -ratio);
     }

@@ -5,6 +5,7 @@ import { Equal } from '../components/svg/Equal';
 import { Plus } from '../components/svg/Plus';
 import { Matrix } from '../matrix/Matrix';
 import { useMatrix } from '../matrix/useMatrix';
+
 import { OperationPage } from './OperationPage';
 
 /**
@@ -15,14 +16,15 @@ export const MatrixAdditionPage: React.VFC = () => {
   const matrix2 = useMatrix({ label: 'B' });
   const sum = useMatrix({ label: 'A+B', readonly: true });
 
+  const { setCells: setSumCells, clear: clearSum } = sum;
   useEffect(() => {
     const result = addMatrices(matrix1.cells, matrix2.cells);
     if (result.ok) {
-      sum.setCells(result.result);
+      setSumCells(result.result);
     } else {
-      sum.clear();
+      clearSum();
     }
-  }, [matrix1.cells, matrix2.cells, sum.setCells, sum.clear]);
+  }, [matrix1.cells, matrix2.cells, setSumCells, clearSum]);
 
   return (
     <OperationPage>

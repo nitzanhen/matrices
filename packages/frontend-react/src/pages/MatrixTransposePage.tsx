@@ -5,6 +5,7 @@ import { transpose } from '@matrices/common';
 import { Equal } from '../components/svg/Equal';
 import { Matrix } from '../matrix/Matrix';
 import { useMatrix } from '../matrix/useMatrix';
+
 import { OperationPage } from './OperationPage';
 
 const useStyles = createUseStyles({
@@ -18,7 +19,7 @@ const useStyles = createUseStyles({
  */
 export const MatrixTransposePage: React.VFC = () => {
   const matrix = useMatrix({ label: 'A' });
-  const tranposed = useMatrix({
+  const transposed = useMatrix({
     label: (
       <span>
         A<sup>t</sup>
@@ -27,14 +28,15 @@ export const MatrixTransposePage: React.VFC = () => {
     readonly: true
   });
 
+  const { setCells: setTransposedCells, clear: clearTransposed } = transposed;
   useEffect(() => {
     const result = transpose(matrix.cells);
     if (result.ok) {
-      tranposed.setCells(result.result);
+      setTransposedCells(result.result);
     } else {
-      tranposed.clear();
+      clearTransposed();
     }
-  }, [matrix.cells, tranposed.setCells, tranposed.clear]);
+  }, [matrix.cells, setTransposedCells, clearTransposed]);
 
   const { inputMatrix } = useStyles();
 
@@ -42,7 +44,7 @@ export const MatrixTransposePage: React.VFC = () => {
     <OperationPage>
       <Matrix {...matrix.toProps()} className={inputMatrix} />
       <Equal />
-      <Matrix {...tranposed.toProps()} />
+      <Matrix {...transposed.toProps()} />
     </OperationPage>
   );
 };

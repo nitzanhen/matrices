@@ -1,8 +1,10 @@
 import React, { HTMLProps, memo } from 'react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
-import { BaseComponentProps } from '../types';
+
 import { CellValue } from '@matrices/common';
+
+import { BaseComponentProps } from '../types';
 
 const useStyles = createUseStyles({
   cell: {
@@ -64,33 +66,32 @@ export interface CellProps extends BaseComponentProps {
 /**
  * A simple cell; can be part of a vector or matrix or stand by itself.
  */
-export const Cell: React.VFC<CellProps> = memo(
-  ({ className, style, value, onChange, label, readonly = false, inputProps }) => {
-    /** @todo fix logic. */
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value === '') {
-        onChange?.(undefined);
-        return;
-      }
-      const value = parseFloat(e.target.value);
-      if (!isNaN(value)) {
-        onChange?.(value);
-      }
-    };
+export const Cell: React.VFC<CellProps> = memo(function Cell({ className, style, value, onChange, label, readonly = false, inputProps }) {
+  /** @todo fix logic. */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') {
+      onChange?.(undefined);
+      return;
+    }
+    const value = parseFloat(e.target.value);
+    if (!isNaN(value)) {
+      onChange?.(value);
+    }
+  };
 
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-      <div className={clsx(classes.cell, readonly && classes.cellResult, className)} style={style}>
-        {label && <span className={classes.label}>{label}</span>}
-        <input
-          disabled={readonly}
-          value={value ?? ''}
-          onInput={handleChange}
-          className={classes.input}
-          {...inputProps}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className={clsx(classes.cell, readonly && classes.cellResult, className)} style={style}>
+      {label && <span className={classes.label}>{label}</span>}
+      <input
+        disabled={readonly}
+        value={value ?? ''}
+        onInput={handleChange}
+        className={classes.input}
+        {...inputProps}
+      />
+    </div>
+  );
+}
 );

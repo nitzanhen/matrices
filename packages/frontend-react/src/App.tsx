@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
+
 import { TopBar } from './components/TopBar';
 import { MatrixAdditionPage } from './pages/MatrixAdditionPage';
 import { MatrixDeterminantPage } from './pages/MatrixDeterminantPage';

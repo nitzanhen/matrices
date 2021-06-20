@@ -101,7 +101,8 @@
         ]
       }
     ],
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "import/default": "off"
   },
   "settings": {
     "import/parsers": {

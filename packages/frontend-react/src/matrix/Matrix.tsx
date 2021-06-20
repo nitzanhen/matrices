@@ -1,12 +1,13 @@
-import React, { forwardRef, ReactNode, useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/common';
 
 import { BaseComponentProps } from '../types';
-import { Cell } from './Cell';
+
 import { Plus } from '../components/svg/Plus';
 import { Minus } from '../components/svg/Minus';
+
 import { EmbeddedCell } from './EmbeddedCell';
 
 interface MatrixDimensions {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BaseComponentProps } from '../../types';
 
 export const Plus: React.VFC<BaseComponentProps> = ({ className, style }) => (

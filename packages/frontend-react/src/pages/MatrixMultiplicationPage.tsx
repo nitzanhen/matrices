@@ -5,6 +5,7 @@ import { Equal } from '../components/svg/Equal';
 import { Multiply } from '../components/svg/Multiply';
 import { Matrix } from '../matrix/Matrix';
 import { useMatrix } from '../matrix/useMatrix';
+
 import { OperationPage } from './OperationPage';
 
 /**
@@ -15,14 +16,15 @@ export const MatrixMultiplicationPage: React.VFC = () => {
   const matrix2 = useMatrix({ label: 'B' });
   const product = useMatrix({ label: 'AB', readonly: true });
 
+  const { setCells: setProductCells, clear: clearProduct } = product;
   useEffect(() => {
     const result = multiplyMatrices(matrix1.cells, matrix2.cells);
     if (result.ok) {
-      product.setCells(result.result);
+      setProductCells(result.result);
     } else {
-      product.clear();
+      clearProduct();
     }
-  }, [matrix1.cells, matrix2.cells, product.setCells, product.clear]);
+  }, [matrix1.cells, matrix2.cells, setProductCells, clearProduct]);
 
   return (
     <OperationPage>

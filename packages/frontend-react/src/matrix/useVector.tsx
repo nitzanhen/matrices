@@ -1,7 +1,6 @@
 import { CellValue, generateVector, Vector } from '@matrices/common';
 import { useCallback, useMemo } from 'react';
-import { Rhax, take } from 'rhax';
-import { MatrixProps } from './Matrix';
+
 import { useMatrix, useMatrixProps } from './useMatrix';
 
 export interface useVectorProps {
@@ -29,7 +28,7 @@ export const useVector = ({
     clear,
     setFocus: setMatrixFocus,
     gridRef,
-    toProps: toMatrixProps
+    //toProps: toMatrixProps
   } = useMatrix({ label, readonly, defaultCells: defaultMatrixCells });
 
   const cells = useMemo(() => matrixCells[0], [matrixCells]);

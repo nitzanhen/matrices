@@ -86,7 +86,7 @@ export const useMatrix = ({
         input?.focus();
       }
     },
-    [gridRef.current, numRows, numColumns]
+    [numRows, numColumns]
   );
 
   const toProps = useCallback(
@@ -102,7 +102,7 @@ export const useMatrix = ({
       gridRef,
       readonly
     }),
-    [cells, addColumn, addRow, setCell, readonly, label]
+    [cells, addColumn, addRow, setCell, readonly, label, removeColumn, removeRow, setFocus]
   );
 
   return {

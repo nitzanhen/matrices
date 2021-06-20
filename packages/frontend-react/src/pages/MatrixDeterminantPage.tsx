@@ -1,10 +1,12 @@
 import { determinant } from '@matrices/common';
 import React, { useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
+
 import { RightArrow } from '../components/svg/RightArrow';
 import { Cell } from '../matrix/Cell';
 import { Matrix } from '../matrix/Matrix';
 import { useMatrix } from '../matrix/useMatrix';
+
 import { OperationPage } from './OperationPage';
 
 const useStyles = createUseStyles(

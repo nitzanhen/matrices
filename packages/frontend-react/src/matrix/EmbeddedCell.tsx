@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Cell, CellProps } from './Cell';
 
 export interface EmbeddedCellProps extends CellProps {

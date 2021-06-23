@@ -4,6 +4,8 @@ import { createUseStyles } from 'react-jss';
 import { Route, Switch } from 'react-router-dom';
 
 import { TopBar } from './components/TopBar';
+import { CrossProductPage } from './pages/CrossProductPage';
+import { DotProductPage } from './pages/DotProductPage';
 import { MatrixAdditionPage } from './pages/MatrixAdditionPage';
 import { MatrixDeterminantPage } from './pages/MatrixDeterminantPage';
 import { MatrixMultiplicationPage } from './pages/MatrixMultiplicationPage';
@@ -58,6 +60,13 @@ function App() {
           </Route>
           <Route path='/matrix/determinant'>
             <MatrixDeterminantPage />
+          </Route>
+
+          <Route path='/vector/dot'>
+            <DotProductPage />
+          </Route>
+          <Route path='/vector/cross'>
+            <CrossProductPage />
           </Route>
         </Switch>
       </main>

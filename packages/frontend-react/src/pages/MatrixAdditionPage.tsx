@@ -14,7 +14,7 @@ import { OperationPage } from './OperationPage';
 export const MatrixAdditionPage: React.VFC = () => {
   const matrix1 = useMatrix({ label: 'A' });
   const matrix2 = useMatrix({ label: 'B' });
-  const sum = useMatrix({ label: 'A+B', readonly: true });
+  const sum = useMatrix({ label: 'A+B', readonly: true, unresizable: true });
 
   const { setCells: setSumCells, clear: clearSum } = sum;
   useEffect(() => {

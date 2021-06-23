@@ -25,7 +25,8 @@ export const MatrixTransposePage: React.VFC = () => {
         A<sup>t</sup>
       </span>
     ),
-    readonly: true
+    readonly: true,
+    unresizable: true
   });
 
   const { setCells: setTransposedCells, clear: clearTransposed } = transposed;

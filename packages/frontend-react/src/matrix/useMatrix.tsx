@@ -6,6 +6,7 @@ import { MatrixProps } from './Matrix';
 export interface useMatrixProps {
   label?: MatrixProps['label'];
   readonly?: MatrixProps['readonly'];
+  unresizable?: MatrixProps['unresizable'];
   defaultCells?: Matrix;
 }
 
@@ -15,6 +16,7 @@ export interface useMatrixProps {
 export const useMatrix = ({
   label,
   readonly = false,
+  unresizable = false,
   defaultCells = generateMatrix(2, 2, () => undefined)
 }: useMatrixProps) => {
   const [cells, setCells] = useState<Matrix>(defaultCells);
@@ -100,9 +102,10 @@ export const useMatrix = ({
       onChange: setCell,
       setFocus,
       gridRef,
-      readonly
+      readonly,
+      unresizable
     }),
-    [cells, addColumn, addRow, setCell, readonly, label, removeColumn, removeRow, setFocus]
+    [cells, addColumn, addRow, setCell, readonly, label, removeColumn, removeRow, setFocus, unresizable]
   );
 
   return {
@@ -118,6 +121,7 @@ export const useMatrix = ({
     gridRef,
     setFocus,
     readonly,
+    unresizable,
     toProps
   };
 };

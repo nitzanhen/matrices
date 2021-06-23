@@ -14,7 +14,7 @@ import { OperationPage } from './OperationPage';
 export const MatrixMultiplicationPage: React.VFC = () => {
   const matrix1 = useMatrix({ label: 'A' });
   const matrix2 = useMatrix({ label: 'B' });
-  const product = useMatrix({ label: 'AB', readonly: true });
+  const product = useMatrix({ label: 'AB', readonly: true, unresizable: true });
 
   const { setCells: setProductCells, clear: clearProduct } = product;
   useEffect(() => {

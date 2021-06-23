@@ -108,6 +108,7 @@ export interface MatrixProps extends BaseComponentProps {
   onRemoveColumn: () => void;
   setFocus: (row: number, column: number) => void;
   readonly?: boolean;
+  unresizable?: boolean;
   gridRef?: React.Ref<HTMLDivElement>;
   label?: ReactNode;
 }
@@ -118,6 +119,7 @@ export interface MatrixProps extends BaseComponentProps {
  */
 export const Matrix: React.VFC<MatrixProps> = ({
   cells,
+  unresizable = false,
   readonly = false,
   onChange,
   onAddRow,
@@ -160,7 +162,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
           ))
         )}
       </div>
-      {!readonly && (
+      {!unresizable && (
         <>
           <div className={classes.addCol}>
             <button onClick={onRemoveColumn}>

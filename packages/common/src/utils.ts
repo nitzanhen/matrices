@@ -25,25 +25,4 @@ export const generateMatrix = <T>(
  * special case of a vector.
  */
 export const generateVector = <T>(columns: number, cb: (i: number) => T): T[] =>
-  generateMatrix(1, columns, i => cb(i))[0];
-
-export const bisect = <T>(target: Iterable<T>, predicate: (item: T) => boolean): [T[], T[]] => {
-  const bisected = [[], []] as [T[], T[]];
-  for (const item of target) {
-    const index = predicate(item) ? 0 : 1;
-    bisected[index].push(item);
-  }
-
-  return bisected;
-};
-
-export const union = <T>(...iterables: Iterable<T>[]): Set<T> => {
-  const set = new Set<T>();
-  iterables.forEach(iter => {
-    for (const item of iter) {
-      set.add(item);
-    }
-  });
-
-  return set;
-};
+  generateMatrix(1, columns, (_, j) => cb(j))[0];

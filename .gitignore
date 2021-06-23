@@ -176,9 +176,6 @@ sketch
 # TODO: where does this rule come from?
 docs/_book
 
-# TODO: where does this rule come from?
-test/
-
 ### yarn ###
 # https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
 

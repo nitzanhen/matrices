@@ -1,32 +1,32 @@
 
-import { crossProduct } from 'operations';
+import { dotProduct } from 'operations';
 import { DimensionError, EmptyCellError, Result } from 'Result'
 
-type ProductResult = Result<[number, number, number], EmptyCellError | DimensionError>
+type ProductResult = Result<number, EmptyCellError | DimensionError>
 
-describe('operations/crossProduct.ts', () => {
-  test('Cross product - valid matrices', () => {
-    expect(crossProduct(
+describe('operations/dotProduct.ts', () => {
+  test('Dot product - valid matrices', () => {
+    expect(dotProduct(
       [1, 2, 3],
       [1, 2, 3],
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: [0, 0, 0]
+        result: 14
       });
 
-      expect(crossProduct(
-        [1, 2, 3],
-        [4, 5, 6],
-      ))
-        .toEqual<ProductResult>({
-          ok: true,
-          result: [-3, 6, -3]
-        });
+    expect(dotProduct(
+      [1, 2, 3],
+      [4, 5, 6],
+    ))
+      .toEqual<ProductResult>({
+        ok: true,
+        result: 32
+      });
   });
 
-  test('Cross product - empty cells', () => {
-    const result1 = crossProduct(
+  test('Dot product - empty cells', () => {
+    const result1 = dotProduct(
       [undefined, 2, 3],
       [1, 2, 3],
     )
@@ -34,7 +34,7 @@ describe('operations/crossProduct.ts', () => {
     //@ts-expect-error
     expect(result1.err).toBeInstanceOf(EmptyCellError)
 
-    const result2 = crossProduct(
+    const result2 = dotProduct(
       [1, 2, undefined],
       [4, undefined, 6],
     )
@@ -43,8 +43,8 @@ describe('operations/crossProduct.ts', () => {
     expect(result2.err).toBeInstanceOf(EmptyCellError)
   });
 
-  test('Cross product - non-matching dimensions', () => {
-    const result1 = crossProduct(
+  test('Dot product - non-matching dimensions', () => {
+    const result1 = dotProduct(
       [1, 2],
       [1, 2, 3],
     );
@@ -52,8 +52,8 @@ describe('operations/crossProduct.ts', () => {
     //@ts-expect-error
     expect(result1.err).toBeInstanceOf(DimensionError);
 
-    const result2 = crossProduct(
-      [1, 2, 3, 5],
+    const result2 = dotProduct(
+      [1, 2, 3],
       [1, 2, 3, 5],
     );
     expect(result2.ok).toBe(false);

@@ -77,7 +77,7 @@ export const addRowMultiplied = (
   i: number,
   j: number,
   scalar: number
-): Result<Matrix, RangeError> => {
+): Result<Matrix, EmptyCellError | RangeError> => {
   const numRows = m.length;
   if (i < 0 || i >= numRows || j < 0 || j >= numRows) {
     return err(

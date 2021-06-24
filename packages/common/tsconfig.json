@@ -9,11 +9,11 @@
     "tsBuildInfoFile": "./.cache/tsbuildinfo",
   },
   "include": [
-    "src"
+    "src",
   ],
   "exclude": [
     "../../node_modules",
     "node_modules",
-    "build"
+    "build",
   ],
 }

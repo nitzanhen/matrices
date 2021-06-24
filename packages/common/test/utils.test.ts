@@ -1,6 +1,6 @@
-import { generateMatrix, generateVector } from '../src/utils';
+import { generateMatrix, generateVector } from 'utils';
 
-describe('utils.test.ts', () => {
+describe('utils.ts', () => {
   test('generateMatrix', () => {
     expect(generateMatrix(2, 2, (i, j) => i + j)).toEqual([[0, 1], [1, 2]]);
     expect(generateMatrix(3, 2, () => null)).toEqual([[null, null], [null, null], [null, null]]);

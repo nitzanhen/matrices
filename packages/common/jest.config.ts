@@ -5,6 +5,11 @@ export default {
   roots: [
     'test'
   ],
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/test/tsconfig.json'
+    }
+  },
   collectCoverageFrom: [
     'src/**/*'
   ]

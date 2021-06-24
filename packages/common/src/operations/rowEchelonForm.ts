@@ -13,8 +13,7 @@ export const swapRows = (m: Matrix, i: number, j: number): Result<Matrix, RangeE
   if (i < 0 || j < 0 || i >= numRows || j >= numRows) {
     return err(
       new RangeError(
-        `i, j must both be valid row indices, i.e. between 0 and ${
-          numRows - 1
+        `i, j must both be valid row indices, i.e. between 0 and ${numRows - 1
         } (inclusive). Received i=${i}, j=${j}`
       )
     );
@@ -46,8 +45,7 @@ export const multiplyRowByScalar = (
   if (i < 0 || i >= numRows) {
     return err(
       new RangeError(
-        `i must be a valid row index, i.e. between 0 and ${
-          numRows - 1
+        `i must be a valid row index, i.e. between 0 and ${numRows - 1
         } (inclusive). Received i=${i}`
       )
     );
@@ -84,8 +82,7 @@ export const addRowMultiplied = (
   if (i < 0 || i >= numRows || j < 0 || j >= numRows) {
     return err(
       new RangeError(
-        `i and j must be a valid row index, i.e. between 0 and ${
-          numRows - 1
+        `i and j must be a valid row index, i.e. between 0 and ${numRows - 1
         } (inclusive). Received i=${i}, j=${j}`
       )
     );
@@ -116,15 +113,13 @@ export const maxWithIndex = (entries: [index: number, value: number][]) =>
   );
 
 /**
- * Returns the row echelon form of the given matrix `m`.
- *
- * This function *does not* modify the original matrix.
- *
- * Performance is `O(n²k)`, where `m` has `k` rows and `n` columns.
- *
- * Based on the algorithm presented at {@link https://en.wikipedia.org/wiki/Gaussian_elimination}
+ * An extended version of the row reduction algorithm for calculating the row-echelon form of a matrix,
+ * in which a sign - denoting the parity of the number of row swaps - is also returned.
+ * This number is used for determinant calculations, as swapping rows in a matrix flips the sign of its determinant.
+ * 
+ * For more info, {@link rowEchelonForm} 
  */
-export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | EmptyCellError> => {
+export const rowEchelonFormWithSign = (m: Matrix): Result<[echelonForm: number[][], sign: number], DimensionError | EmptyCellError> => {
   const numRows = m.length;
   const numColumns = m[0].length;
   if (m.some(row => row.length !== numColumns)) {
@@ -140,6 +135,7 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
 
   let pivotRowIndex = 0;
   let pivotColumnIndex = 0;
+  let numSwaps = 0;
 
   while (pivotRowIndex < numRows && pivotColumnIndex < numColumns) {
     const pivotColumn = echelonForm
@@ -154,7 +150,11 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
     }
 
     //Swap rows such that the maximum pivot is on top.
-    swapRows(echelonForm, pivotRowIndex, pivotColumnMaxIndex);
+    if (pivotRowIndex !== pivotColumnMaxIndex) {
+      swapRows(echelonForm, pivotRowIndex, pivotColumnMaxIndex);
+      numSwaps++;
+    }
+
     for (let index = pivotRowIndex + 1; index < numRows; index++) {
       const ratio =
         echelonForm[index][pivotColumnIndex] / echelonForm[pivotRowIndex][pivotColumnIndex];
@@ -168,5 +168,26 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
     pivotColumnIndex++;
   }
 
-  return ok(echelonForm);
+  const swapSign = numSwaps % 2 === 0 ? 1 : -1;
+  return ok([echelonForm, swapSign]);
+}
+
+rowEchelonFormWithSign([[1, 5], [3, 2]])
+
+/**
+ * Returns the row echelon form of the given matrix `m`.
+ *
+ * This function *does not* modify the original matrix.
+ *
+ * Performance is `O(n²k)`, where `m` has `k` rows and `n` columns.
+ *
+ * Based on the algorithm presented at {@link https://en.wikipedia.org/wiki/Gaussian_elimination}
+ */
+export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | EmptyCellError> => {
+  const result = rowEchelonFormWithSign(m);
+  if (!result.ok) {
+    return result;
+  }
+
+  return ok(result.result[0])
 };

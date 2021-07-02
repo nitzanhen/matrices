@@ -1,12 +1,9 @@
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode, useCallback, useMemo, FocusEvent } from 'react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/common';
 
 import { BaseComponentProps } from '../types';
-
-import { Plus } from '../components/svg/Plus';
-import { Minus } from '../components/svg/Minus';
 
 import { EmbeddedCell } from './EmbeddedCell';
 
@@ -20,63 +17,10 @@ const useStyles = createUseStyles(
     root: {
       width: 'max-content',
       height: 'max-content',
-      display: 'grid',
-      gridTemplateAreas: `
-        "label ."
-        "matrix add-col"
-        "add-row ."
-      `,
-      rowGap: 16,
-      columnGap: 16,
-      alignItems: 'center',
-      justifyContent: 'center',
-      gridTemplateRows: '1fr auto',
-      gridTemplateColumns: '1fr auto',
-
-      '& button': {
-        appearance: 'none',
-        border: 'none',
-        background: 'none',
-        padding: 0,
-        margin: 0,
-        borderRadius: '50%',
-        boxShadow: '0 2px 3px 1px #00000029'
-      },
-
-      '& svg': {
-        margin: 0,
-        padding: 0,
-        width: 24,
-        height: 24,
-        fill: 'var(--color-primary)',
-        verticalAlign: 'top'
-      }
-    },
-    addCol: {
-      gridArea: 'add-col',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column',
-
-      '& > :not(:last-child)': {
-        marginBottom: 16
-      }
-    },
-
-    addRow: {
-      gridArea: 'add-row',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-
-      '& > :not(:last-child)': {
-        marginRight: 16
-      }
+      position: 'relative'
     },
 
     matrix: ({ numRows, numColumns }: MatrixDimensions) => ({
-      gridArea: 'matrix',
       display: 'grid',
       gridTemplateRows: `repeat(${numRows}, 100px)`,
       gridTemplateColumns: `repeat(${numColumns}, 100px)`,
@@ -90,10 +34,29 @@ const useStyles = createUseStyles(
     }),
     cell: {},
     label: {
-      gridArea: 'label',
+      position: 'absolute',
+      bottom: 'calc(100% + 8px)',
+      left: 0,
+      right: 0,
+      zIndex: 100,
       textAlign: 'center',
       fontSize: 28,
-      color: 'var(--color-primary)'
+      color: 'var(--color-primary)',
+      '& > :not(:last-child)': {
+        marginRight: 8
+      }
+    },
+
+    dimensionInput: {
+      display: 'inline-block',
+
+      width: '0.8em'
+    },
+
+    dimensionsForm: {
+      display: 'inline-flex',
+      alignItems: 'baseline',
+      columnGap: 2
     }
   },
   { name: 'matrix' }
@@ -102,10 +65,8 @@ const useStyles = createUseStyles(
 export interface MatrixProps extends BaseComponentProps {
   cells: MathMatrix;
   onChange: (row: number, column: number, value: CellValue) => void;
-  onAddRow: () => void;
-  onRemoveRow: () => void;
-  onAddColumn: () => void;
-  onRemoveColumn: () => void;
+  onNumRowsChanged: (numRows: number) => void,
+  onNumColumnsChanged: (numColumns: number) => void,
   setFocus: (row: number, column: number) => void;
   readonly?: boolean;
   unresizable?: boolean;
@@ -122,10 +83,8 @@ export const Matrix: React.VFC<MatrixProps> = ({
   unresizable = false,
   readonly = false,
   onChange,
-  onAddRow,
-  onRemoveRow,
-  onAddColumn,
-  onRemoveColumn,
+  onNumRowsChanged,
+  onNumColumnsChanged,
   setFocus,
   className,
   style,
@@ -142,9 +101,67 @@ export const Matrix: React.VFC<MatrixProps> = ({
 
   const classes = useStyles({ numRows, numColumns });
 
+  const handleNumRowsChange = useCallback((e: FocusEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const value = parseInt(e.target.value);
+    if (!isNaN(value)) {
+      onNumRowsChanged(value)
+    }
+  }, [onNumRowsChanged]);
+
+  const handleNumColumnsChange = useCallback((e: FocusEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const value = parseInt(e.target.value);
+    if (!isNaN(value)) {
+      onNumColumnsChanged(value)
+    }
+  }, [onNumColumnsChanged]);
+
+  /** @todo this isnt actually being fired, probably because the form isnt being submitted. */
+  const handleDimensionsFormSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const formData = new FormData(e.currentTarget);
+    const newNumRows = parseInt(formData.get('num-rows') as string);
+    const newNumColumns = parseInt(formData.get('num-columns') as string);
+
+    if(!isNaN(newNumRows) && newNumRows !== numRows) {
+      onNumRowsChanged(newNumRows)
+    }
+    if(!isNaN(newNumColumns) && newNumColumns !== numColumns) {
+      onNumColumnsChanged(newNumColumns)
+    }
+  }, [onNumRowsChanged, onNumColumnsChanged])
+
   return (
     <div className={clsx(classes.root, className)}>
-      <div className={classes.label}>{label}</div>
+      <div className={classes.label}>
+        <span>{label}</span>
+        {!unresizable && (
+          <form className={classes.dimensionsForm} noValidate onSubmit={handleDimensionsFormSubmit}>
+            (
+            <input
+              name='num-rows'
+              onBlur={handleNumRowsChange}
+              onSubmit={handleNumRowsChange}
+              className={classes.dimensionInput}
+              defaultValue={numRows}
+            />
+            x
+            <input
+              name='num-columns'
+              onBlur={handleNumColumnsChange}
+              className={classes.dimensionInput}
+              defaultValue={numColumns}
+            />
+            )
+          </form>
+        )}
+
+      </div>
       <div className={classes.matrix} style={style} ref={gridRef}>
         {cells.flatMap((row, i) =>
           row.map((value, j) => (
@@ -162,27 +179,6 @@ export const Matrix: React.VFC<MatrixProps> = ({
           ))
         )}
       </div>
-      {!unresizable && (
-        <>
-          <div className={classes.addCol}>
-            <button onClick={onRemoveColumn}>
-              <Minus />
-            </button>
-            <button onClick={onAddColumn}>
-              <Plus />
-            </button>
-          </div>
-          <div className={classes.addRow}>
-            <button onClick={onRemoveRow}>
-              <Minus />
-            </button>
-            <span>{numRows} rows</span>
-            <button onClick={onAddRow}>
-              <Plus />
-            </button>
-          </div>
-        </>
-      )}
     </div>
   );
 };

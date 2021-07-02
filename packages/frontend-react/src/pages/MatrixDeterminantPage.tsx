@@ -1,5 +1,5 @@
 import { determinant } from '@matrices/common';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
 
 import { RightArrow } from '../components/svg/RightArrow';
@@ -20,10 +20,23 @@ const useStyles = createUseStyles(
 
 export const MatrixDeterminantPage: React.VFC = () => {
   const matrix = useMatrix({ label: 'A' });
-  const result = useMemo(() => {
+  const resultMatrix = useMatrix({
+    label: '|A|',
+    readonly: true,
+    unresizable: true,
+    defaultCells: [[undefined]]
+  })
+
+  const { setCells: setResultCells, clear: clearResult } = resultMatrix;
+  useEffect(() => {
     const result = determinant(matrix.cells);
-    return result.ok ? result.result : undefined;
-  }, [matrix.cells]);
+    if (result.ok) {
+      setResultCells([[result.result]])
+    }
+    else {
+      clearResult();
+    }
+  }, [matrix.cells, setResultCells, clearResult]);
 
   const classes = useStyles();
 
@@ -31,7 +44,7 @@ export const MatrixDeterminantPage: React.VFC = () => {
     <OperationPage>
       <Matrix {...matrix.toProps()} />
       <RightArrow />
-      <Cell value={result} readonly className={classes.cell} label='|A|' />
+      <Matrix {...resultMatrix.toProps()} className={classes.cell} />
     </OperationPage>
   );
 };

@@ -64,7 +64,7 @@ export interface CellProps extends BaseComponentProps {
 }
 
 /**
- * A simple cell; can be part of a vector or matrix or stand by itself.
+ * A simple cell; typically used as part of a Matrix, even if it contains only a single cell.
  */
 export const Cell: React.VFC<CellProps> = memo(function Cell({ className, style, value, onChange, label, readonly = false, inputProps }) {
   /** @todo fix logic. */

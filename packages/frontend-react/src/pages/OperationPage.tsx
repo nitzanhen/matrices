@@ -12,14 +12,18 @@ const useStyles = createUseStyles(
     },
 
     content: {
+      width: '100%',
       display: 'flex',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      justifyContent: 'center',
+      rowGap: 50,
 
       '& > *:not(:last-child)': {
         marginRight: 40
       },
 
       '& > svg': {
-        alignSelf: 'center',
         width: 48,
         height: 48,
         fill: 'var(--color-light)'

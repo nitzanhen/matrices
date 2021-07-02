@@ -25,28 +25,6 @@ export const useMatrix = ({
   const numRows = cells.length;
   const numColumns = cells[0].length;
 
-  const addColumn = useCallback(() => {
-    setCells(cells => cells.map(row => [...row, undefined]));
-  }, []);
-
-  const removeColumn = useCallback(() => {
-    setCells(cells => {
-      const numColumns = cells[0].length;
-      return numColumns > 1 ? cells.map(row => row.slice(0, -1)) : cells;
-    });
-  }, []);
-
-  const addRow = useCallback(() => {
-    setCells(cells => [...cells, Array(cells[0].length).fill(undefined)]);
-  }, []);
-
-  const removeRow = useCallback(() => {
-    setCells(cells => {
-      const numRows = cells.length;
-      return numRows > 1 ? cells.slice(0, -1) : cells;
-    });
-  }, []);
-
   const setCell = useCallback((row: number, column: number, value: CellValue) => {
     setCells(cells => {
       const newCells = cells.map(row => [...row]);
@@ -54,6 +32,22 @@ export const useMatrix = ({
 
       return newCells;
     });
+  }, []);
+
+  const setNumRows = useCallback((numRows: number) => {
+    setCells(cells => generateMatrix(
+      numRows,
+      cells[0].length,
+      (i, j) => cells[i]?.[j] ?? undefined)
+    )
+  }, []);
+
+  const setNumColumns = useCallback((numColumns: number) => {
+    setCells(cells => generateMatrix(
+      cells.length,
+      numColumns,
+      (i, j) => cells[i]?.[j] ?? undefined)
+    )
   }, []);
 
   const clear = useCallback(() => {
@@ -95,28 +89,24 @@ export const useMatrix = ({
     (): MatrixProps => ({
       label,
       cells,
-      onAddColumn: addColumn,
-      onRemoveColumn: removeColumn,
-      onAddRow: addRow,
-      onRemoveRow: removeRow,
       onChange: setCell,
+      onNumRowsChanged: setNumRows,
+      onNumColumnsChanged: setNumColumns,
       setFocus,
       gridRef,
       readonly,
       unresizable
     }),
-    [cells, addColumn, addRow, setCell, readonly, label, removeColumn, removeRow, setFocus, unresizable]
+    [cells, setCell, readonly, label, setFocus, unresizable]
   );
 
   return {
     label,
     cells,
-    addColumn,
-    removeColumn,
-    addRow,
-    removeRow,
     setCell,
     setCells,
+    setNumRows,
+    setNumColumns,
     clear,
     gridRef,
     setFocus,

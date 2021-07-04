@@ -27,16 +27,11 @@ const useStyles = createUseStyles(
       marginTop: 40,
       width: '100%',
       overflow: 'hidden',
-      display: 'flex',
-
-      '& > span': {
-        display: 'block',
-        width: 1,
-        flex: '0 0 auto',
-        backgroundColor: 'var(--background-dark)',
-        opacity: 0.3,
-        margin: '0 24px'
-      },
+      display: 'grid',
+      gridTemplateColumns: '1fr 1px 1fr',
+      gridTemplateRows: 'auto auto',
+      columnGap: 16,
+      rowGap: 16,
 
       '& > div': {
         flex: '1 1 50%',
@@ -47,6 +42,17 @@ const useStyles = createUseStyles(
         columnGap: 16,
         rowGap: 16
       }
+    },
+    link: {
+      maxWidth: 120
+    },
+
+    divider: {
+      display: 'block',
+      width: 1,
+      flex: '0 0 auto',
+      backgroundColor: 'var(--background-dark)',
+      opacity: 0.3,
     }
   },
   { name: 'welcome' }
@@ -66,16 +72,21 @@ export const WelcomePage: React.VFC = () => {
         <h1>Welcome!</h1>
         <p>select an operation to get started</p>
         <div className={classes.actions}>
-          <div>
-            <Link to='/matrix/sum'>Matrix addition</Link>
-            <Link to='/matrix/product'>Matrix multiplication</Link>
-            <Link to='/matrix/transpose'>Matrix transpose</Link>
-            <Link to='/matrix/determinant'>Matrix determinant</Link>
-          </div>
+          <h2>Matrix</h2>
           <span />
+          <h2>Vector</h2>
+
           <div>
-            <Link to='/vector/dot'>Dot product</Link>
-            <Link to='/vector/cross'>Cross product</Link>
+            <Link to='/matrix/sum' className={classes.link}>Matrix addition</Link>
+            <Link to='/matrix/product' className={classes.link}>Matrix multiplication</Link>
+            <Link to='/matrix/transpose' className={classes.link}>Matrix transpose</Link>
+            <Link to='/matrix/determinant' className={classes.link}>Matrix determinant</Link>
+          </div>
+
+          <span className={classes.divider} />
+          <div>
+            <Link to='/vector/dot' className={classes.link}>Dot product</Link>
+            <Link to='/vector/cross' className={classes.link}>Cross product</Link>
           </div>
         </div>
       </div>

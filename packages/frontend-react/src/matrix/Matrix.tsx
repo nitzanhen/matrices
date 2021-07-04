@@ -134,7 +134,7 @@ export const Matrix: React.VFC<MatrixProps> = ({
     if(!isNaN(newNumColumns) && newNumColumns !== numColumns) {
       onNumColumnsChanged(newNumColumns)
     }
-  }, [onNumRowsChanged, onNumColumnsChanged])
+  }, [onNumRowsChanged, onNumColumnsChanged, numRows, numColumns])
 
   return (
     <div className={clsx(classes.root, className)}>

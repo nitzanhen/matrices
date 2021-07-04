@@ -6,6 +6,7 @@ import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/commo
 import { BaseComponentProps } from '../types';
 
 import { EmbeddedCell } from './EmbeddedCell';
+import { Multiply } from '../components/svg/Multiply';
 
 interface MatrixDimensions {
   numRows: number;
@@ -35,6 +36,9 @@ const useStyles = createUseStyles(
     cell: {},
     label: {
       position: 'absolute',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       bottom: 'calc(100% + 8px)',
       left: 0,
       right: 0,
@@ -44,20 +48,39 @@ const useStyles = createUseStyles(
       color: 'var(--color-primary)',
       '& > :not(:last-child)': {
         marginRight: 8
-      }
+      },
     },
 
     dimensionInput: {
       display: 'inline-block',
+      background: 'none',
+      border: 'none',
+      width: '0.8em',
+      borderBottom: '2px solid var(--color-primary)',
+      color: 'var(--color-primary)',
+      transition: 'all 100ms ease-in-out',
+      textAlign: 'center',
+      fontSize: '0.6em',
 
-      width: '0.8em'
+      '&:focus-visible': {
+        outline: 'none',
+      },
+      '&:focus': {
+        borderColor: 'var(--color-light)'
+      }
     },
 
     dimensionsForm: {
       display: 'inline-flex',
-      alignItems: 'baseline',
-      columnGap: 2
-    }
+      alignItems: 'flex-end',
+      backgroundColor: 'var(--background-light)',
+      padding: '4px 6px',
+      borderRadius: 4,
+
+      '& > svg': {
+        fill: 'var(--color-primary)'
+      }
+    },
   },
   { name: 'matrix' }
 );
@@ -128,10 +151,10 @@ export const Matrix: React.VFC<MatrixProps> = ({
     const newNumRows = parseInt(formData.get('num-rows') as string);
     const newNumColumns = parseInt(formData.get('num-columns') as string);
 
-    if(!isNaN(newNumRows) && newNumRows !== numRows) {
+    if (!isNaN(newNumRows) && newNumRows !== numRows) {
       onNumRowsChanged(newNumRows)
     }
-    if(!isNaN(newNumColumns) && newNumColumns !== numColumns) {
+    if (!isNaN(newNumColumns) && newNumColumns !== numColumns) {
       onNumColumnsChanged(newNumColumns)
     }
   }, [onNumRowsChanged, onNumColumnsChanged, numRows, numColumns])
@@ -141,24 +164,23 @@ export const Matrix: React.VFC<MatrixProps> = ({
       <div className={classes.label}>
         <span>{label}</span>
         {!unresizable && (
-          <form className={classes.dimensionsForm} noValidate onSubmit={handleDimensionsFormSubmit}>
-            (
+          <article className={classes.dimensionsForm}>
             <input
+              tabIndex={-1}
               name='num-rows'
-              onBlur={handleNumRowsChange}
-              onSubmit={handleNumRowsChange}
+              onChange={handleNumRowsChange}
               className={classes.dimensionInput}
               defaultValue={numRows}
             />
-            x
+            <Multiply />
             <input
+              tabIndex={-1}
               name='num-columns'
-              onBlur={handleNumColumnsChange}
+              onChange={handleNumColumnsChange}
               className={classes.dimensionInput}
               defaultValue={numColumns}
             />
-            )
-          </form>
+          </article>
         )}
 
       </div>

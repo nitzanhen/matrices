@@ -3,6 +3,7 @@ import { createUseStyles } from 'react-jss';
 import { useHistory } from 'react-router-dom';
 
 import { BackArrow } from '../components/BackArrow';
+import { Tip } from '../components/svg/Tip';
 
 const useStyles = createUseStyles(
   {
@@ -10,6 +11,7 @@ const useStyles = createUseStyles(
       width: '100%',
       height: '100%',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative'
@@ -47,6 +49,22 @@ const useStyles = createUseStyles(
       borderRadius: '50%',
       boxShadow: '0px 3px 6px 3px rgba(0, 0, 0, 0.12)',
       cursor: 'pointer'
+    },
+    tip: {
+      marginTop: 72,
+      marginBottom: -72,
+      padding: '12px 16px 12px 12px',
+      borderRadius: 8,
+      backgroundColor: 'var(--background-light)',
+      display: 'flex',
+      alignItems: 'center',
+      columnGap: 8
+    },
+    tipIcon: {
+      fill: 'var(--color-primary)',
+      width: '2em',
+      height: '2em',
+      opacity: 0.6
     }
   },
   { name: 'operation-page' }
@@ -67,6 +85,16 @@ export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
         <BackArrow />
       </button>
       <div className={classes.content}>{children}</div>
+      <aside className={classes.tip}>
+        <div>
+          <Tip className={classes.tipIcon} />
+        </div>
+        <div>
+          <h2>Tip!</h2>
+          <p>Try navigating the matrix cells with the arrow keys or with tab.</p>
+        </div>
+
+      </aside>
     </div>
   );
 };

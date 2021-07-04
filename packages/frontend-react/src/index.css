@@ -18,14 +18,12 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-h1, p {
+h1, h2, h6, p {
   margin: 0;
   font-weight: normal;
 }
 
 h2 {
-  margin: 0;
-  font-weight: normal;
   font-size: 20px;
 }
 

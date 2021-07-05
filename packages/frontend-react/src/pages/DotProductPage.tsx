@@ -1,8 +1,7 @@
-import { CellValue, dotProduct, generateVector } from '@matrices/common';
-import React, { useEffect, useState } from 'react';
+import { dotProduct, generateVector } from '@matrices/common';
+import React, { useEffect } from 'react';
 
 import { Equal } from '../components/svg/Equal';
-import { Cell } from '../matrix/Cell';
 import { Matrix } from '../matrix/Matrix';
 
 import { useMatrix } from '../matrix/useMatrix';
@@ -41,7 +40,7 @@ export const DotProductPage: React.VFC = () => {
     else {
       clearProduct();
     }
-  }, [vector1.cells, vector2.cells,])
+  }, [vector1.cells, vector2.cells, clearProduct, setProductCells])
 
   return (
     <OperationPage>

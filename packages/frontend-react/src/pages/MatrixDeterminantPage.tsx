@@ -1,9 +1,8 @@
 import { determinant } from '@matrices/common';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 
 import { RightArrow } from '../components/svg/RightArrow';
-import { Cell } from '../matrix/Cell';
 import { Matrix } from '../matrix/Matrix';
 import { useMatrix } from '../matrix/useMatrix';
 

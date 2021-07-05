@@ -97,7 +97,7 @@ export const useMatrix = ({
       readonly,
       unresizable
     }),
-    [cells, setCell, readonly, label, setFocus, unresizable]
+    [cells, setCell, readonly, label, setFocus, unresizable, setNumRows, setNumColumns]
   );
 
   return {

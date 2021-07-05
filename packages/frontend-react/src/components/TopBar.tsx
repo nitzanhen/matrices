@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { Link as RouterLink } from 'react-router-dom';
+
 import { Github } from './svg/Github';
 
 const useStyles = createUseStyles(

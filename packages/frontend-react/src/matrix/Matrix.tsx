@@ -4,9 +4,9 @@ import { createUseStyles } from 'react-jss';
 import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/common';
 
 import { BaseComponentProps } from '../types';
+import { Multiply } from '../components/svg/Multiply';
 
 import { EmbeddedCell } from './EmbeddedCell';
-import { Multiply } from '../components/svg/Multiply';
 
 interface MatrixDimensions {
   numRows: number;
@@ -141,23 +141,6 @@ export const Matrix: React.VFC<MatrixProps> = ({
       onNumColumnsChanged(value)
     }
   }, [onNumColumnsChanged]);
-
-  /** @todo this isnt actually being fired, probably because the form isnt being submitted. */
-  const handleDimensionsFormSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const formData = new FormData(e.currentTarget);
-    const newNumRows = parseInt(formData.get('num-rows') as string);
-    const newNumColumns = parseInt(formData.get('num-columns') as string);
-
-    if (!isNaN(newNumRows) && newNumRows !== numRows) {
-      onNumRowsChanged(newNumRows)
-    }
-    if (!isNaN(newNumColumns) && newNumColumns !== numColumns) {
-      onNumColumnsChanged(newNumColumns)
-    }
-  }, [onNumRowsChanged, onNumColumnsChanged, numRows, numColumns])
 
   return (
     <div className={clsx(classes.root, className)}>

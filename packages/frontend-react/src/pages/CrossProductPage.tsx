@@ -44,7 +44,7 @@ export const CrossProductPage: React.VFC = () => {
   }, [vector1.cells, vector2.cells, setProductCells, clearProduct])
 
   return (
-    <OperationPage>
+    <OperationPage title="Cross product">
       <Matrix {...vector1.toProps()} />
       <Cross />
       <Matrix {...vector2.toProps()} />

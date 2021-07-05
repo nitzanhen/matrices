@@ -27,7 +27,7 @@ export const MatrixMultiplicationPage: React.VFC = () => {
   }, [matrix1.cells, matrix2.cells, setProductCells, clearProduct]);
 
   return (
-    <OperationPage>
+    <OperationPage title="Matrix multiplication">
       <Matrix {...matrix1.toProps()} />
       <Multiply />
       <Matrix {...matrix2.toProps()} />

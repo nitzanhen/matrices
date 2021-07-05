@@ -42,7 +42,7 @@ export const MatrixTransposePage: React.VFC = () => {
   const { inputMatrix } = useStyles();
 
   return (
-    <OperationPage>
+    <OperationPage title="Matrix transpose">
       <Matrix {...matrix.toProps()} className={inputMatrix} />
       <Equal />
       <Matrix {...transposed.toProps()} />

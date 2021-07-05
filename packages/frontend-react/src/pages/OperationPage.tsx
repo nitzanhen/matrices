@@ -8,16 +8,25 @@ import { Tip } from '../components/svg/Tip';
 const useStyles = createUseStyles(
   {
     root: {
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative'
+      width: 'calc(100% - 2*16px)',
+      height: 'calc(100% - 2*16px)',
+      display: 'grid',
+      gridTemplateAreas: `
+      "back title ."
+      ". content ."
+      ". tip ."
+      `,
+      padding: 16,
+      gridTemplateColumns: '1fr min(100%, 1000px) 1fr'
+    },
+
+    title: {
+      gridArea: 'title',
+      color: 'var(--color-primary)'
     },
 
     content: {
+      gridArea: 'content',
       width: '100%',
       display: 'flex',
       flexWrap: 'wrap',
@@ -35,8 +44,9 @@ const useStyles = createUseStyles(
         fill: 'var(--color-light)'
       }
     },
+
     backButton: {
-      position: 'absolute',
+      gridArea: 'back',
       top: 16,
       left: 16,
       padding: 4,
@@ -51,14 +61,16 @@ const useStyles = createUseStyles(
       cursor: 'pointer'
     },
     tip: {
-      marginTop: 72,
-      marginBottom: -72,
+      gridArea: 'tip',
+      width: 'max-content',
+      alignSelf: 'flex-start',
+      margin: '0 auto',
       padding: '12px 16px 12px 12px',
       borderRadius: 8,
       backgroundColor: 'var(--background-light)',
       display: 'flex',
       alignItems: 'center',
-      columnGap: 8
+      columnGap: 8,
     },
     tipIcon: {
       fill: 'var(--color-primary)',
@@ -70,12 +82,14 @@ const useStyles = createUseStyles(
   { name: 'operation-page' }
 );
 
-export interface OperationPageProps { }
+export interface OperationPageProps { 
+  title: string
+}
 
 /**
  * Common structure and styles for operation pages.
  */
-export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
+export const OperationPage: React.FC<OperationPageProps> = ({ title, children }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -84,7 +98,13 @@ export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
       <button className={classes.backButton} onClick={() => history.goBack()}>
         <BackArrow />
       </button>
-      <div className={classes.content}>{children}</div>
+      <h1 className={classes.title}>
+        {title}
+      </h1>
+
+      <div className={classes.content}>
+        {children}
+      </div>
       <aside className={classes.tip}>
         <div>
           <Tip className={classes.tipIcon} />
@@ -93,7 +113,6 @@ export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
           <h2>Tip!</h2>
           <p>Try navigating the matrix cells with the arrow keys or with tab.</p>
         </div>
-
       </aside>
     </div>
   );

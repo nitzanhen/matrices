@@ -43,7 +43,7 @@ export const DotProductPage: React.VFC = () => {
   }, [vector1.cells, vector2.cells, clearProduct, setProductCells])
 
   return (
-    <OperationPage>
+    <OperationPage title="Dot product">
       <Matrix {...vector1.toProps()} />
       <Matrix {...vector2.toProps()} />
       <Equal />

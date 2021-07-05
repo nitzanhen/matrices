@@ -40,7 +40,7 @@ export const MatrixDeterminantPage: React.VFC = () => {
   const classes = useStyles();
 
   return (
-    <OperationPage>
+    <OperationPage title="Matrix determinant">
       <Matrix {...matrix.toProps()} />
       <RightArrow />
       <Matrix {...resultMatrix.toProps()} className={classes.cell} />

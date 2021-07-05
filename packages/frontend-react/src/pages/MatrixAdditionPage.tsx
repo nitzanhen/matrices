@@ -27,7 +27,7 @@ export const MatrixAdditionPage: React.VFC = () => {
   }, [matrix1.cells, matrix2.cells, setSumCells, clearSum]);
 
   return (
-    <OperationPage>
+    <OperationPage title="Matrix addition">
       <Matrix {...matrix1.toProps()} />
       <Plus />
       <Matrix {...matrix2.toProps()} />

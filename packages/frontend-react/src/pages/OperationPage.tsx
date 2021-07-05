@@ -20,11 +20,6 @@ const useStyles = createUseStyles(
       gridTemplateColumns: '1fr min(100%, 1000px) 1fr'
     },
 
-    title: {
-      gridArea: 'title',
-      color: 'var(--color-primary)'
-    },
-
     content: {
       gridArea: 'content',
       width: '100%',
@@ -82,14 +77,12 @@ const useStyles = createUseStyles(
   { name: 'operation-page' }
 );
 
-export interface OperationPageProps { 
-  title: string
-}
+export interface OperationPageProps {}
 
 /**
  * Common structure and styles for operation pages.
  */
-export const OperationPage: React.FC<OperationPageProps> = ({ title, children }) => {
+export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -98,9 +91,6 @@ export const OperationPage: React.FC<OperationPageProps> = ({ title, children })
       <button className={classes.backButton} onClick={() => history.goBack()}>
         <BackArrow />
       </button>
-      <h1 className={classes.title}>
-        {title}
-      </h1>
 
       <div className={classes.content}>
         {children}

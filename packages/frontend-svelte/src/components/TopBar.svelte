@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { link } from 'svelte-routing';
+  import { link } from 'svelte-navigator';
 import Github from './svg/Github.svelte';
 
   export let page: string;

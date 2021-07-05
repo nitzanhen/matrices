@@ -56,7 +56,7 @@ const useStyles = createUseStyles(
       background: 'none',
       border: 'none',
       width: '0.8em',
-      borderBottom: '2px solid var(--color-primary)',
+      borderBottom: '1px solid var(--color-primary)',
       color: 'var(--color-primary)',
       transition: 'all 100ms ease-in-out',
       textAlign: 'center',
@@ -74,10 +74,12 @@ const useStyles = createUseStyles(
       display: 'inline-flex',
       alignItems: 'flex-end',
       backgroundColor: 'var(--background-light)',
-      padding: '4px 6px',
+      padding: '2px 6px 4px 6px',
       borderRadius: 4,
 
       '& > svg': {
+        width: '0.7em',
+        height: '0.7em',
         fill: 'var(--color-primary)'
       }
     },

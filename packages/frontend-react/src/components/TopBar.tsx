@@ -20,22 +20,49 @@ const useStyles = createUseStyles(
       height: '2em',
       fill: 'white',
       display: 'block'
-    }
+    },
+    text: {
+
+      '& > h1': {
+        display: 'inline'
+      },
+
+      '& > *:not(h1)': {
+        fontSize: 22,
+        letterSpacing: 2,
+      },
+
+      '& > *:not(:last-child)': {
+        marginRight: 8
+      }
+    },
   },
   { name: 'top-bar' }
 );
 
-export const TopBar: React.VFC = () => {
+interface TopBarProps {
+  page?: string;
+}
+
+export const TopBar: React.VFC<TopBarProps> = ({ page }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <h1>
-        <RouterLink to='/'>Coolest Matrices</RouterLink>
-      </h1>
+      <span className={classes.text}>
+        <h1>
+          <RouterLink to='/'>Coolest Matrices</RouterLink>
+        </h1>
+        {page && (
+          <>
+            <span>/</span>
+            <span>{page}</span>
+          </>
+        )}
+      </span>
       <a href='https://github.com/NitzanHen/matrices'>
         <Github className={classes.github} />
       </a>
-    </div>
+    </div >
   );
 };

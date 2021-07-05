@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import { TopBar } from './components/TopBar';
 import { CrossProductPage } from './pages/CrossProductPage';
@@ -41,9 +41,19 @@ const useStyles = createUseStyles(
 function App() {
   const classes = useStyles();
 
+  const { pathname } = useLocation();
+  const pageName = useMemo(() => ({
+    '/matrix/sum': 'Matrix Addition',
+    '/matrix/product': 'Matrix multiplication',
+    '/matrix/transpose': 'Matrix transposition',
+    '/matrix/determinant': 'Matrix determinant',
+    '/vector/dot': 'Dot product',
+    '/vector/cross': 'Cross product'
+  })[pathname], [pathname])
+
   return (
     <div className={clsx(classes.root, classes.colorDefs)}>
-      <TopBar />
+      <TopBar page={pageName}/>
       <main>
         <Switch>
           <Route path='/' exact>

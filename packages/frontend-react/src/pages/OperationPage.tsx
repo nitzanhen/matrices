@@ -42,8 +42,6 @@ const useStyles = createUseStyles(
 
     backButton: {
       gridArea: 'back',
-      top: 16,
-      left: 16,
       padding: 4,
       width: 40,
       height: 40,

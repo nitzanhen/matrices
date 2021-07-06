@@ -23,6 +23,9 @@ export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const el = e.target as HTMLInputElement;
 
+    /**
+     * Handles the change of focus when arrows keys are pressed.
+     */
     switch (e.key) {
       case 'ArrowLeft': {
         if (el.selectionStart === 0) {
@@ -36,7 +39,7 @@ export const EmbeddedCell: React.VFC<EmbeddedCellProps> = ({
         if (!value || el.selectionStart === String(value).length) {
           e.preventDefault();
           e.stopPropagation();
-          return setFocus?.(row, column + 1);
+          setFocus?.(row, column + 1);
         }
         break;
       }

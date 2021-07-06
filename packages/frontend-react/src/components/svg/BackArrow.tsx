@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BaseComponentProps } from '../types';
+import { BaseComponentProps } from '../../types';
 
 export const BackArrow: React.VFC<BaseComponentProps> = ({ className, style }) => (
   <svg className={className} style={style} viewBox='0 0 24 24'>

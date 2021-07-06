@@ -2,7 +2,7 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { useHistory } from 'react-router-dom';
 
-import { BackArrow } from '../components/BackArrow';
+import { BackArrow } from '../components/svg/BackArrow';
 import { Tip } from '../components/svg/Tip';
 
 const useStyles = createUseStyles(

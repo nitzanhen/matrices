@@ -1,7 +1,13 @@
 <script lang="ts">
   import { Route, useLocation } from 'svelte-navigator';
   import TopBar from './components/TopBar.svelte';
+  import MatrixAdditionPage from './pages/MatrixAdditionPage.svelte';
+  import MatrixDeterminantPage from './pages/MatrixDeterminantPage.svelte';
+  import MatrixProductPage from './pages/MatrixProductPage.svelte';
+  import MatrixTransposePage from './pages/MatrixTransposePage.svelte';
   import WelcomePage from './pages/WelcomePage.svelte';
+  import DotProductPage from './pages/DotProductPage.svelte';
+  import CrossProductPage from './pages/CrossProductPage.svelte';
 
   const pageNames = {
     '/matrix/sum': 'Matrix Addition',
@@ -14,14 +20,32 @@
 
   const location = useLocation();
   $: pageName = (pageNames as any)[$location.pathname];
-  $: console.log(pageName)
 </script>
 
 <div class="root">
   <TopBar page={pageName} />
   <main>
-    <Route path="/*">
+    <Route path="/">
       <WelcomePage />
+    </Route>
+    <Route path="/matrix/sum">
+      <MatrixAdditionPage />
+    </Route>
+    <Route path="/matrix/product">
+      <MatrixProductPage />
+    </Route>
+    <Route path="/matrix/transpose">
+      <MatrixTransposePage />
+    </Route>
+    <Route path="/matrix/determinant">
+      <MatrixDeterminantPage />
+    </Route>
+
+    <Route path="/vector/dot">
+      <DotProductPage />
+    </Route>
+    <Route path="/vector/cross">
+      <CrossProductPage />
     </Route>
   </main>
 </div>

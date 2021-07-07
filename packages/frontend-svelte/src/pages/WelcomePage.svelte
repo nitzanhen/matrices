@@ -1,6 +1,6 @@
 <script lang="ts">
   import HomeLink from '../components/HomeLink.svelte';
-import Cell from '../components/matrix/Cell.svelte';
+  import Cell from '../components/matrix/Cell.svelte';
 </script>
 
 <div class="root">
@@ -14,19 +14,16 @@ import Cell from '../components/matrix/Cell.svelte';
       <h2>Vector</h2>
 
       <div>
-        <HomeLink to="/matrix/sum" style="max-width: 120px;">Matrix addition</HomeLink>
-        <HomeLink to="/matrix/product" style="max-width: 120px;">Matrix multiplication</HomeLink>
-        <HomeLink to="/matrix/transpose" style="max-width: 120px;">Matrix transpose</HomeLink>
-        <HomeLink to="/matrix/determinant" style="max-width: 120px;">Matrix determinant</HomeLink>
+        <HomeLink to="/matrix/sum">Matrix addition</HomeLink>
+        <HomeLink to="/matrix/product">Matrix multiplication</HomeLink>
+        <HomeLink to="/matrix/transpose">Matrix transpose</HomeLink>
+        <HomeLink to="/matrix/determinant">Matrix determinant</HomeLink>
       </div>
       <span class="divider" />
       <div>
-        <HomeLink to="/vector/dot" style="max-width: 120px;">Dot product</HomeLink>
-        <HomeLink to="/vector/cross" style="max-width: 120px;">Cross product</HomeLink>
+        <HomeLink to="/vector/dot">Dot product</HomeLink>
+        <HomeLink to="/vector/cross">Cross product</HomeLink>
       </div>
-      <Cell>
-        <span slot="label">(0, 0)</span>
-      </Cell>
     </div>
   </div>
 </div>
@@ -69,6 +66,10 @@ import Cell from '../components/matrix/Cell.svelte';
     row-gap: 16px;
     column-gap: 16px;
     padding: 8px;
+  }
+
+  .actions > div > :global(a) {
+    max-width: 120px;
   }
 
   .divider {

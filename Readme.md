@@ -10,6 +10,8 @@ Stack aside, the implementations are meant to be practical clones.
 All implementations use Typescript.
 
 - [x] React
+  (The React project is built using Vite, and Lerna sometimes terminates Vite's dev server immediately after starting it. 
+  To test out the React demo in dev, cd into `packages/frontend-react` then run `yarn dev`)
 - [ ] Angular
 - [ ] Vue
 - [ ] Svelte

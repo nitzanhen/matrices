@@ -1,11 +1,11 @@
 <script lang="ts">
   import { link } from 'svelte-navigator';
-import Github from './svg/Github.svelte';
+  import Github from './svg/Github.svelte';
 
   export let page: string;
 </script>
 
-<div class="root">
+<header class="root">
   <span class="text">
     <h1>
       <a href="/" use:link>Coolest Matrices</a>
@@ -18,7 +18,7 @@ import Github from './svg/Github.svelte';
   <a href="https://github.com/NitzanHen/matrices">
     <Github />
   </a>
-</div>
+</header>
 
 <style>
   .root {
@@ -37,13 +37,11 @@ import Github from './svg/Github.svelte';
   }
 
   .text > :not(h1) {
-    font-size: 22;
-    letter-spacing: 2; 
+    font-size: 22px;
+    letter-spacing: 2px;
   }
 
   .text > :not(:last-child) {
     margin-right: 8px;
   }
-
- 
 </style>

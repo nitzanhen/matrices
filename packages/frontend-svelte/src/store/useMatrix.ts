@@ -1,28 +1,20 @@
 import { derived, writable } from 'svelte/store';
-import { generateMatrix, Matrix, CellValue } from '@matrices/common';
+import { generateMatrix, Matrix } from '@matrices/common';
 
 export interface useMatrixProps {
-  label?: string //MatrixProps['label'];
   readonly?: boolean //MatrixProps['readonly'];
   unresizable?: boolean //MatrixProps['unresizable'];
   defaultCells?: Matrix;
 }
 
 export const useMatrix = ({
-  label,
   readonly = false,
   unresizable = false,
   defaultCells = generateMatrix(2, 2, () => undefined)
-}: useMatrixProps) => {
+}: useMatrixProps = {}) => {
   const cells = writable(defaultCells);
 
-  const setCell = (row: number, column: number, value: CellValue) =>
-    cells.update(cells => {
-      const newCells = cells.map(row => [...row]);
-      newCells[row][column] = value;
-
-      return newCells;
-    });
+  const dimensions = derived(cells, cells => [cells.length, cells[0].length] as [number, number]);
 
   const setNumRows = (numRows: number) =>
     cells.update(cells => generateMatrix(
@@ -43,25 +35,60 @@ export const useMatrix = ({
   const clear = () =>
     cells.update(cells => generateMatrix(cells.length, cells[0].length, () => undefined));
 
-  const props = derived(cells, () => ({
-    label,
+  const gridRef = writable<HTMLDivElement | null>(null);
+
+  const setFocus = derived(
+    [dimensions, gridRef],
+    ([[numRows, numColumns], gridRef]) => (i: number, j: number) => {
+      if (i < 0 || j < 0 || i > numRows - 1 || j > numColumns - 1) {
+        return;
+      }
+
+      const el = gridRef;
+
+      const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
+      const cells = el ? Array.from(el.children) : null;
+      const input = cells?.[position]?.querySelector('input') as HTMLInputElement | undefined;
+
+      const focusedElement = el?.querySelector('*:focus') as HTMLInputElement | undefined;
+      if (focusedElement) {
+        const focusPosition = cells!.indexOf(focusedElement.parentElement!);
+        const focusColumn = focusPosition % numColumns;
+        if (focusColumn === j && input) {
+          // Iff the focus is not changed horizontally:
+          // Set the caret position in the element to be focused equal to the current caret position
+          // (this is expected behaviour), then focus it.
+          const caretPosition = focusedElement.selectionStart;
+
+          input.type = 'text';
+          input.setSelectionRange(caretPosition, caretPosition);
+          input.type = 'number';
+        }
+
+        input?.focus();
+      }
+    })
+
+  const props = derived(setFocus, setFocus => ({
     cells,
-    onChange: setCell,
     onNumRowsChanged: setNumRows,
     onNumColumnsChanged: setNumColumns,
     readonly,
-    unresizable
-  }))
+    unresizable,
+    gridRef,
+    setFocus
+  }));
+
 
   return {
-    label,
     cells,
-    setCell,
     setNumRows,
     setNumColumns,
     clear,
     readonly,
     unresizable,
+    gridRef,
+    setFocus,
     props
   }
 }

@@ -3,7 +3,7 @@
 
   export let to: string;
 
-  export let style: string;
+  export let style: string = '';
 </script>
 
 <a use:link href={to} class="link" {style}>

@@ -1,6 +1,8 @@
 import { dotProduct, generateVector } from '@matrices/common';
 import React, { useEffect } from 'react';
 
+import { Dot } from '../components/svg/Dot';
+
 import { Equal } from '../components/svg/Equal';
 import { Matrix } from '../matrix/Matrix';
 
@@ -45,6 +47,7 @@ export const DotProductPage: React.VFC = () => {
   return (
     <OperationPage>
       <Matrix {...vector1.toProps()} />
+      <Dot />
       <Matrix {...vector2.toProps()} />
       <Equal />
       <Matrix {...product.toProps()} />

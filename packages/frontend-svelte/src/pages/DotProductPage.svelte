@@ -2,6 +2,7 @@
   import { dotProduct, generateVector } from '@matrices/common';
 
   import Matrix from '../components/matrix/Matrix.svelte';
+  import Dot from '../components/svg/Dot.svelte';
   import Equal from '../components/svg/Equal.svelte';
   import { useMatrix } from '../store/useMatrix';
 
@@ -24,7 +25,7 @@
 
   $: {
     const [u] = $cells1;
-    const [v] = $cells2
+    const [v] = $cells2;
     const result = dotProduct(u, v);
     if (result.ok) {
       productCells.set([[result.result]]);
@@ -38,6 +39,7 @@
   <Matrix {...$props1}>
     <svelte:fragment slot="label">u</svelte:fragment>
   </Matrix>
+  <Dot />
   <Matrix {...$props2}>
     <svelte:fragment slot="label">v</svelte:fragment>
   </Matrix>

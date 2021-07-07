@@ -17,7 +17,7 @@ const useStyles = createUseStyles(
       ". tip ."
       `,
       padding: 16,
-      gridTemplateColumns: '1fr min(100%, 1000px) 1fr'
+      gridTemplateColumns: '5vw 1fr 5vw'
     },
 
     content: {

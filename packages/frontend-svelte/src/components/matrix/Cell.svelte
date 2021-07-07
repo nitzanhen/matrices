@@ -88,6 +88,8 @@
     height: 100px;
     border-radius: 10px;
     background-color: var(--background-light);
+    box-sizing: border-box;
+    border: 1px solid transparent
   }
 
   input {
@@ -110,7 +112,7 @@
   }
 
   .cell:focus-within {
-    outline: 1px solid var(--color-light);
+    border-color: var(--color-light);
   }
 
   .cell.readonly {

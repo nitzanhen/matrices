@@ -16,9 +16,10 @@ const useStyles = createUseStyles({
     height: 50,
     backgroundColor: 'var(--background-light)',
     borderRadius: 10,
+    border: '1px solid transparent',
 
     '&:focus-within': {
-      outline: '1px solid var(--color-light, #3d7bcc)'
+      borderColor: 'var(--color-light, #3d7bcc)'
     }
   },
   cellResult: {

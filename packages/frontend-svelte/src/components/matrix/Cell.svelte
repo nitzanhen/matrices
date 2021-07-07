@@ -28,7 +28,6 @@
    */
   $: handleKeyDown = (e: KeyboardEvent) => {
     const el = e.target as HTMLInputElement;
-    console.log(value, el.selectionStart);
 
     switch (e.key) {
       case 'ArrowLeft': {

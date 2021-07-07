@@ -68,18 +68,28 @@ export const useMatrix = ({
       const input = cells?.[position]?.querySelector('input') as HTMLInputElement | undefined;
 
       const focusedElement = el?.querySelector('*:focus') as HTMLInputElement | undefined;
-      if (focusedElement) {
+      if (focusedElement && input) {
         const focusPosition = cells!.indexOf(focusedElement.parentElement!);
         const focusColumn = focusPosition % numColumns;
-        if (focusColumn === j) {
+        if (j > focusColumn) {
+          // The focus was moved right; set the caret position to 0 (the leftmost position)
+          input.setSelectionRange(0, 0)
+        }
+        else if (j < focusColumn) {
+          //The focus was moved left; set the caret position to the last position of the new input (the rightmost position)
+          const maxPosition = input.value.length;
+          input.setSelectionRange(maxPosition, maxPosition);
+        }
+        else { //(j === focusColumn)
           // Iff the focus is not changed horizontally:
           // Set the caret position in the element to be focused equal to the current caret position
           // (this is expected behaviour), then focus it.
           const caretPosition = focusedElement.selectionStart;
-          input?.setSelectionRange(caretPosition, caretPosition);
+
+          input.setSelectionRange(caretPosition, caretPosition);
         }
 
-        input?.focus();
+        input.focus();
       }
     },
     [numRows, numColumns]

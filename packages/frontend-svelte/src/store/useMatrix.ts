@@ -10,7 +10,7 @@ export interface useMatrixProps {
 export const useMatrix = ({
   readonly = false,
   unresizable = false,
-  defaultCells = generateMatrix(2, 2, () => undefined)
+  defaultCells = generateMatrix(2, 2)
 }: useMatrixProps = {}) => {
   const cells = writable(defaultCells);
 
@@ -20,7 +20,7 @@ export const useMatrix = ({
     cells.update(cells => generateMatrix(
       numRows,
       cells[0].length,
-      (i, j) => cells[i]?.[j] ?? undefined
+      (i, j) => cells[i]?.[j] ?? null
     ));
 
 
@@ -28,12 +28,12 @@ export const useMatrix = ({
     cells.update(cells => generateMatrix(
       cells.length,
       numColumns,
-      (i, j) => cells[i]?.[j] ?? undefined
+      (i, j) => cells[i]?.[j] ?? null
     ));
 
 
   const clear = () =>
-    cells.update(cells => generateMatrix(cells.length, cells[0].length, () => undefined));
+    cells.update(cells => generateMatrix(cells.length, cells[0].length));
 
   const gridRef = writable<HTMLDivElement | null>(null);
 

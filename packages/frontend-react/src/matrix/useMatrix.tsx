@@ -17,7 +17,7 @@ export const useMatrix = ({
   label,
   readonly = false,
   unresizable = false,
-  defaultCells = generateMatrix(2, 2, () => undefined)
+  defaultCells = generateMatrix(2, 2, () => null)
 }: useMatrixProps) => {
   const [cells, setCells] = useState<Matrix>(defaultCells);
 
@@ -38,7 +38,7 @@ export const useMatrix = ({
     setCells(cells => generateMatrix(
       numRows,
       cells[0].length,
-      (i, j) => cells[i]?.[j] ?? undefined)
+      (i, j) => cells[i]?.[j] ?? null)
     )
   }, []);
 
@@ -46,12 +46,12 @@ export const useMatrix = ({
     setCells(cells => generateMatrix(
       cells.length,
       numColumns,
-      (i, j) => cells[i]?.[j] ?? undefined)
+      (i, j) => cells[i]?.[j] ?? null)
     )
   }, []);
 
   const clear = useCallback(() => {
-    setCells(generateMatrix(numRows, numColumns, () => undefined));
+    setCells(generateMatrix(numRows, numColumns, () => null));
   }, [numRows, numColumns]);
 
   const gridRef = useRef<HTMLDivElement | null>(null);

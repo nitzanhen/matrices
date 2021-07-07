@@ -1,5 +1,5 @@
 <script>
-  import { determinant } from '@matrices/common';
+  import { determinant, generateMatrix } from '@matrices/common';
 
   import Matrix from '../components/matrix/Matrix.svelte';
   import RightArrow from '../components/svg/RightArrow.svelte';
@@ -13,7 +13,7 @@
     cells: determinantCells,
     props: determinantProps,
     clear: clearDeterminant
-  } = useMatrix({ readonly: true, unresizable: true, defaultCells: [[undefined]] });
+  } = useMatrix({ readonly: true, unresizable: true, defaultCells: generateMatrix(1, 1) });
 
   $: {
     const result = determinant($cells1);

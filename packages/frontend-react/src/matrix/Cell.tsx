@@ -70,7 +70,7 @@ export interface CellProps extends BaseComponentProps {
 export const Cell: React.VFC<CellProps> = memo(function Cell({ className, style, value, onChange, label, readonly = false, inputProps }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
-      onChange?.(undefined);
+      onChange?.(null);
       return;
     }
     const value = parseFloat(e.target.value);

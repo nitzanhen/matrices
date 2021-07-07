@@ -56,7 +56,7 @@ export const multiplyRowByScalar = (
     );
   }
 
-  if (m[i].includes(undefined)) {
+  if (m[i].includes(null)) {
     return err(new EmptyCellError());
   }
   m[i] = (m[i] as number[]).map(x => scalar * x);
@@ -88,10 +88,10 @@ export const addRowMultiplied = (
     );
   }
 
-  if (m[i].includes(undefined)) {
+  if (m[i].includes(null)) {
     return err(new EmptyCellError());
   }
-  if (m[j].includes(undefined)) {
+  if (m[j].includes(null)) {
     return err(new EmptyCellError());
   }
   m[i] = (m[i] as number[]).map((x, k) => x + scalar * (m[j][k] as number));
@@ -126,7 +126,7 @@ export const rowEchelonFormWithSign = (m: Matrix): Result<[echelonForm: number[]
     return err(new DimensionError());
   }
 
-  if (m.some(row => row.includes(undefined))) {
+  if (m.some(row => row.includes(null))) {
     return err(new EmptyCellError());
   }
 

@@ -14,20 +14,20 @@ export const DotProductPage: React.VFC = () => {
   const vector1 = useMatrix({
     label: 'u',
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   })
 
   const vector2 = useMatrix({
     label: 'v',
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   })
 
   const product = useMatrix({
     label: 'u·v',
     readonly: true,
     unresizable: true,
-    defaultCells: [[undefined]]
+    defaultCells: [[null]]
   })
 
   const { setCells: setProductCells, clear: clearProduct } = product;

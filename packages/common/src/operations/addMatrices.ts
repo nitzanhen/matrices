@@ -24,8 +24,8 @@ export const addMatrices = (
   for (let i = 0; i < numRows; i++) {
     result[i] = [];
     for (let j = 0; j < numColumns; j++) {
-      const aij = m1[i][j] ?? null;
-      const bij = m2[i][j] ?? null;
+      const aij = m1[i][j];
+      const bij = m2[i][j];
       if (aij === null || bij === null) {
         return err(new EmptyCellError());
       }

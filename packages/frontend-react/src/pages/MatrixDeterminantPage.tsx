@@ -23,7 +23,7 @@ export const MatrixDeterminantPage: React.VFC = () => {
     label: '|A|',
     readonly: true,
     unresizable: true,
-    defaultCells: [[undefined]]
+    defaultCells: [[null]]
   })
 
   const { setCells: setResultCells, clear: clearResult } = resultMatrix;

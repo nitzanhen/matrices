@@ -15,7 +15,7 @@
   $: handleInput = (e: ChangeEvent) => {
     const { value: rawValue } = e.currentTarget;
     if (rawValue === '') {
-      value = undefined;
+      value = null;
     }
     const parsed = parseFloat(rawValue);
     if (!isNaN(parsed)) {

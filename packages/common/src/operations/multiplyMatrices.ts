@@ -29,8 +29,8 @@ export const multiplyMatrices = (
     for (let j = 0; j < n; j++) {
       let cij = 0;
       for (let l = 0; l < m; l++) {
-        const ail = m1[i][l] ?? null;
-        const blj = m2[l][j] ?? null;
+        const ail = m1[i][l];
+        const blj = m2[l][j];
         if (ail === null || blj === null) {
           return err(new EmptyCellError());
         }

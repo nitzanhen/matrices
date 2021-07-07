@@ -1,5 +1,5 @@
 <script>
-  import { dotProduct, generateVector } from '@matrices/common';
+  import { dotProduct, generateMatrix, generateVector } from '@matrices/common';
 
   import Matrix from '../components/matrix/Matrix.svelte';
   import Dot from '../components/svg/Dot.svelte';
@@ -10,18 +10,18 @@
 
   let { cells: cells1, props: props1 } = useMatrix({
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   });
   let { cells: cells2, props: props2 } = useMatrix({
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   });
 
   let {
     cells: productCells,
     props: productProps,
     clear: clearproduct
-  } = useMatrix({ readonly: true, unresizable: true, defaultCells: [[undefined]] });
+  } = useMatrix({ readonly: true, unresizable: true, defaultCells: generateMatrix(1, 1) });
 
   $: {
     const [u] = $cells1;

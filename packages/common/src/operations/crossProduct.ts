@@ -11,7 +11,7 @@ export const crossProduct = (u: Vector, v: Vector): Result<[number, number, numb
   if (u.length !== 3 || v.length !== 3) {
     return err(new DimensionError('u and v must both be vectors of order 3'));
   }
-  if (u.includes(undefined) || v.includes(undefined)) {
+  if (u.includes(null) || v.includes(null)) {
     return err(new EmptyCellError());
   }
   const [u1, u2, u3] = u as number[];

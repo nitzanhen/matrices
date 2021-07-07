@@ -1,4 +1,4 @@
-export type CellValue = number | undefined;
+export type CellValue = number | null;
 
 export type Matrix = CellValue[][];
 

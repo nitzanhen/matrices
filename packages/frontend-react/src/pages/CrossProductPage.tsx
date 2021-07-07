@@ -13,20 +13,20 @@ export const CrossProductPage: React.VFC = () => {
   const vector1 = useMatrix({
     label: 'u',
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3, () => null)]
   })
 
   const vector2 = useMatrix({
     label: 'v',
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3, () => null)]
   })
 
   const product = useMatrix({
     label: 'u×v',
     unresizable: true,
     readonly: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3, () => null)]
   })
 
   const { setCells: setProductCells, clear: clearProduct } = product;

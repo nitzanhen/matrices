@@ -17,7 +17,7 @@ export const dotProduct = (u: Vector, v: Vector): Result<number, DimensionError 
   for (let i = 0; i < n; i++) {
     const ui = u[i];
     const vi = v[i];
-    if(ui === undefined || vi === undefined) {
+    if(ui === null || vi === null) {
       return err(new EmptyCellError())
     }
     sum += ui*vi;

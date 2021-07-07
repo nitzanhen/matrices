@@ -10,18 +10,18 @@ import Multiply from '../components/svg/Multiply.svelte';
 
   let { cells: cells1, props: props1 } = useMatrix({
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   });
   let { cells: cells2, props: props2 } = useMatrix({
     unresizable: true,
-    defaultCells: [generateVector(3, () => undefined)]
+    defaultCells: [generateVector(3)]
   });
 
   let {
     cells: productCells,
     props: productProps,
     clear: clearProduct
-  } = useMatrix({ readonly: true, unresizable: true, defaultCells: [generateVector(3, () => undefined)] });
+  } = useMatrix({ readonly: true, unresizable: true, defaultCells: [generateVector(3)] });
 
   $: {
     const [u] = $cells1;

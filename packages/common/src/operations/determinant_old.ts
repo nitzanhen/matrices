@@ -78,7 +78,7 @@ const determinant = (matrix: Matrix): Result<number, DimensionError | EmptyCellE
     for (let i = 0; i < n; i++) {
       const j = permutation[i];
       const aij = matrix[i][j];
-      if (aij === undefined) {
+      if (aij === null) {
         return err(new EmptyCellError());
       }
       product *= aij;

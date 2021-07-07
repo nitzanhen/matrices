@@ -13,7 +13,7 @@ export const transpose = (m: Matrix): Result<Matrix, EmptyCellError> => {
   for (let i = 0; i < numCols; i++) {
     result[i] = [];
     for (let j = 0; j < numRows; j++) {
-      const mji = m[j][i] ?? null;
+      const mji = m[j][i];
       if (mji === null) {
         return err(new EmptyCellError());
       }

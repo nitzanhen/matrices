@@ -2,16 +2,8 @@
   import { useNavigate } from 'svelte-navigator';
   import BackArrow from '../components/svg/BackArrow.svelte';
   import Tip from '../components/svg/Tip.svelte';
-  import { stringifyStyles } from '../utils';
 
   const navigate = useNavigate();
-
-  $: tipIconStyle = stringifyStyles({
-    width: '2em',
-    height: '2em',
-    opacity: '0.6',
-    fill: 'var(--color-primary)'
-  });
 </script>
 
 <div class="root">
@@ -24,7 +16,7 @@
   </div>
   <aside class="tip">
     <div>
-      <Tip style={tipIconStyle} />
+      <Tip />
     </div>
     <div>
       <h2>Tip!</h2>
@@ -92,5 +84,11 @@
     align-items: center;
     border-radius: 8px;
     column-gap: 8px;
+  }
+  .tip :global(svg) {
+    width: 2em;
+    height: 2em;
+    opacity: 0.6;
+    fill: var(--color-primary);
   }
 </style>

@@ -4,7 +4,6 @@
     "module": "esnext",
     "jsx": "preserve",
     "sourceMap": true,
-    "baseUrl": "./src"
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [

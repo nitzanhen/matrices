@@ -17,7 +17,7 @@ export const useMatrix = ({
   label,
   readonly = false,
   unresizable = false,
-  defaultCells = generateMatrix(2, 2, () => null)
+  defaultCells = generateMatrix(2, 2)
 }: useMatrixProps) => {
   const [cells, setCells] = useState<Matrix>(defaultCells);
 

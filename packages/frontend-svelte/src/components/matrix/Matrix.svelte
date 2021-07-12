@@ -89,7 +89,6 @@
     left: 0;
     right: 0;
     bottom: calc(100% + 8px);
-    z-index: 100;
 
     display: flex;
     align-items: center;

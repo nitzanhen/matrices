@@ -22,7 +22,6 @@ export default defineComponent({
     const route = useRoute();
 
     const pagename = route.path.substring(1);
-    console.log(pagename)
     return { pagename }
   }
 })

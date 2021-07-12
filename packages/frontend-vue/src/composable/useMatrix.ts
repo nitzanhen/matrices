@@ -20,13 +20,12 @@ export const useMatrix = ({
   readonly = false,
   unresizable = false,
   defaultCells = generateMatrix(2, 2)
-}: useMatrixProps) => {
+}: useMatrixProps = {}) => {
 
   const cells = ref(defaultCells);
 
-  const [numRows, numColumns] = [cells.value.length, cells.value[0].length];
-
   const setNumRows = (newNumRows: number) => {
+    const numColumns = cells.value[0].length;
     cells.value = generateMatrix(
       newNumRows,
       numColumns,
@@ -35,6 +34,7 @@ export const useMatrix = ({
   };
 
   const setNumColumns = (newNumColumns: number) => {
+    const numRows = cells.value.length;
     cells.value = generateMatrix(
       numRows,
       newNumColumns,
@@ -43,12 +43,17 @@ export const useMatrix = ({
   };
 
   const clear = () => {
+    const numRows = cells.value.length;
+    const numColumns = cells.value[0].length;
     cells.value = generateMatrix(numRows, numColumns);
   }
 
   const gridRef = ref<HTMLDivElement | null>(null);
 
   const setFocus = (i: number, j: number) => {
+    const numRows = cells.value.length;
+    const numColumns = cells.value[0].length;
+
     if (i < 0 || j < 0 || i > numRows - 1 || j > numColumns - 1) {
       return;
     }
@@ -56,12 +61,12 @@ export const useMatrix = ({
     const el = gridRef.value;
 
     const position = i * numColumns + j; //equivalent to element in pos (i, j) in the grid
-    const cells = el ? Array.from(el.children) : null;
-    const input = cells?.[position]?.querySelector('input') as HTMLInputElement | undefined;
+    const cellNodes = el ? Array.from(el.children) : null;
+    const input = cellNodes?.[position]?.querySelector('input') as HTMLInputElement | undefined;
 
     const focusedElement = el?.querySelector('*:focus') as HTMLInputElement | undefined;
     if (focusedElement && input) {
-      const focusPosition = cells!.indexOf(focusedElement.parentElement!);
+      const focusPosition = cellNodes!.indexOf(focusedElement.parentElement!);
       const focusColumn = focusPosition % numColumns;
       if (j > focusColumn) {
         // The focus was moved right; set the caret position to 0 (the leftmost position)
@@ -86,7 +91,7 @@ export const useMatrix = ({
   }
 
   const props = computed(() => ({
-    cells,
+    cells: cells.value,
     readonly,
     unresizable,
     gridRef,

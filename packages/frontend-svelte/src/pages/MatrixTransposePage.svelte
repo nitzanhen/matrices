@@ -31,6 +31,6 @@
   </Matrix>
   <RightArrow />
   <Matrix {...$transposeProps}>
-    <svelte:fragment slot="label">A+B</svelte:fragment>
+    <svelte:fragment slot="label">A<sup>t</sup></svelte:fragment>
   </Matrix>
 </OperationPage>

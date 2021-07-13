@@ -4,7 +4,7 @@
       <BackArrow />
     </button>
 
-    <div class="content">
+    <div class="operation-page-content">
       <slot></slot>
     </div>
 
@@ -56,7 +56,7 @@ export default defineComponent({
     grid-template-columns: 5vw 1fr 5vw;
   }
 
-  .content {
+  .operation-page-content {
     grid-area: content;
     width: 100%;
 
@@ -66,11 +66,6 @@ export default defineComponent({
     justify-content: center;
     row-gap: 50px;
     column-gap: 40px;
-  }
-  .content > svg {
-    width: 48px;
-    height: 48px;
-    fill: var(--color-light);
   }
 
   .back-button {
@@ -109,5 +104,13 @@ export default defineComponent({
     height: 2em;
     opacity: 0.6;
     fill: var(--color-primary);
+  }
+</style>
+
+<style>
+  .operation-page-content svg {
+    width: 48px;
+    height: 48px;
+    fill: var(--color-light);
   }
 </style>

@@ -22,6 +22,7 @@
         :row="i"
         :column="j"
         :set-focus="setFocus"
+        :readonly="readonly"
         v-model="cells[i][j]"
       >
         <template v-slot:label>

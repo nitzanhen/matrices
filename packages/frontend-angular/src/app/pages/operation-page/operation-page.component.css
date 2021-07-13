@@ -1,0 +1,72 @@
+.root {
+  width: calc(100% - 2*16px);
+  height: calc(100% - 2*16px);
+  padding: 16px;
+
+  display: grid;
+  grid-template-columns: 5vw 1fr 5vw;
+  grid-template-areas: 
+  "back title ."
+  ". content ."
+  ". tip .";
+}
+
+.content {
+  grid-area: content;
+  width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  row-gap: 50px;
+}
+
+::ng-deep .content > :not(:last-child) {
+  margin-right: 40px;
+}
+
+::ng-deep .content > svg {
+  width: 48px;
+  height: 48px;
+  fill: var(--color-light);
+}
+
+.back-button {
+  grid-area: back;
+
+  padding: 4px;
+  width: 40px;
+  height: 40px;
+
+  appearance: none;
+  border: none;
+  background: none;
+  fill: var(--color-light);
+  cursor: pointer;
+
+  border-radius: 50%;
+  box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.12);
+}
+
+.tip {
+  grid-area: tip;
+  width: max-content;
+  align-self: flex-start;
+
+  margin: 0 auto;
+  padding: 12px;
+  padding-right: 16px;
+  border-radius: 8px;
+  background-color: var(--background-light);
+
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+::ng-deep .tip-icon > svg {
+  fill: var(--color-primary);
+  width: 2em;
+  height: 2em;
+  opacity: 0.6;
+} 

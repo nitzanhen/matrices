@@ -1,0 +1,14 @@
+<div class="root">
+  <span class="text">
+    <h1>
+      <a routerLink="/">Coolest Matrices</a>
+    </h1>
+    <ng-container *ngIf="pagename">
+      <span>/</span>
+      <span>{{ pagename }}</span>
+    </ng-container>
+  </span>
+  <a href='https://github.com/NitzanHen/matrices'>
+    <app-github class="github"></app-github>
+  </a>
+</div>

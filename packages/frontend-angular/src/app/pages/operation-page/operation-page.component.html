@@ -1,0 +1,19 @@
+<div class="root">
+  <button class="back-button" (click)="goBack()">
+    <app-back-arrow></app-back-arrow>
+  </button>
+
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+
+  <aside class="tip">
+    <div>
+      <app-tip class="tip-icon"></app-tip>
+    </div>
+    <div>
+      <h2>Tip!</h2>
+      <p>Try navigating the matrix cells with the arrow keys or with tab.</p>
+    </div>
+  </aside>
+</div>

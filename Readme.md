@@ -13,8 +13,8 @@ All implementations use Typescript.
   (The React project is built using Vite, and Lerna sometimes terminates Vite's dev server immediately after starting it. 
   To test out the React demo in dev, cd into `packages/frontend-react` then run `yarn dev`)
 - [ ] Angular
-- [ ] Vue
-- [ ] Svelte
+- [x] Vue
+- [x] Svelte
 
 # License
 

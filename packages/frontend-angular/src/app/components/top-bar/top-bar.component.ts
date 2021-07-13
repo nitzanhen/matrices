@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,13 +8,26 @@ import { Location } from '@angular/common';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  public pagename: string = '';
+  public path: string = '';
+
+  private readonly pagenames = {
+    '/matrix/sum': 'Matrix Addition',
+    '/matrix/product': 'Matrix multiplication',
+    '/matrix/transpose': 'Matrix transposition',
+    '/matrix/determinant': 'Matrix determinant',
+    '/vector/dot': 'Dot product',
+    '/vector/cross': 'Cross product'
+  }
+  public get pagename() {
+    return (this.pagenames as any)[this.path]
+  }
 
   constructor(
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.pagename = this.location.path().slice(1);
+    this.router.events.subscribe(() => (this.path = this.location.path()))
   }
 }

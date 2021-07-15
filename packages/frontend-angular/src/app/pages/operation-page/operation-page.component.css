@@ -26,7 +26,7 @@
   margin-right: 40px;
 }
 
-::ng-deep .content > svg {
+::ng-deep .content > * > svg {
   width: 48px;
   height: 48px;
   fill: var(--color-light);

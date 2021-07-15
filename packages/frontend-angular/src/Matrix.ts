@@ -1,4 +1,5 @@
-import { generateMatrix, Matrix as MathMatrix } from '@matrices/common';
+import { CellValue, generateMatrix, Matrix as MathMatrix } from '@matrices/common';
+import { Subject } from 'rxjs';
 
 interface MatrixConstructorOptions {
   unresizable?: boolean;
@@ -11,7 +12,8 @@ interface MatrixConstructorOptions {
  * This is the equivalent of the other frameworks' `useMatrix`.
  */
 export class Matrix {
-  public cells: MathMatrix
+  private cellsSubject: Subject<MathMatrix>;
+  private _cells!: MathMatrix
   public unresizable: boolean;
   public readonly: boolean;
 
@@ -22,35 +24,51 @@ export class Matrix {
     readonly = false,
     defaultCells = generateMatrix(2, 2)
   }: MatrixConstructorOptions = {}) {
-    this.cells = defaultCells;
+    this.cellsSubject = new Subject<MathMatrix>();
+    this.cellsSubject.subscribe((cells => (this._cells = cells)));
+    this.cellsSubject.next(defaultCells);
+
     this.unresizable = unresizable;
     this.readonly = readonly;
+  }
+
+  get cells() {
+    return this._cells;
+  }
+  set cells(cells: MathMatrix) {
+    this.cellsSubject.next(cells);
+  }
+
+  setCell(i: number, j: number, value: CellValue) {
+    const cells = this.cells;
+    cells[i][j] = value;
+    this.cellsSubject.next(cells);
   }
 
   get numRows() {
     return this.cells.length;
   }
   set numRows(newNumRows: number) {
-    this.cells = generateMatrix(
+    this.cellsSubject.next(generateMatrix(
       newNumRows,
       this.numColumns,
       (i, j) => this.cells[i]?.[j] ?? null
-    );
+    ));
   }
 
   get numColumns() {
     return this.cells[0].length
   }
   set numColumns(newNumColumns: number) {
-    this.cells = generateMatrix(
+    this.cellsSubject.next(generateMatrix(
       this.numRows,
       newNumColumns,
       (i, j) => this.cells[i]?.[j] ?? null
-    );
+    ));
   }
 
   clear() {
-    this.cells = generateMatrix(this.numRows, this.numColumns);
+    this.cellsSubject.next(generateMatrix(this.numRows, this.numColumns));
   }
 
   setFocus(i: number, j: number): void {
@@ -87,5 +105,9 @@ export class Matrix {
 
       input.focus();
     }
+  }
+
+  get cellsObserver() {
+    return this.cellsSubject.asObservable()
   }
 }

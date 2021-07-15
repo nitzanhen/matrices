@@ -46,4 +46,11 @@ export class MatrixComponent implements AfterViewInit {
     this.m.gridRef = this.matrixRef.nativeElement;
   }
 
+  rowTrackFn(index: number) {
+    return index;
+  }
+
+  cellTrackFn(index: number) {
+    return index;
+  }
 }

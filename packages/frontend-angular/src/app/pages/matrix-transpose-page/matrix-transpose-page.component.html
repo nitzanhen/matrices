@@ -1,1 +1,12 @@
-<p>matrix-transpose-page works!</p>
+<app-operation-page>
+  <app-matrix [m]="matrix1">
+    <ng-container label>A</ng-container>
+  </app-matrix>
+
+  <app-right-arrow></app-right-arrow>
+
+  <app-matrix [m]="transposed">
+    <ng-container label>A<sup>t</sup></ng-container>
+  </app-matrix>
+
+</app-operation-page>

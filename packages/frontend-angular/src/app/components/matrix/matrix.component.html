@@ -12,8 +12,8 @@
 
   <div class="matrix" [style]="matrixStyles" #matrixRef>
     <ng-container *ngFor="let row of m.cells; let i = index">
-      <app-cell *ngFor="let cell of row; let j = index" class="cell" [row]="i" [column]="j" [(value)]="m.cells[i][j]"
-        [readonly]="m.readonly" [setFocus]="setFocus">
+      <app-cell *ngFor="let cell of row; let j = index; trackBy: cellTrackFn" class="cell" [row]="i" [column]="j"
+        [value]="m.cells[i][j]" (valueChange)="m.setCell(i, j, $event)" [readonly]="m.readonly" [setFocus]="setFocus">
         <ng-container label>({{ i }},{{ j }})</ng-container>
       </app-cell>
     </ng-container>

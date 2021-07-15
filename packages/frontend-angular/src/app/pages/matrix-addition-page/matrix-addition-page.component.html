@@ -1,7 +1,19 @@
 <app-operation-page>
-  <app-matrix [m]="matrix1"></app-matrix>
-  <app-multiply></app-multiply>
-  <app-matrix [m]="matrix2"></app-matrix>
+  
+  <app-matrix [m]="matrix1">
+    <ng-container label>A</ng-container>
+  </app-matrix>
+
+  <app-plus></app-plus>
+
+  <app-matrix [m]="matrix2">
+    <ng-container label>B</ng-container>
+  </app-matrix>
+
   <app-equal></app-equal>
-  <app-matrix [m]="sum"></app-matrix>
+
+  <app-matrix [m]="sum">
+    <ng-container label>A+B</ng-container>
+  </app-matrix>
+
 </app-operation-page>

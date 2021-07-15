@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { addMatrices } from '@matrices/common';
+import { zip } from 'rxjs';
 
 import { Matrix } from 'src/Matrix';
 
@@ -8,10 +10,24 @@ import { Matrix } from 'src/Matrix';
   styles: [
   ]
 })
-export class MatrixAdditionPageComponent {
+export class MatrixAdditionPageComponent implements OnInit {
   matrix1 = new Matrix();
   matrix2 = new Matrix();
   sum = new Matrix({ unresizable: true, readonly: true }); 
 
   constructor() { }
+
+  ngOnInit() {
+    //Listen to the cells of both observables, and update cell accordingly.
+    zip(this.matrix1.cellsObserver, this.matrix2.cellsObserver)
+      .subscribe(([cells1, cells2]) => {
+        const result = addMatrices(cells1, cells2);
+        if(result.ok) {
+          this.sum.cells = result.result;
+        }
+        else {
+          this.sum.clear();
+        }
+      })
+  }
 }

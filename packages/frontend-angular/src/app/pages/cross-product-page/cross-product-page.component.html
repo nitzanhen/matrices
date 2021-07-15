@@ -1,1 +1,17 @@
-<p>cross-product-page works!</p>
+<app-operation-page>
+  <app-matrix [m]="vector1">
+    <ng-container label>u</ng-container>
+  </app-matrix>
+
+  <app-multiply></app-multiply>
+
+  <app-matrix [m]="vector2">
+    <ng-container label>v</ng-container>
+  </app-matrix>
+
+  <app-equal></app-equal>
+
+  <app-matrix [m]="product">
+    <ng-container label>u×v</ng-container>
+  </app-matrix>
+</app-operation-page>

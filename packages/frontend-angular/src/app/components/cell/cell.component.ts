@@ -33,8 +33,6 @@ export class CellComponent {
   handleKeydown(e: KeyboardEvent): void {
     const el = e.target as HTMLInputElement;
 
-    console.log(this.row, this.column)
-
     switch (e.key) {
       case 'ArrowLeft': {
         if (el.selectionStart === 0) {

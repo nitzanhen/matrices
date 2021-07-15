@@ -1,1 +1,19 @@
-<p>matrix-multiplication-page works!</p>
+<app-operation-page>
+
+  <app-matrix [m]="matrix1">
+    <ng-container label>A</ng-container>
+  </app-matrix>
+
+  <app-multiply></app-multiply>
+
+  <app-matrix [m]="matrix2">
+    <ng-container label>B</ng-container>
+  </app-matrix>
+
+  <app-equal></app-equal>
+
+  <app-matrix [m]="product">
+    <ng-container label>AB</ng-container>
+  </app-matrix>
+
+</app-operation-page>

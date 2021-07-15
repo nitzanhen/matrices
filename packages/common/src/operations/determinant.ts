@@ -21,7 +21,9 @@ export const determinant = (m: Matrix): Result<number, EmptyCellError | Dimensio
     return result;
   }
 
-  const { result: [echelonForm, sign] } = result;
+  const {
+    result: [echelonForm, sign]
+  } = result;
 
   const determinant = [...Array(n).keys()]
     .map(i => echelonForm[i][i])

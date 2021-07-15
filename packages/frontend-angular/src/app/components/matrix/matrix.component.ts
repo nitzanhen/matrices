@@ -8,7 +8,7 @@ import { Matrix } from 'src/Matrix';
   styleUrls: ['./matrix.component.css']
 })
 export class MatrixComponent implements AfterViewInit {
-  @Input() m!: Matrix
+  @Input() m!: Matrix;
 
   @ViewChild('matrixRef') matrixRef!: ElementRef<HTMLDivElement>;
 
@@ -32,15 +32,15 @@ export class MatrixComponent implements AfterViewInit {
   get matrixStyles() {
     return {
       'grid-template-rows': `repeat(${this.m.numRows}, auto)`,
-      'grid-template-columns': `repeat(${this.m.numColumns}, auto)`,
-    }
+      'grid-template-columns': `repeat(${this.m.numColumns}, auto)`
+    };
   }
 
   get setFocus() {
     return this.m.setFocus.bind(this.m);
   }
 
-  constructor() { }
+  constructor() {}
 
   ngAfterViewInit(): void {
     this.m.gridRef = this.matrixRef.nativeElement;

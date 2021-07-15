@@ -14,20 +14,20 @@ export const CrossProductPage: React.VFC = () => {
     label: 'u',
     unresizable: true,
     defaultCells: [generateVector(3, () => null)]
-  })
+  });
 
   const vector2 = useMatrix({
     label: 'v',
     unresizable: true,
     defaultCells: [generateVector(3, () => null)]
-  })
+  });
 
   const product = useMatrix({
     label: 'u×v',
     unresizable: true,
     readonly: true,
     defaultCells: [generateVector(3, () => null)]
-  })
+  });
 
   const { setCells: setProductCells, clear: clearProduct } = product;
   useEffect(() => {
@@ -37,11 +37,10 @@ export const CrossProductPage: React.VFC = () => {
     const result = crossProduct(v1, v2);
     if (result.ok) {
       setProductCells([result.result]);
+    } else {
+      clearProduct();
     }
-    else {
-      clearProduct()
-    }
-  }, [vector1.cells, vector2.cells, setProductCells, clearProduct])
+  }, [vector1.cells, vector2.cells, setProductCells, clearProduct]);
 
   return (
     <OperationPage>
@@ -51,5 +50,5 @@ export const CrossProductPage: React.VFC = () => {
       <Equal />
       <Matrix {...product.toProps()} />
     </OperationPage>
-  )
+  );
 };

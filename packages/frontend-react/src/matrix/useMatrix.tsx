@@ -35,19 +35,11 @@ export const useMatrix = ({
   }, []);
 
   const setNumRows = useCallback((numRows: number) => {
-    setCells(cells => generateMatrix(
-      numRows,
-      cells[0].length,
-      (i, j) => cells[i]?.[j] ?? null)
-    )
+    setCells(cells => generateMatrix(numRows, cells[0].length, (i, j) => cells[i]?.[j] ?? null));
   }, []);
 
   const setNumColumns = useCallback((numColumns: number) => {
-    setCells(cells => generateMatrix(
-      cells.length,
-      numColumns,
-      (i, j) => cells[i]?.[j] ?? null)
-    )
+    setCells(cells => generateMatrix(cells.length, numColumns, (i, j) => cells[i]?.[j] ?? null));
   }, []);
 
   const clear = useCallback(() => {
@@ -73,14 +65,13 @@ export const useMatrix = ({
         const focusColumn = focusPosition % numColumns;
         if (j > focusColumn) {
           // The focus was moved right; set the caret position to 0 (the leftmost position)
-          input.setSelectionRange(0, 0)
-        }
-        else if (j < focusColumn) {
+          input.setSelectionRange(0, 0);
+        } else if (j < focusColumn) {
           //The focus was moved left; set the caret position to the last position of the new input (the rightmost position)
           const maxPosition = input.value.length;
           input.setSelectionRange(maxPosition, maxPosition);
-        }
-        else { //(j === focusColumn)
+        } else {
+          //(j === focusColumn)
           // Iff the focus is not changed horizontally:
           // Set the caret position in the element to be focused equal to the current caret position
           // (this is expected behaviour), then focus it.

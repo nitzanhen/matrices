@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent {
-
-  constructor() { }
+  constructor() {}
 }

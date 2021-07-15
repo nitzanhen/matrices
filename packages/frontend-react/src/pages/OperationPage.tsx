@@ -63,7 +63,7 @@ const useStyles = createUseStyles(
       backgroundColor: 'var(--background-light)',
       display: 'flex',
       alignItems: 'center',
-      columnGap: 8,
+      columnGap: 8
     },
     tipIcon: {
       fill: 'var(--color-primary)',
@@ -90,9 +90,7 @@ export const OperationPage: React.FC<OperationPageProps> = ({ children }) => {
         <BackArrow />
       </button>
 
-      <div className={classes.content}>
-        {children}
-      </div>
+      <div className={classes.content}>{children}</div>
       <aside className={classes.tip}>
         <div>
           <Tip className={classes.tipIcon} />

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 interface MatrixConstructorOptions {
   unresizable?: boolean;
   readonly?: boolean;
-  defaultCells?: MathMatrix
+  defaultCells?: MathMatrix;
 }
 
 /**
@@ -13,7 +13,7 @@ interface MatrixConstructorOptions {
  */
 export class Matrix {
   private cellsSubject: Subject<MathMatrix>;
-  private _cells!: MathMatrix
+  private _cells!: MathMatrix;
   public unresizable: boolean;
   public readonly: boolean;
 
@@ -25,7 +25,7 @@ export class Matrix {
     defaultCells = generateMatrix(2, 2)
   }: MatrixConstructorOptions = {}) {
     this.cellsSubject = new Subject<MathMatrix>();
-    this.cellsSubject.subscribe((cells => (this._cells = cells)));
+    this.cellsSubject.subscribe(cells => (this._cells = cells));
     this.cellsSubject.next(defaultCells);
 
     this.unresizable = unresizable;
@@ -49,22 +49,18 @@ export class Matrix {
     return this.cells.length;
   }
   set numRows(newNumRows: number) {
-    this.cellsSubject.next(generateMatrix(
-      newNumRows,
-      this.numColumns,
-      (i, j) => this.cells[i]?.[j] ?? null
-    ));
+    this.cellsSubject.next(
+      generateMatrix(newNumRows, this.numColumns, (i, j) => this.cells[i]?.[j] ?? null)
+    );
   }
 
   get numColumns() {
-    return this.cells[0].length
+    return this.cells[0].length;
   }
   set numColumns(newNumColumns: number) {
-    this.cellsSubject.next(generateMatrix(
-      this.numRows,
-      newNumColumns,
-      (i, j) => this.cells[i]?.[j] ?? null
-    ));
+    this.cellsSubject.next(
+      generateMatrix(this.numRows, newNumColumns, (i, j) => this.cells[i]?.[j] ?? null)
+    );
   }
 
   clear() {
@@ -87,14 +83,13 @@ export class Matrix {
       const focusColumn = focusPosition % this.numColumns;
       if (j > focusColumn) {
         // The focus was moved right; set the caret position to 0 (the leftmost position)
-        input.setSelectionRange(0, 0)
-      }
-      else if (j < focusColumn) {
+        input.setSelectionRange(0, 0);
+      } else if (j < focusColumn) {
         //The focus was moved left; set the caret position to the last position of the new input (the rightmost position)
         const maxPosition = input.value.length;
         input.setSelectionRange(maxPosition, maxPosition);
-      }
-      else { //(j === focusColumn)
+      } else {
+        //(j === focusColumn)
         // Iff the focus is not changed horizontally:
         // Set the caret position in the element to be focused equal to the current caret position
         // (this is expected behaviour), then focus it.
@@ -108,6 +103,6 @@ export class Matrix {
   }
 
   get cellsObserver() {
-    return this.cellsSubject.asObservable()
+    return this.cellsSubject.asObservable();
   }
 }

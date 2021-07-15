@@ -1,10 +1,10 @@
-import { generateMatrix, Matrix } from '@matrices/common'
+import { generateMatrix, Matrix } from '@matrices/common';
 import { computed, ref } from 'vue';
 
 export interface useMatrixProps {
   readonly?: boolean;
   unresizable?: boolean;
-  defaultCells?: Matrix
+  defaultCells?: Matrix;
 }
 
 /**
@@ -21,32 +21,23 @@ export const useMatrix = ({
   unresizable = false,
   defaultCells = generateMatrix(2, 2)
 }: useMatrixProps = {}) => {
-
   const cells = ref(defaultCells);
 
   const setNumRows = (newNumRows: number) => {
     const numColumns = cells.value[0].length;
-    cells.value = generateMatrix(
-      newNumRows,
-      numColumns,
-      (i, j) => cells.value[i]?.[j] ?? null
-    )
+    cells.value = generateMatrix(newNumRows, numColumns, (i, j) => cells.value[i]?.[j] ?? null);
   };
 
   const setNumColumns = (newNumColumns: number) => {
     const numRows = cells.value.length;
-    cells.value = generateMatrix(
-      numRows,
-      newNumColumns,
-      (i, j) => cells.value[i]?.[j] ?? null
-    )
+    cells.value = generateMatrix(numRows, newNumColumns, (i, j) => cells.value[i]?.[j] ?? null);
   };
 
   const clear = () => {
     const numRows = cells.value.length;
     const numColumns = cells.value[0].length;
     cells.value = generateMatrix(numRows, numColumns);
-  }
+  };
 
   const gridRef = ref<HTMLDivElement | null>(null);
 
@@ -70,14 +61,13 @@ export const useMatrix = ({
       const focusColumn = focusPosition % numColumns;
       if (j > focusColumn) {
         // The focus was moved right; set the caret position to 0 (the leftmost position)
-        input.setSelectionRange(0, 0)
-      }
-      else if (j < focusColumn) {
+        input.setSelectionRange(0, 0);
+      } else if (j < focusColumn) {
         //The focus was moved left; set the caret position to the last position of the new input (the rightmost position)
         const maxPosition = input.value.length;
         input.setSelectionRange(maxPosition, maxPosition);
-      }
-      else { //(j === focusColumn)
+      } else {
+        //(j === focusColumn)
         // Iff the focus is not changed horizontally:
         // Set the caret position in the element to be focused equal to the current caret position
         // (this is expected behaviour), then focus it.
@@ -88,7 +78,7 @@ export const useMatrix = ({
 
       input.focus();
     }
-  }
+  };
 
   const props = computed(() => ({
     cells: cells.value,
@@ -100,8 +90,8 @@ export const useMatrix = ({
 
   const eventHandlers = computed(() => ({
     numRowsChanged: setNumRows,
-    numColumnsChanged: setNumColumns,
-  }))
+    numColumnsChanged: setNumColumns
+  }));
 
   return {
     cells,
@@ -114,5 +104,5 @@ export const useMatrix = ({
     gridRef,
     props,
     eventHandlers
-  }
+  };
 };

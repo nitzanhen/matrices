@@ -22,20 +22,19 @@ const useStyles = createUseStyles(
       display: 'block'
     },
     text: {
-
       '& > h1': {
         display: 'inline'
       },
 
       '& > *:not(h1)': {
         fontSize: 22,
-        letterSpacing: 2,
+        letterSpacing: 2
       },
 
       '& > *:not(:last-child)': {
         marginRight: 8
       }
-    },
+    }
   },
   { name: 'top-bar' }
 );
@@ -63,6 +62,6 @@ export const TopBar: React.VFC<TopBarProps> = ({ page }) => {
       <a href='https://github.com/NitzanHen/matrices'>
         <Github className={classes.github} />
       </a>
-    </div >
+    </div>
   );
 };

@@ -1,4 +1,3 @@
-
 /**
  * A generator of numbers, from `start` to `end`, with `step` difference
  * between elements.
@@ -22,7 +21,7 @@ export function* generateIndices(...maxIndices: number[]): Generator<number[]> {
   const headRange = rangeGenerator(0, headIndex);
   for (const coord of headRange) {
     for (const coords of generateIndices(...otherIndices)) {
-      yield [coord, ...coords]
+      yield [coord, ...coords];
     }
   }
 }

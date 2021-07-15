@@ -48,7 +48,7 @@ const useStyles = createUseStyles(
       color: 'var(--color-primary)',
       '& > :not(:last-child)': {
         marginRight: 8
-      },
+      }
     },
 
     dimensionInput: {
@@ -63,7 +63,7 @@ const useStyles = createUseStyles(
       fontSize: '0.6em',
 
       '&:focus-visible': {
-        outline: 'none',
+        outline: 'none'
       },
       '&:focus': {
         borderColor: 'var(--color-light)'
@@ -82,7 +82,7 @@ const useStyles = createUseStyles(
         height: '0.7em',
         fill: 'var(--color-primary)'
       }
-    },
+    }
   },
   { name: 'matrix' }
 );
@@ -90,8 +90,8 @@ const useStyles = createUseStyles(
 export interface MatrixProps extends BaseComponentProps {
   cells: MathMatrix;
   onChange: (row: number, column: number, value: CellValue) => void;
-  onNumRowsChanged: (numRows: number) => void,
-  onNumColumnsChanged: (numColumns: number) => void,
+  onNumRowsChanged: (numRows: number) => void;
+  onNumColumnsChanged: (numColumns: number) => void;
   setFocus: (row: number, column: number) => void;
   readonly?: boolean;
   unresizable?: boolean;
@@ -126,23 +126,29 @@ export const Matrix: React.VFC<MatrixProps> = ({
 
   const classes = useStyles({ numRows, numColumns });
 
-  const handleNumRowsChange = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const value = parseInt(e.target.value);
-    if (!isNaN(value)) {
-      onNumRowsChanged(value)
-    }
-  }, [onNumRowsChanged]);
+  const handleNumRowsChange = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const value = parseInt(e.target.value);
+      if (!isNaN(value)) {
+        onNumRowsChanged(value);
+      }
+    },
+    [onNumRowsChanged]
+  );
 
-  const handleNumColumnsChange = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const value = parseInt(e.target.value);
-    if (!isNaN(value)) {
-      onNumColumnsChanged(value)
-    }
-  }, [onNumColumnsChanged]);
+  const handleNumColumnsChange = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const value = parseInt(e.target.value);
+      if (!isNaN(value)) {
+        onNumColumnsChanged(value);
+      }
+    },
+    [onNumColumnsChanged]
+  );
 
   return (
     <div className={clsx(classes.root, className)}>
@@ -167,7 +173,6 @@ export const Matrix: React.VFC<MatrixProps> = ({
             />
           </article>
         )}
-
       </div>
       <div className={classes.matrix} style={style} ref={gridRef}>
         {cells.flatMap((row, i) =>

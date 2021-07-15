@@ -24,15 +24,14 @@ export const MatrixDeterminantPage: React.VFC = () => {
     readonly: true,
     unresizable: true,
     defaultCells: [[null]]
-  })
+  });
 
   const { setCells: setResultCells, clear: clearResult } = resultMatrix;
   useEffect(() => {
     const result = determinant(matrix.cells);
     if (result.ok) {
-      setResultCells([[result.result]])
-    }
-    else {
+      setResultCells([[result.result]]);
+    } else {
       clearResult();
     }
   }, [matrix.cells, setResultCells, clearResult]);

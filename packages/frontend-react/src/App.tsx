@@ -42,18 +42,22 @@ function App() {
   const classes = useStyles();
 
   const { pathname } = useLocation();
-  const pageName = useMemo(() => ({
-    '/matrix/sum': 'Matrix Addition',
-    '/matrix/product': 'Matrix multiplication',
-    '/matrix/transpose': 'Matrix transposition',
-    '/matrix/determinant': 'Matrix determinant',
-    '/vector/dot': 'Dot product',
-    '/vector/cross': 'Cross product'
-  })[pathname], [pathname])
+  const pageName = useMemo(
+    () =>
+      ({
+        '/matrix/sum': 'Matrix Addition',
+        '/matrix/product': 'Matrix multiplication',
+        '/matrix/transpose': 'Matrix transposition',
+        '/matrix/determinant': 'Matrix determinant',
+        '/vector/dot': 'Dot product',
+        '/vector/cross': 'Cross product'
+      }[pathname]),
+    [pathname]
+  );
 
   return (
     <div className={clsx(classes.root, classes.colorDefs)}>
-      <TopBar page={pageName}/>
+      <TopBar page={pageName} />
       <main>
         <Switch>
           <Route path='/' exact>

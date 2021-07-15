@@ -17,17 +17,14 @@ export class TopBarComponent implements OnInit {
     '/matrix/determinant': 'Matrix determinant',
     '/vector/dot': 'Dot product',
     '/vector/cross': 'Cross product'
-  }
+  };
   public get pagename() {
-    return (this.pagenames as any)[this.path]
+    return (this.pagenames as any)[this.path];
   }
 
-  constructor(
-    private location: Location,
-    private router: Router
-  ) { }
+  constructor(private location: Location, private router: Router) {}
 
   ngOnInit() {
-    this.router.events.subscribe(() => (this.path = this.location.path()))
+    this.router.events.subscribe(() => (this.path = this.location.path()));
   }
 }

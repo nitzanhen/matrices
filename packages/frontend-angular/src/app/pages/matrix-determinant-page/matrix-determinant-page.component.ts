@@ -6,27 +6,23 @@ import { Matrix } from 'src/Matrix';
 @Component({
   selector: 'app-matrix-determinant-page',
   templateUrl: './matrix-determinant-page.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class MatrixDeterminantPageComponent implements OnInit {
-
   matrix1 = new Matrix();
-  det = new Matrix({ unresizable: true, readonly: true, defaultCells: [[ null ]] });
+  det = new Matrix({ unresizable: true, readonly: true, defaultCells: [[null]] });
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     //Listen to the cells of both observables, and update cell accordingly.
-    this.matrix1.cellsObserver
-      .subscribe((cells) => {
-        const result = determinant(cells);
-        if (result.ok) {
-          this.det.cells = [[ result.result ]];
-        }
-        else {
-          this.det.clear();
-        }
-      })
+    this.matrix1.cellsObserver.subscribe(cells => {
+      const result = determinant(cells);
+      if (result.ok) {
+        this.det.cells = [[result.result]];
+      } else {
+        this.det.clear();
+      }
+    });
   }
 }

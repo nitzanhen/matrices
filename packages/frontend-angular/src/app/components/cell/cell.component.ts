@@ -14,8 +14,8 @@ export class CellComponent {
   @Input() row!: number;
   @Input() column!: number;
   @Input() setFocus!: (row: number, column: number) => void;
- 
-  constructor() { }
+
+  constructor() {}
 
   handleChange(e: Event): void {
     const { value: rawValue } = e.currentTarget as HTMLInputElement;
@@ -64,5 +64,4 @@ export class CellComponent {
       }
     }
   }
-
 }

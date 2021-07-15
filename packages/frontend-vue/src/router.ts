@@ -17,7 +17,6 @@ export const router = createRouter({
     { path: '/matrix/transpose', component: MatrixTransposePage },
     { path: '/matrix/determinant', component: MatrixDeterminantPage },
     { path: '/vector/dot', component: DotProductPage },
-    { path: '/vector/cross', component: CrossProductPage },
+    { path: '/vector/cross', component: CrossProductPage }
   ]
 });
-

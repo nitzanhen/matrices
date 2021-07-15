@@ -15,20 +15,20 @@ export const DotProductPage: React.VFC = () => {
     label: 'u',
     unresizable: true,
     defaultCells: [generateVector(3)]
-  })
+  });
 
   const vector2 = useMatrix({
     label: 'v',
     unresizable: true,
     defaultCells: [generateVector(3)]
-  })
+  });
 
   const product = useMatrix({
     label: 'u·v',
     readonly: true,
     unresizable: true,
     defaultCells: [[null]]
-  })
+  });
 
   const { setCells: setProductCells, clear: clearProduct } = product;
   useEffect(() => {
@@ -38,11 +38,10 @@ export const DotProductPage: React.VFC = () => {
     const result = dotProduct(v1, v2);
     if (result.ok) {
       setProductCells([[result.result]]);
-    }
-    else {
+    } else {
       clearProduct();
     }
-  }, [vector1.cells, vector2.cells, clearProduct, setProductCells])
+  }, [vector1.cells, vector2.cells, clearProduct, setProductCells]);
 
   return (
     <OperationPage>
@@ -52,5 +51,5 @@ export const DotProductPage: React.VFC = () => {
       <Equal />
       <Matrix {...product.toProps()} />
     </OperationPage>
-  )
+  );
 };

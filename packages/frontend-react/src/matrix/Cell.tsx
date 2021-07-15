@@ -67,7 +67,15 @@ export interface CellProps extends BaseComponentProps {
 /**
  * A simple cell; typically used as part of a Matrix, even if it contains only a single cell.
  */
-export const Cell: React.VFC<CellProps> = memo(function Cell({ className, style, value, onChange, label, readonly = false, inputProps }) {
+export const Cell: React.VFC<CellProps> = memo(function Cell({
+  className,
+  style,
+  value,
+  onChange,
+  label,
+  readonly = false,
+  inputProps
+}) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') {
       onChange?.(null);
@@ -93,5 +101,4 @@ export const Cell: React.VFC<CellProps> = memo(function Cell({ className, style,
       />
     </div>
   );
-}
-);
+});

@@ -7,9 +7,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./operation-page.component.css']
 })
 export class OperationPageComponent {
-  constructor(private location: Location) { }
+  constructor(private location: Location) {}
 
   goBack(): void {
-    this.location.back()
+    this.location.back();
   }
 }

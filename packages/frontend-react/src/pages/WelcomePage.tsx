@@ -52,7 +52,7 @@ const useStyles = createUseStyles(
       width: 1,
       flex: '0 0 auto',
       backgroundColor: 'var(--background-dark)',
-      opacity: 0.3,
+      opacity: 0.3
     }
   },
   { name: 'welcome' }
@@ -77,16 +77,28 @@ export const WelcomePage: React.VFC = () => {
           <h2>Vector</h2>
 
           <div>
-            <Link to='/matrix/sum' className={classes.link}>Matrix addition</Link>
-            <Link to='/matrix/product' className={classes.link}>Matrix multiplication</Link>
-            <Link to='/matrix/transpose' className={classes.link}>Matrix transpose</Link>
-            <Link to='/matrix/determinant' className={classes.link}>Matrix determinant</Link>
+            <Link to='/matrix/sum' className={classes.link}>
+              Matrix addition
+            </Link>
+            <Link to='/matrix/product' className={classes.link}>
+              Matrix multiplication
+            </Link>
+            <Link to='/matrix/transpose' className={classes.link}>
+              Matrix transpose
+            </Link>
+            <Link to='/matrix/determinant' className={classes.link}>
+              Matrix determinant
+            </Link>
           </div>
 
           <span className={classes.divider} />
           <div>
-            <Link to='/vector/dot' className={classes.link}>Dot product</Link>
-            <Link to='/vector/cross' className={classes.link}>Cross product</Link>
+            <Link to='/vector/dot' className={classes.link}>
+              Dot product
+            </Link>
+            <Link to='/vector/cross' className={classes.link}>
+              Cross product
+            </Link>
           </div>
         </div>
       </div>

@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'matrix/transpose', component: MatrixTransposePageComponent },
   { path: 'matrix/determinant', component: MatrixDeterminantPageComponent },
   { path: 'vector/dot', component: DotProductPageComponent },
-  { path: 'vector/cross', component: CrossProductPageComponent },
+  { path: 'vector/cross', component: CrossProductPageComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

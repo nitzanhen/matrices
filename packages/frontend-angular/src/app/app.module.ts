@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,8 @@ import { MatrixDeterminantPageComponent } from './pages/matrix-determinant-page/
 import { DotProductPageComponent } from './pages/dot-product-page/dot-product-page.component';
 import { CrossProductPageComponent } from './pages/cross-product-page/cross-product-page.component';
 import { BackArrowComponent } from './components/svg/back-arrow/back-arrow.component';
+import { CellComponent } from './components/cell/cell.component';
+import { MatrixComponent } from './components/matrix/matrix.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +43,14 @@ import { BackArrowComponent } from './components/svg/back-arrow/back-arrow.compo
     MatrixDeterminantPageComponent,
     DotProductPageComponent,
     CrossProductPageComponent,
-    BackArrowComponent
+    BackArrowComponent,
+    CellComponent,
+    MatrixComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

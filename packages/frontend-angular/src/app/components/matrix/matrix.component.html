@@ -1,0 +1,21 @@
+<div class="root">
+  <div class="label">
+    <span>
+      <ng-content select="[label]"></ng-content>
+    </span>
+    <article *ngIf="!m.unresizable" class="dimensions">
+      <input tabindex="-1" name="num-rows" [value]="m.numRows" (input)="handleNumRowsChange($event)" />
+      <app-multiply class="icon"></app-multiply>
+      <input tabindex="-1" name="num-columns" [value]="m.numColumns" (input)="handleNumColumnsChange($event)" />
+    </article>
+  </div>
+
+  <div class="matrix" [style]="matrixStyles" #matrixRef>
+    <ng-container *ngFor="let row of m.cells; let i = index">
+      <app-cell *ngFor="let cell of row; let j = index" class="cell" [row]="i" [column]="j" [(value)]="m.cells[i][j]"
+        [readonly]="m.readonly" [setFocus]="setFocus">
+        <ng-container label>({{ i }},{{ j }})</ng-container>
+      </app-cell>
+    </ng-container>
+  </div>
+</div>

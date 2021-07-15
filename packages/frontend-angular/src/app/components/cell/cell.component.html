@@ -1,0 +1,11 @@
+<div class="cell" [class.readonly]="readonly">
+  <span class="label">
+    <ng-content select="[label]"></ng-content>
+  </span>
+  <input 
+    [disabled]="readonly"
+    [value]="value ?? ''"
+    (input)="handleChange($event)"
+    (keydown)="handleKeydown($event)"
+  />
+</div>

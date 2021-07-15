@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "eslint src --ext .ts --ext .tsx --color",
+    "lint:fix": "eslint src --ext .ts --ext .tsx --fix --color"
   },
   "private": true,
   "dependencies": {

@@ -12,5 +12,6 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["jest", "node"]
   }
 }

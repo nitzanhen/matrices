@@ -5,9 +5,6 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "dev:react": "lerna run dev --scope @matrices/common --scope @matrices/react --parallel",
-    "dev:svelte": "lerna run dev --scope @matrices/common --scope @matrices/svelte --parallel",
-    "dev:vue": "lerna run dev --scope @matrices/common --scope @matrices/vue --parallel",
     "lint": "lerna run lint --parallel",
     "lint:fix": "lerna run lint:fix --parallel",
     "prettier": "prettier --check \"packages/*/src/**/*{.ts,.tsx}\"",

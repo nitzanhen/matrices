@@ -18,7 +18,7 @@
   $: {
     const result = determinant($cells1);
     if (result.ok) {
-      determinantCells.set([[result.result]]);
+      determinantCells.set([[result.value]]);
     } else {
       clearDeterminant();
     }

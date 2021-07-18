@@ -37,7 +37,7 @@ export const DotProductPage: React.VFC = () => {
 
     const result = dotProduct(v1, v2);
     if (result.ok) {
-      setProductCells([[result.result]]);
+      setProductCells([[result.value]]);
     } else {
       clearProduct();
     }

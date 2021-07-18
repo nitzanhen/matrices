@@ -41,7 +41,7 @@ export default defineComponent({
     watchEffect(() => {
       const result = addMatrices(matrix1.cells.value, matrix2.cells.value);
       if (result.ok) {
-        sum.cells.value = result.result;
+        sum.cells.value = result.value;
       }
       else {
         sum.clear();

@@ -36,7 +36,7 @@ export const CrossProductPage: React.VFC = () => {
 
     const result = crossProduct(v1, v2);
     if (result.ok) {
-      setProductCells([result.result]);
+      setProductCells([result.value]);
     } else {
       clearProduct();
     }

@@ -12,7 +12,7 @@ describe('operations/dotProduct.ts', () => {
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: 14
+        value: 14
       });
 
     expect(dotProduct(
@@ -21,13 +21,13 @@ describe('operations/dotProduct.ts', () => {
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: 32
+        value: 32
       });
   });
 
   test('Dot product - empty cells', () => {
     const result1 = dotProduct(
-      [undefined, 2, 3],
+      [null, 2, 3],
       [1, 2, 3],
     )
     expect(result1.ok).toBe(false);
@@ -35,8 +35,8 @@ describe('operations/dotProduct.ts', () => {
     expect(result1.err).toBeInstanceOf(EmptyCellError)
 
     const result2 = dotProduct(
-      [1, 2, undefined],
-      [4, undefined, 6],
+      [1, 2, null],
+      [4, null, 6],
     )
     expect(result2.ok).toBe(false);
     //@ts-expect-error

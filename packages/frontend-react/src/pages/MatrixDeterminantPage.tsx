@@ -30,7 +30,7 @@ export const MatrixDeterminantPage: React.VFC = () => {
   useEffect(() => {
     const result = determinant(matrix.cells);
     if (result.ok) {
-      setResultCells([[result.result]]);
+      setResultCells([[result.value]]);
     } else {
       clearResult();
     }

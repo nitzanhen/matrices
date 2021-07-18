@@ -20,7 +20,7 @@ export const MatrixMultiplicationPage: React.VFC = () => {
   useEffect(() => {
     const result = multiplyMatrices(matrix1.cells, matrix2.cells);
     if (result.ok) {
-      setProductCells(result.result);
+      setProductCells(result.value);
     } else {
       clearProduct();
     }

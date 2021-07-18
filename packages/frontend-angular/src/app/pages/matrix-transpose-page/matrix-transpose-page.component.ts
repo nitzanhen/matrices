@@ -19,7 +19,7 @@ export class MatrixTransposePageComponent implements OnInit {
     this.matrix1.cellsObserver.subscribe(cells => {
       const result = transpose(cells);
       if (result.ok) {
-        this.transposed.cells = result.result;
+        this.transposed.cells = result.value;
       } else {
         this.transposed.clear();
       }

@@ -18,7 +18,7 @@
   $: {
     const result = transpose($cells1);
     if (result.ok) {
-      transposeCells.set(result.result);
+      transposeCells.set(result.value);
     } else {
       clearTranspose();
     }

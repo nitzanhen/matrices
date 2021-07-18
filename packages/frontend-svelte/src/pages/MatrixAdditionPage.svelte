@@ -20,7 +20,7 @@
   $: {
     const result = addMatrices($cells1, $cells2);
     if (result.ok) {
-      sumCells.set(result.result);
+      sumCells.set(result.value);
     } else {
       clearSum();
     }

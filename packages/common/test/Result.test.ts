@@ -2,8 +2,8 @@ import { ok, err, Result } from 'Result';
 
 describe('Result.ts', () => {
   test('ok()', () => {
-    expect(ok(3)).toEqual<Result<number>>({ ok: true, result: 3 });
-    expect(ok([])).toEqual<Result<unknown[]>>({ ok: true, result: [] });
+    expect(ok(3)).toEqual<Result<number>>({ ok: true, value: 3 });
+    expect(ok([])).toEqual<Result<unknown[]>>({ ok: true, value: [] });
   })
 
   test('err()', () => {

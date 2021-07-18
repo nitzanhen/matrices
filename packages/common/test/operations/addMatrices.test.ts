@@ -12,7 +12,7 @@ describe('operations/addMatrices.ts', () => {
     ))
       .toEqual<SumResult>({
         ok: true,
-        result: [
+        value: [
           [2, 4],
           [6, 8]
         ]
@@ -24,7 +24,7 @@ describe('operations/addMatrices.ts', () => {
     ))
       .toEqual<SumResult>({
         ok: true,
-        result: [
+        value: [
           [6, 3, 10, 13],
           [-1, 8, 10, -2]
         ]
@@ -33,7 +33,7 @@ describe('operations/addMatrices.ts', () => {
 
   test('Matrix addition - empty cells', () => {
     const result1 = addMatrices(
-      [[1, 2], [undefined, 4]],
+      [[1, 2], [null, 4]],
       [[1, 2], [3, 4]],
     )
     expect(result1.ok).toBe(false);
@@ -42,7 +42,7 @@ describe('operations/addMatrices.ts', () => {
 
     const result2 = addMatrices(
       [[5, -3, 2, 4], [1, 4, 9, -2]],
-      [[1, 6, undefined, 9], [-2, 4, 1, 0]],
+      [[1, 6, null, 9], [-2, 4, 1, 0]],
     )
     expect(result2.ok).toBe(false);
     //@ts-expect-error

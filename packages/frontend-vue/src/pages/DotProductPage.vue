@@ -44,7 +44,7 @@ export default defineComponent({
 
       const result = dotProduct(v1, v2);
       if (result.ok) {
-        product.cells.value = [[result.result]];
+        product.cells.value = [[result.value]];
       }
       else {
         product.clear();

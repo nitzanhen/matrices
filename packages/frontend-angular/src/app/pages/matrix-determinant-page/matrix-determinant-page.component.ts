@@ -19,7 +19,7 @@ export class MatrixDeterminantPageComponent implements OnInit {
     this.matrix1.cellsObserver.subscribe(cells => {
       const result = determinant(cells);
       if (result.ok) {
-        this.det.cells = [[result.result]];
+        this.det.cells = [[result.value]];
       } else {
         this.det.clear();
       }

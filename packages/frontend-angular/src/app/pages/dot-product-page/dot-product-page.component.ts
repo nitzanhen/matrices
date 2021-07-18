@@ -24,7 +24,7 @@ export class DotProductPageComponent implements OnInit {
 
       const result = dotProduct(u, v);
       if (result.ok) {
-        this.product.cells = [[result.result]];
+        this.product.cells = [[result.value]];
       } else {
         this.product.clear();
       }

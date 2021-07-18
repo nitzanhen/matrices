@@ -22,7 +22,7 @@ export const determinant = (m: Matrix): Result<number, EmptyCellError | Dimensio
   }
 
   const {
-    result: [echelonForm, sign]
+    value: [echelonForm, sign]
   } = result;
 
   const determinant = [...Array(n).keys()]

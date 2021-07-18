@@ -21,7 +21,7 @@ export class MatrixAdditionPageComponent implements OnInit {
     zip(this.matrix1.cellsObserver, this.matrix2.cellsObserver).subscribe(([cells1, cells2]) => {
       const result = addMatrices(cells1, cells2);
       if (result.ok) {
-        this.sum.cells = result.result;
+        this.sum.cells = result.value;
       } else {
         this.sum.clear();
       }

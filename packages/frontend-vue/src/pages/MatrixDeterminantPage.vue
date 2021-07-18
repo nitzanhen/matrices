@@ -34,7 +34,7 @@ export default defineComponent({
     watchEffect(() => {
       const result = determinant(matrix.cells.value);
       if (result.ok) {
-        det.cells.value = [[result.result]];
+        det.cells.value = [[result.value]];
       }
       else {
         det.clear();

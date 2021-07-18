@@ -12,7 +12,7 @@ describe('operations/transpose.ts', () => {
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: [[1], [2], [3]]
+        value: [[1], [2], [3]]
       });
 
     expect(transpose(
@@ -20,20 +20,20 @@ describe('operations/transpose.ts', () => {
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: [[1, 4], [2, 5], [3, 6]]
+        value: [[1, 4], [2, 5], [3, 6]]
       });
   });
 
   test('Transpose - empty cells', () => {
     const result1 = transpose(
-      [[1, 2, undefined]],
+      [[1, 2, null]],
     )
     expect(result1.ok).toBe(false);
     //@ts-expect-error
     expect(result1.err).toBeInstanceOf(EmptyCellError)
 
     const result2 = transpose(
-      [[1, 2, undefined], [4, 5, 6]]
+      [[1, 2, null], [4, 5, 6]]
     )
     expect(result2.ok).toBe(false);
     //@ts-expect-error

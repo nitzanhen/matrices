@@ -28,7 +28,7 @@ import Multiply from '../components/svg/Multiply.svelte';
     const [v] = $cells2;
     const result = crossProduct(u, v);
     if (result.ok) {
-      productCells.set([result.result]);
+      productCells.set([result.value]);
     } else {
       clearProduct();
     }

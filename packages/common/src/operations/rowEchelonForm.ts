@@ -197,5 +197,5 @@ export const rowEchelonForm = (m: Matrix): Result<number[][], DimensionError | E
     return result;
   }
 
-  return ok(result.result[0]);
+  return ok(result.value[0]);
 };

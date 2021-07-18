@@ -20,7 +20,7 @@ import Multiply from '../components/svg/Multiply.svelte';
   $: {
     const result = multiplyMatrices($cells1, $cells2);
     if (result.ok) {
-      productCells.set(result.result);
+      productCells.set(result.value);
     } else {
       clearProduct();
     }

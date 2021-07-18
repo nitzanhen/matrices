@@ -28,7 +28,7 @@
     const [v] = $cells2;
     const result = dotProduct(u, v);
     if (result.ok) {
-      productCells.set([[result.result]]);
+      productCells.set([[result.value]]);
     } else {
       clearproduct();
     }

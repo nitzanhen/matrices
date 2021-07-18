@@ -33,7 +33,7 @@ export const MatrixTransposePage: React.VFC = () => {
   useEffect(() => {
     const result = transpose(matrix.cells);
     if (result.ok) {
-      setTransposedCells(result.result);
+      setTransposedCells(result.value);
     } else {
       clearTransposed();
     }

@@ -21,7 +21,7 @@ export class MatrixMultiplicationPageComponent implements OnInit {
     zip(this.matrix1.cellsObserver, this.matrix2.cellsObserver).subscribe(([cells1, cells2]) => {
       const result = multiplyMatrices(cells1, cells2);
       if (result.ok) {
-        this.product.cells = result.result;
+        this.product.cells = result.value;
       } else {
         this.product.clear();
       }

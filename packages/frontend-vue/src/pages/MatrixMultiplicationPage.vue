@@ -41,7 +41,7 @@ export default defineComponent({
     watchEffect(() => {
       const result = multiplyMatrices(matrix1.cells.value, matrix2.cells.value);
       if (result.ok) {
-        product.cells.value = result.result;
+        product.cells.value = result.value;
       }
       else {
         product.clear();

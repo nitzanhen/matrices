@@ -34,7 +34,7 @@ export default defineComponent({
     watchEffect(() => {
       const result = transpose(matrix.cells.value);
       if (result.ok) {
-        transposed.cells.value = result.result;
+        transposed.cells.value = result.value;
       }
       else {
         transposed.clear();

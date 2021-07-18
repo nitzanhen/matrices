@@ -12,7 +12,7 @@ describe('operations/crossProduct.ts', () => {
     ))
       .toEqual<ProductResult>({
         ok: true,
-        result: [0, 0, 0]
+        value: [0, 0, 0]
       });
 
       expect(crossProduct(
@@ -21,13 +21,13 @@ describe('operations/crossProduct.ts', () => {
       ))
         .toEqual<ProductResult>({
           ok: true,
-          result: [-3, 6, -3]
+          value: [-3, 6, -3]
         });
   });
 
   test('Cross product - empty cells', () => {
     const result1 = crossProduct(
-      [undefined, 2, 3],
+      [null, 2, 3],
       [1, 2, 3],
     )
     expect(result1.ok).toBe(false);
@@ -35,8 +35,8 @@ describe('operations/crossProduct.ts', () => {
     expect(result1.err).toBeInstanceOf(EmptyCellError)
 
     const result2 = crossProduct(
-      [1, 2, undefined],
-      [4, undefined, 6],
+      [1, 2, null],
+      [4, null, 6],
     )
     expect(result2.ok).toBe(false);
     //@ts-expect-error

@@ -20,7 +20,7 @@ export const MatrixAdditionPage: React.VFC = () => {
   useEffect(() => {
     const result = addMatrices(matrix1.cells, matrix2.cells);
     if (result.ok) {
-      setSumCells(result.result);
+      setSumCells(result.value);
     } else {
       clearSum();
     }

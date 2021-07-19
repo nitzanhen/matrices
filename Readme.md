@@ -1,5 +1,7 @@
 # Matrix operation demos
 
+[Demo](https://nitzanhen.github.io/matrices/) (this is the latest version of the React demo, built and deployed using Actions)
+
 This repository contains different implementations of the same small app - a matrix operation calculator.
 Each implementation uses a different stack. The purpose of this is to get a first taste for different tools and frameworks - something more than a "hello world" app, but not so big that it takes weeks to complete.
 

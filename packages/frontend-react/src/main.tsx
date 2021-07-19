@@ -8,7 +8,7 @@ import App from './App';
 //eslint-disable-next-line import/no-named-as-default-member
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

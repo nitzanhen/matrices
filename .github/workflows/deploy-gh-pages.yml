@@ -11,10 +11,10 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Install & build
-        run: |
-          yarn install --frozen-lockfile
-          yarn lerna run build --scope @matrices/react --include-dependencies
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn lerna run build --scope @matrices/react --include-dependencies
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4

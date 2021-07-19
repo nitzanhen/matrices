@@ -1,0 +1,24 @@
+name: Deploy React demo
+
+on: [push]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install & build
+        run: |
+        yarn install --frozen-lockfile
+        cd packages/frontend-react
+        yarn build
+
+       - name: Deploy
+         uses: JamesIves/github-pages-deploy-action@4.1.4
+         with:
+          branch: gh-pages
+          folder: packages/frontend-react/build

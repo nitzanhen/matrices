@@ -3,7 +3,7 @@ name: Deploy React demo
 on: [push]
 
 jobs:
-  CI:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

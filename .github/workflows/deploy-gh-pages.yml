@@ -21,4 +21,4 @@ jobs:
         with:
           branch: gh-pages
           folder: packages/frontend-react/build
-          single-commit: true
+          single-commit: 'true'

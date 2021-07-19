@@ -14,8 +14,7 @@ jobs:
       - name: Install & build
         run: |
           yarn install --frozen-lockfile
-          cd packages/frontend-react
-          yarn build
+          yarn lerna run build --scope @matrices/react --include-dependencies
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4

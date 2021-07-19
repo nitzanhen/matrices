@@ -17,5 +17,5 @@ export default defineConfig({
     outDir: 'build'
   },
 
-  base: './'
+  base: '/matrices/'
 })

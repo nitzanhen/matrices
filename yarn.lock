@@ -11694,10 +11694,10 @@ rgba-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rhax@^1.0.0-beta.18:
-  version "1.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/rhax/-/rhax-1.0.0-beta.18.tgz#ab02c7c08073e41c566300d9110a2583f96d7032"
-  integrity sha512-QOo5oJnfnoqDUv+TbfplClrvYpGT9qWOZO4eZysEPJIN8w6+6xOND0zbdq67bhUzTp5EalddRV/3MJ7m6P6NhA==
+rhax@^2.0.0-alpha.1:
+  version "2.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/rhax/-/rhax-2.0.0-alpha.1.tgz#231cac6d3854ede73132c0581265980e8b4b3541"
+  integrity sha512-Zs/lWuytFoR1Fc/E6H9zbwXyDFNYZTThBipVXbPlt6jUzw9XDDtY/6u5GsQV5gyQu2BsRxajW0UvLLez3bl7kA==
 
 rimraf@2, rimraf@^2.5.4, rimraf@^2.6.2, rimraf@^2.6.3:
   version "2.7.1"
